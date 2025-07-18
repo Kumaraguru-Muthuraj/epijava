@@ -56,6 +56,7 @@ public class Countbits {
     }
 
     /* 5.8 - Reverse digits. 457 --> 754
+    O(n), O(1)
      */
     public static int reverse(int x) {
         int absX = Math.abs(x);
