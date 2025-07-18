@@ -24,7 +24,7 @@ public class Countbits {
         return count;
     }
 
-    //5.1 Parity of bits in a word
+    //5.1 Parity of bits in a word - O(log(word size)),O(1)
     public static short parityV0(long x) {
         x ^= x >>> 32;
         x ^= x >>> 16;
@@ -38,7 +38,7 @@ public class Countbits {
     }
 
     /* 5.2 Swap bits (view numbers as an array starting with index 0 - LSB, 31-MSB)
-    j - MSB, i - LSB
+    j - MSB, i - LSB - O(1), O(1)
     */
     public static long swapBits(int x, int j, int i) throws Exception {
         if (i > j || i < 0 || j > 31) {
@@ -55,15 +55,27 @@ public class Countbits {
         return x;
     }
 
+    /* 5.8 - Reverse digits. 457 --> 754
+     */
+    public static int reverse(int x) {
+        int absX = Math.abs(x);
+        int result = 0;
+        while (absX > 0) {
+            result = result * 10 + absX % 10;
+            absX /= 10;
+        }
+        return x < 0 ? -result : result;
+    }
+
     public static void print(long x) {
         System.out.println(Long.toBinaryString(x));
     }
 
     public static void main(String[] args) throws Exception {
-        swapBits(23457, 30, 5);
-
+        System.out.println(reverse(-235));
         if (true)
             return;
+        swapBits(23457, 30, 5);
         System.out.println(parityV0(4091));
         System.out.println(count1sV1(4090));
         System.out.println(-8);
