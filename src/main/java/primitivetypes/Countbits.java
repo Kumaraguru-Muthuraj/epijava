@@ -68,14 +68,40 @@ public class Countbits {
         return x < 0 ? -result : result;
     }
 
+    /* 5.9 - Palindrome in digits.
+    For a 4 digit number, we have 10 options in all the 4 places => 10 x 10 x 10 x 10 = 10 pow 4.
+    Number of 4 digit nos - k = 10 pow 4.
+    log k = 4.
+    Number of digits = log (number).
+    O(number of digits), O(1)
+     */
+    public static boolean checkPalindrome(int x) {
+        if (x < 0)
+            return false;
+        int div = (int) Math.pow(10, (int) Math.floor(Math.log10(x)));
+        //System.out.println(div);
+        while (x > 0) {
+            int msd = x / div;
+            int lsd = x % 10;
+            if (msd != lsd) {
+                return false;
+            }
+            x %= div; // First remove msd.
+            x /= 10; // Second remove lsd.
+            div /= 100; //Since we lost 2 digits.
+        }
+        return true;
+    }
+
     public static void print(long x) {
         System.out.println(Long.toBinaryString(x));
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(reverse(-235));
+        System.out.println(checkPalindrome(234551432));
         if (true)
             return;
+        System.out.println(reverse(-235));
         swapBits(23457, 30, 5);
         System.out.println(parityV0(4091));
         System.out.println(count1sV1(4090));
