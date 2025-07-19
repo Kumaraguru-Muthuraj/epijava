@@ -116,9 +116,16 @@ public class Countbits {
     // 5.4 - Closest number with the same binary weight - O(n) algorithm.
     public static long nWithSameWeightV0(long x) throws Exception {
         print(x);
-        long res = 0;
-        print(res);
-        return res;
+        int numBits = 62; // Leave the sign bit.
+        for (int i = 0; i < numBits; i++) { //Deal with only 61 bits and 62nd is for the next bit check. mask line.
+            if (((x >>> i) & 1L) != ((x >>> i+1) & 1L)) {
+                long mask = (1L << i) | ((1L << i+1));
+                x ^= mask;
+                print(x);
+                return x;
+            }
+        }
+        throw new Exception("All 0s or 1s");
     }
 
     public static void print(long x) {
@@ -126,9 +133,11 @@ public class Countbits {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(nWithSameWeight(4));
         if (true)
             return;
+        System.out.println(nWithSameWeight(8));
+        System.out.println("--------------------");
+        System.out.println(nWithSameWeightV0(8));
         System.out.println(checkPalindrome(234551432));
         System.out.println(reverse(-235));
         swapBits(23457, 30, 5);
