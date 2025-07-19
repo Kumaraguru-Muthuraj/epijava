@@ -93,14 +93,43 @@ public class Countbits {
         return true;
     }
 
+    /*5.4 - Closest number with the same binary weight
+    87 - 0101 0111 --> Ans: 91 - 0101 1011
+    O(1) algorithm. O(1) Space. Check notebook.
+     */
+    public static long nWithSameWeight(long x) throws Exception {
+        print(x);
+        //Validations here - All 0s and 1s cannot be processed.
+        if (x == 0 || ~x == 0 || x < 0) {
+            throw new Exception();
+        }
+
+        long lBitsClr = x ^ (x >>> 1);
+        long onlyLast1 = lBitsClr & -lBitsClr;
+
+        long mask = onlyLast1 ^ (onlyLast1 << 1);
+        long res = x ^ mask;
+        print(res);
+        return res;
+    }
+
+    // 5.4 - Closest number with the same binary weight - O(n) algorithm.
+    public static long nWithSameWeightV0(long x) throws Exception {
+        print(x);
+        long res = 0;
+        print(res);
+        return res;
+    }
+
     public static void print(long x) {
         System.out.println(Long.toBinaryString(x));
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(checkPalindrome(234551432));
+        System.out.println(nWithSameWeight(6));
         if (true)
             return;
+        System.out.println(checkPalindrome(234551432));
         System.out.println(reverse(-235));
         swapBits(23457, 30, 5);
         System.out.println(parityV0(4091));
