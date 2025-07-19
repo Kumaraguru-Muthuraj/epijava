@@ -107,7 +107,7 @@ public class Countbits {
         long lBitsClr = x ^ (x >>> 1);
         long onlyLast1 = lBitsClr & -lBitsClr;
 
-        long mask = onlyLast1 ^ (onlyLast1 << 1);
+        long mask = onlyLast1 | (onlyLast1 << 1);
         long res = x ^ mask;
         print(res);
         return res;
@@ -126,7 +126,7 @@ public class Countbits {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(nWithSameWeight(6));
+        System.out.println(nWithSameWeight(4));
         if (true)
             return;
         System.out.println(checkPalindrome(234551432));
