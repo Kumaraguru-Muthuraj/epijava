@@ -129,7 +129,7 @@ public class Countbits {
     }
 
     //5.6 - Compute x/y using addition, subtraction and bit-wise operations
-    /*
+    /* Check the page 53 for detailed explanation on how this is a simple algorithm.
     For x =  Long.MAX_VALUE - 1 and y =  Long.MAX_VALUE - 2, this algorithm will not work
     because y << 32 will overflow. Perhaps we need to go from power's value from 1 to higher value
     when the difference between x and y is small.
