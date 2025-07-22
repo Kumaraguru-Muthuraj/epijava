@@ -128,11 +128,37 @@ public class Countbits {
         throw new Exception("All 0s or 1s");
     }
 
+    //5.6 - Compute x/y using addition, subtraction and bit-wise operations
+    /*
+    For x =  Long.MAX_VALUE - 1 and y =  Long.MAX_VALUE - 2, this algorithm will not work
+    because y << 32 will overflow. Perhaps we need to go from power's value from 1 to higher value
+    when the difference between x and y is small.
+     */
+    public static long divide(long x, long y) {
+        long result = 0;
+        int power = 32; //Why 32??
+        long maxDiv = y << power;
+        while (x > y) {
+            while (maxDiv > x) {
+                maxDiv >>= 1;
+                power--;
+            }
+            x -= maxDiv;
+            result += 1L << power;
+        }
+
+        return result;
+    }
+
     public static void print(long x) {
         System.out.println(Long.toBinaryString(x));
     }
 
     public static void main(String[] args) throws Exception {
+        Long x = Long.MAX_VALUE - 1;
+        Long y = Long.MAX_VALUE - 2;
+        System.out.println(divide(x, y));
+        System.out.println(x+ ", " + y);
         if (true)
             return;
         System.out.println(nWithSameWeight(8));
