@@ -90,11 +90,55 @@ public class Countbits {
         throw new Exception("All 0s or 1s");
     }
 
+    //5.5 - Compute X x Y without arithmetic operations.
+    /* Use bitwise operations and invent your add method.
+     O(n^2), O(1).
+     1 addition takes n operations, where n is the width of the operand.
+     There are n additions, hence n^2
+     */
+    public static long add(long a, long b) {
+        print("a", a); print("b", b);
+        long sum = 0, carryIn = 0, carryOut = 0, k = 1;
+        long tempa = a, tempb = b;
+        while (tempa != 0 || tempb != 0) {
+            System.out.println("-");
+            long ak = a & k, bk = b & k; //The bits to be added, followed by 0s
+            print("ak", ak);
+            print("bk", bk);
+            carryOut = (ak & bk) | (ak & carryIn) | (bk & carryIn);
+            print("cO", carryOut);
+            sum |= (ak ^ bk ^ carryIn);
+            print("sum", sum);
+            carryIn = carryOut << 1;
+            print("cI", carryIn);
+            k <<= 1;
+            print("k", k);
+            tempa >>>= 1;
+            tempb >>>= 1;
+        }
+
+        return sum | carryIn;
+    }
+
+    //Multiply y, x times. Simulate binary multiplication.
+    public static long multiply(long x, long y) {
+        long sum = 0;
+        while (x != 0) {
+            if ((x & 1) != 0) {
+                sum = add(sum, y);
+            }
+            x >>>= 1;
+            y <<= 1;
+        }
+        return sum;
+    }
+
     //5.6 - Compute x/y using addition, subtraction and bit-wise operations
     /* Check the page 53 for detailed explanation on how this is a simple algorithm.
     For x =  Long.MAX_VALUE - 1 and y =  Long.MAX_VALUE - 2, this algorithm will not work
     because y << 32 will overflow. Perhaps we need to go from power's value from 1 to higher value
     when the difference between x and y is small.
+    O(n), O(1)
      */
     public static long divide(long x, long y) {
         long result = 0;
@@ -150,17 +194,22 @@ public class Countbits {
         return true;
     }
 
+    public static void print(String s, long x) {
+        System.out.println(s + " - " + Long.toBinaryString(x));
+    }
     public static void print(long x) {
         System.out.println(Long.toBinaryString(x));
     }
 
     public static void main(String[] args) throws Exception {
+        //print("sum", add(7, 7));
+        print("add", add(4,5));
+        if (true)
+            return;
         Long x = Long.MAX_VALUE - 1;
         Long y = Long.MAX_VALUE - 2;
         System.out.println(divide(x, y));
         System.out.println(x+ ", " + y);
-        if (true)
-            return;
         System.out.println(nWithSameWeight(8));
         System.out.println("--------------------");
         System.out.println(nWithSameWeightV0(8));
