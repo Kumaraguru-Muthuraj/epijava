@@ -55,44 +55,6 @@ public class Countbits {
         return x;
     }
 
-    /* 5.8 - Reverse digits. 457 --> 754
-    O(n), O(1)
-     */
-    public static int reverse(int x) {
-        int absX = Math.abs(x);
-        int result = 0;
-        while (absX > 0) {
-            result = result * 10 + absX % 10;
-            absX /= 10;
-        }
-        return x < 0 ? -result : result;
-    }
-
-    /* 5.9 - Palindrome in digits.
-    For a 4 digit number, we have 10 options in all the 4 places => 10 x 10 x 10 x 10 = 10 pow 4.
-    Number of 4 digit nos - k = 10 pow 4.
-    log k = 4.
-    Number of digits = log (number).
-    O(number of digits), O(1)
-     */
-    public static boolean checkPalindrome(int x) {
-        if (x < 0)
-            return false;
-        int div = (int) Math.pow(10, (int) Math.floor(Math.log10(x)));
-        //System.out.println(div);
-        while (x > 0) {
-            int msd = x / div;
-            int lsd = x % 10;
-            if (msd != lsd) {
-                return false;
-            }
-            x %= div; // First remove msd.
-            x /= 10; // Second remove lsd.
-            div /= 100; //Since we lost 2 digits.
-        }
-        return true;
-    }
-
     /*5.4 - Closest number with the same binary weight
     87 - 0101 0111 --> Ans: 91 - 0101 1011
     O(1) algorithm. O(1) Space. Check notebook.
@@ -148,6 +110,44 @@ public class Countbits {
         }
 
         return result;
+    }
+
+    /* 5.8 - Reverse digits. 457 --> 754
+    O(n), O(1)
+     */
+    public static int reverse(int x) {
+        int absX = Math.abs(x);
+        int result = 0;
+        while (absX > 0) {
+            result = result * 10 + absX % 10;
+            absX /= 10;
+        }
+        return x < 0 ? -result : result;
+    }
+
+    /* 5.9 - Palindrome in digits.
+    For a 4 digit number, we have 10 options in all the 4 places => 10 x 10 x 10 x 10 = 10 pow 4.
+    Number of 4 digit nos - k = 10 pow 4.
+    log k = 4.
+    Number of digits = log (number).
+    O(number of digits), O(1)
+     */
+    public static boolean checkPalindrome(int x) {
+        if (x < 0)
+            return false;
+        int div = (int) Math.pow(10, (int) Math.floor(Math.log10(x)));
+        //System.out.println(div);
+        while (x > 0) {
+            int msd = x / div;
+            int lsd = x % 10;
+            if (msd != lsd) {
+                return false;
+            }
+            x %= div; // First remove msd.
+            x /= 10; // Second remove lsd.
+            div /= 100; //Since we lost 2 digits.
+        }
+        return true;
     }
 
     public static void print(long x) {
