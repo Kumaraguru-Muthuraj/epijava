@@ -216,6 +216,24 @@ public class Countbits {
         return true;
     }
 
+    //5.10 - Generate a uniform random number with a boolean random function.
+    public static int randomBoolean() {
+        return new Random().nextBoolean() ? 1 : 0;
+    }
+
+    public static int nextRandom(int max) {
+        int rand = 0;
+        do {
+            rand = 0;
+            for (int i = 0; (1 << i) < max; i++) { // 1<<i just checks if we exceeded because the 1 in the MSB moves.
+                rand = (rand << 1) | randomBoolean();
+                //print("Rand", rand);
+            }
+        } while (rand > max);
+        //print("Rand", rand);
+        return rand;
+    }
+
     public static void print(String s, long x) {
         System.out.println(s + " - " + Long.toBinaryString(x));
     }
@@ -224,12 +242,15 @@ public class Countbits {
     }
 
     public static void main(String[] args) throws Exception {
+        for (int i = 0; i < 30; i++) {
+            System.out.println(nextRandom(5));
+        }
+        if (true)
+            return;
         //print("sum", add(7, 7));
         long sum = multiply(1,3);
         System.out.print(sum);
         print(" - addV0", sum);
-        if (true)
-            return;
         Long x = Long.MAX_VALUE - 1;
         Long y = Long.MAX_VALUE - 2;
         System.out.println(divide(x, y));
