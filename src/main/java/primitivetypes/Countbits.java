@@ -120,12 +120,34 @@ public class Countbits {
         return sum | carryIn;
     }
 
+    //My own logic
+    public static long addV1(long a, long b) {
+        long tempa = a, tempb = b;
+        long sum = 0;
+        long k = 1, ak = 0, bk = 0, carryIn = 0, carryOut = 0;
+
+        while (tempa != 0 || tempb != 0) {
+            ak = a & k;
+            bk = b & k;
+
+            carryOut = (ak & bk) | carryIn;
+            sum |= ak ^ bk ^ carryIn;
+
+            carryIn = carryOut << 1;
+            k <<= 1;
+
+            tempa >>>= 1;
+            tempb >>>= 1;
+        }
+        return sum | carryIn;
+    }
+
     //Multiply y, x times. Simulate binary multiplication.
     public static long multiply(long x, long y) {
         long sum = 0;
         while (x != 0) {
             if ((x & 1) != 0) {
-                sum = add(sum, y);
+                sum = addV1(sum, y);
             }
             x >>>= 1;
             y <<= 1;
@@ -203,7 +225,9 @@ public class Countbits {
 
     public static void main(String[] args) throws Exception {
         //print("sum", add(7, 7));
-        print("add", add(4,5));
+        long sum = multiply(1,3);
+        System.out.print(sum);
+        print(" - addV0", sum);
         if (true)
             return;
         Long x = Long.MAX_VALUE - 1;
