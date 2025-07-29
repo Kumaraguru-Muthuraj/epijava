@@ -178,6 +178,23 @@ public class Countbits {
         return result;
     }
 
+    /* 5.7 - Compute x^y
+    * There is an iterative algorithm that is equivalent of this. Check in the book.
+    * O(log(y)), O(log(y))
+     */
+    public static long power(long x, long y) {
+        if (y == 0) {
+            return 1;
+        } else if ((y & 1) == 0) {
+            long temp = power(x, y >> 1);
+            return temp * temp;
+        } else {
+            return x * power(x, y-1);
+        }
+    }
+
+
+
     /* 5.8 - Reverse digits. 457 --> 754
     O(n), O(1)
      */
@@ -242,11 +259,14 @@ public class Countbits {
     }
 
     public static void main(String[] args) throws Exception {
-        for (int i = 0; i < 30; i++) {
-            System.out.println(nextRandom(5));
+        for (int i = 0; i < 7; i++) {
+            System.out.println(power(2, i));
         }
         if (true)
             return;
+        for (int i = 0; i < 30; i++) {
+            System.out.println(nextRandom(5));
+        }
         //print("sum", add(7, 7));
         long sum = multiply(1,3);
         System.out.print(sum);
