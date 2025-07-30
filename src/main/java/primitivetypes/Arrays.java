@@ -5,7 +5,9 @@ import java.util.Random;
 
 public class Arrays {
     /*6.0 - Order even followed by odd numbers.
-    O(log(n)), O(1), stable, in-place
+    We might think that its O(log(n)), but its O(n) because if all numbers are even or odd,
+    we traverse once completely.
+    O(1), stable, in-place
      */
     public static void orderEvenOdd() {
         int[] array = getArray(10);
