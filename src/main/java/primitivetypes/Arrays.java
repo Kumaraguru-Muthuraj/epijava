@@ -96,12 +96,63 @@ public class Arrays {
         }
         return al;
     }
+    public static ArrayList<Integer> getArrayList3Nums(int size) {
+        ArrayList<Integer> al = new ArrayList<>();
+        Random r = new Random();
+        for (int i = 0; i < size; i++) {
+            al.add(r.nextInt(3));
+        }
+        return al;
+    }
 
+    /* 6.1 - Dutch National Flag problem.
+     * 3 color codes, just segregate them.
+     * Note that this algorithm works only if the pivot is the middle element.
+     * O(n), O(1)
+     */
+    enum Color {RED, YELLOW, BLUE}
+    public static void partitionHelper(ArrayList<Integer> l, int pivot) {
+        //Set the first element as pivot
+        int temp = l.get(0);
+        l.set(0, pivot);
+
+        System.out.println("pivot - " + pivot + " - temp - " + temp);
+
+        int loIdx = -1;
+        int hiIdx = l.size();
+        int cIdx = 0;
+
+        while (cIdx < hiIdx) {
+            if (l.get(cIdx) == pivot) {
+                cIdx++;
+            } else if (l.get(cIdx) < pivot) {
+                Collections.swap(l, cIdx++, ++loIdx);
+            } else if (pivot < l.get(cIdx)) {
+                Collections.swap(l, cIdx, --hiIdx);
+            }
+            print(l);
+        }
+
+        //Set temp to the right place.
+        if (temp < pivot) {
+            l.set(loIdx + 1, temp);
+        } else if (pivot < temp) {
+            l.set(hiIdx - 1, temp);
+        }
+        print(l);
+    }
+    public static void dutchFlag() {
+        ArrayList<Integer> l = getArrayList3Nums(20);
+        print(l);
+        partitionHelper(l, 1);
+    }
     public static void main(String[] args) {
-        quickSort();
+
         if (true) {
             return;
         }
+        dutchFlag();
+        quickSort();
         orderEvenOdd();
     }
 }
