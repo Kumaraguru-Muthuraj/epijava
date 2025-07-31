@@ -146,11 +146,37 @@ public class Arrays {
         print(l);
         partitionHelper(l, 1);
     }
-    public static void main(String[] args) {
 
+    /* 6.2 - Get the next number, where the input is a list of numbers from 0 to 9
+    * as a list.
+     */
+    public static void getNext(List<Integer> num) {
+        int n = num.size() - 1;
+        num.set(n, num.get(n) + 1);
+        for (int i = n; i > 0 && num.get(i) == 10; i--) {
+            num.set(i, 0);
+            num.set(i - 1, num.get(i - 1) + 1);
+        }
+        if (num.get(0) == 10) {
+            num.set(0, 0);
+            num.add(0, 1);
+        }
+    }
+    public static ArrayList<Integer> getNumberAsList(int size) {
+        ArrayList<Integer> al = new ArrayList<>();
+        Random r = new Random();
+        for (int i = 0; i < size; i++) {
+            al.add(r.nextInt(10));
+        }
+        return al;
+    }
+
+    public static void main(String[] args) {
         if (true) {
             return;
         }
+        ArrayList<Integer> num = getNumberAsList(4);
+        getNext(num);
         dutchFlag();
         quickSort();
         orderEvenOdd();
