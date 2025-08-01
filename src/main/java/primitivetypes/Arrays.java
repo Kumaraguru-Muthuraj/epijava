@@ -148,7 +148,7 @@ public class Arrays {
     }
 
     /* 6.2 - Get the next number, where the input is a list of numbers from 0 to 9
-    * as a list.
+    * as a list. O(n), O(1)
      */
     public static void getNext(List<Integer> num) {
         int n = num.size() - 1;
@@ -159,7 +159,7 @@ public class Arrays {
         }
         if (num.get(0) == 10) {
             num.set(0, 0);
-            num.add(0, 1);
+            num.add(0, 1); // Insert the MSD
         }
     }
     public static ArrayList<Integer> getNumberAsList(int size) {
