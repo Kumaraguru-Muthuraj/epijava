@@ -171,7 +171,29 @@ public class Arrays {
         return al;
     }
 
+    /* 6.5 - Delete duplicates in a sorted array.
+     */
+    public static int deleteDuplicates() {
+        ArrayList<Integer> al = getArrayList(20);
+        Collections.sort(al);
+        print(al);
+        int wIdx = 1, rIdx = 1;
+        for (; rIdx < al.size(); rIdx++) {
+            if (al.get(rIdx) != al.get(wIdx - 1)) {
+                al.set(wIdx++, al.get(rIdx));
+            }
+        }
+        //Optional - clear the entries from wIdx;
+        for (int i = wIdx; i < al.size(); i++) {
+            al.set(i, 0);
+        }
+        print(al);
+        System.out.println("Length - " + wIdx);
+        return wIdx; //Length of the new array
+    }
+
     public static void main(String[] args) {
+        deleteDuplicates();
         if (true) {
             return;
         }
