@@ -73,6 +73,12 @@ public class Arrays {
             System.out.print(i + ", ");
         }
     }
+    public static void printReverse(List<Integer> l) {
+        System.out.println();
+        for (int h = l.size() - 1; h >= 0; h--) {
+            System.out.print(l.get(h) + ", ");
+        }
+    }
 
     public static void swap(int[] array, int i, int k) {
         int temp = array[i];
@@ -171,6 +177,33 @@ public class Arrays {
         return al;
     }
 
+    /* 6.3 - Multiply 2 arbitrary precision integers.
+     */
+    public static ArrayList<Integer> multiply(ArrayList<Integer> n1, ArrayList<Integer> n2) {
+        print(n1);
+        print(n2);
+        int n1L = n1.size();
+        int n2L = n2.size();
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < (n1L + n2L); i++) {
+            result.add(0); //Use this for storing carry-forward and result.
+        }
+
+        for (int j = n2L - 1, resI = 0; j >= 0; j--, resI++) {
+            int resultIdx = (n1L + n2L - 1) - resI;
+            int multiplier = n2.get(j);
+            for (int i = n1L - 1; i >= 0; i--) {
+                int prod = result.get(resultIdx) + n1.get(i) * multiplier;
+                result.set(resultIdx, prod % 10); //Result
+                result.set(resultIdx - 1, result.get(resultIdx - 1) + prod / 10); //Carry forward
+                resultIdx--;
+            }
+        }
+
+        print(result);
+        return result;
+    }
+
     /* 6.5 - Delete duplicates in a sorted array.
      */
     public static int deleteDuplicates() {
@@ -224,10 +257,11 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        pascal(5);
+        multiply(getNumberAsList(4), getNumberAsList(2));
         if (true) {
             return;
         }
+        pascal(5);
         deleteDuplicates();
         ArrayList<Integer> num = getNumberAsList(4);
         getNext(num);
