@@ -247,7 +247,7 @@ public class Arrays {
     12345 -> 12354
      */
     public static void nextPermutation(List<Integer> ints) {
-        print(ints);
+        //print(ints);
 
         //Find the longest increasing sequence
         int i = ints.size() - 1;
@@ -301,11 +301,15 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        nextPermutation(new ArrayList<>(List.of(5,4,7,6,3,1)));
 
 
         if (true) {
             return;
+        }
+        nextPermutation(new ArrayList<>(List.of(5,4,7,6,3,1)));
+        ArrayList<Integer> l = new ArrayList<>(List.of(1,2,3,4,5));
+        for (int i = 0; i < 10; i++) {
+            nextPermutation(l);
         }
         maxProfit(10);
         multiply(getNumberAsList(4), getNumberAsList(2));
