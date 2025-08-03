@@ -281,7 +281,8 @@ public class Arrays {
     }
 
     /* 6.11 - Sample k items from offline data of size n
-    O(k), O(1)
+    O(k), O(1).
+    If k > population.size / 2, then change k to pop.size - k, and sample is from k to pop.size.
      */
     public static List<Integer> sampleKItems(List<Integer> population, int k) {
         print(population);
