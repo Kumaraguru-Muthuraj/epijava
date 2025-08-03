@@ -178,6 +178,7 @@ public class Arrays {
     }
 
     /* 6.3 - Multiply 2 arbitrary precision integers.
+    O(n1L * n2L), O(m+n)
      */
     public static ArrayList<Integer> multiply(ArrayList<Integer> n1, ArrayList<Integer> n2) {
         print(n1);
@@ -225,6 +226,23 @@ public class Arrays {
         return wIdx; //Length of the new array
     }
 
+    /* 6.6 - Given an array of stock prices, you are allowed to buy and sell a stock once.
+    What is the max profit.
+    O(n), O(1)
+     */
+    public static int maxProfit(int n) {
+        ArrayList<Integer> al = getArrayList(10);
+        print(al);
+        int maxProfit = 0;
+        int minSoFar = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            minSoFar = Math.min(minSoFar, al.get(i));
+            maxProfit = Math.max(maxProfit, (al.get(i) - minSoFar));
+        }
+        System.out.println("Profit - " + maxProfit);
+        return maxProfit;
+    }
+
     /* 6.19 - Compute Pascal's triangle
     O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
     O(n)
@@ -257,10 +275,11 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        multiply(getNumberAsList(4), getNumberAsList(2));
+        maxProfit(10);
         if (true) {
             return;
         }
+        multiply(getNumberAsList(4), getNumberAsList(2));
         pascal(5);
         deleteDuplicates();
         ArrayList<Integer> num = getNumberAsList(4);
