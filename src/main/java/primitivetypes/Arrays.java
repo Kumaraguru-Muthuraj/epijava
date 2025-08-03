@@ -245,6 +245,9 @@ public class Arrays {
     645720 -> 645|720 --> 647|520 --> 647|025 --> 647025
     12354 -> 12453 -> 12435
     12345 -> 12354
+    Depending on the data, if it is 198765 its O(n-1) traversal + Reversing -> O(n/2).
+    Since traversing is predominant, its O(n).
+    S.C -> O(1)
      */
     public static void nextPermutation(List<Integer> ints) {
         //print(ints);
