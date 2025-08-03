@@ -192,11 +192,41 @@ public class Arrays {
         return wIdx; //Length of the new array
     }
 
+    /* 6.19 - Compute Pascal's triangle
+     */
+    //How will an arbitrary iteration look like?
+    public static void pascal(int n) {
+        if (n < 1)
+            return;
+        List<List<Integer>> pascalT = new ArrayList<>(n);
+        List<Integer> cR = new ArrayList<>();
+        cR.add(1);
+        pascalT.add(cR);
+
+        for (int r = 1; r < n; r++) {
+            List<Integer> pR = pascalT.get(r-1);
+            cR = new ArrayList<>();
+            for (int i = 0; i <= r; i++) {
+                if (i == 0 || i == r) {
+                    cR.add(i, 1);
+                } else {
+                    cR.add(i, pR.get(i) + pR.get(i - 1));
+                }
+            }
+            pascalT.add(cR);
+        }
+        System.out.println("Pascal...");
+        for (int r = 0; r < n; r++) {
+            print(pascalT.get(r));
+        }
+    }
+
     public static void main(String[] args) {
-        deleteDuplicates();
+        pascal(5);
         if (true) {
             return;
         }
+        deleteDuplicates();
         ArrayList<Integer> num = getNumberAsList(4);
         getNext(num);
         dutchFlag();
