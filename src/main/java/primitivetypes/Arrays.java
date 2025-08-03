@@ -193,6 +193,8 @@ public class Arrays {
     }
 
     /* 6.19 - Compute Pascal's triangle
+    O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
+    O(n)
      */
     //How will an arbitrary iteration look like?
     public static void pascal(int n) {
