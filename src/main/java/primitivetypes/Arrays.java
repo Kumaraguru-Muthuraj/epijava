@@ -64,6 +64,14 @@ public class Arrays {
             System.out.print(i + ", ");
         }
     }
+
+    public static void print(List<Integer> l, int k) {
+        System.out.println();
+        for (int i = 0; i < k; i++) {
+            System.out.print(l.get(i) + ", ");
+        }
+    }
+
     public static void print(List<Integer> l) {
         System.out.println();
         for (int i : l) {
@@ -272,6 +280,20 @@ public class Arrays {
         print(ints);
     }
 
+    /* 6.11 - Sample k items from offline data of size n
+    O(k), O(1)
+     */
+    public static List<Integer> sampleKItems(List<Integer> population, int k) {
+        print(population);
+        Random r = new Random();
+        for (int i = 0; i < k; i++) {
+            int idx = r.nextInt(population.size() - i) + i;
+            Collections.swap(population, i, idx);
+        }
+        print(population, k);
+        return population;
+    }
+
     /* 6.19 - Compute Pascal's triangle
     O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
     O(n)
@@ -304,8 +326,7 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-
-
+        sampleKItems(getArrayList(10), 5);
         if (true) {
             return;
         }
