@@ -1,9 +1,6 @@
 package primitivetypes;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Arrays {
     /*6.0 - Order even followed by odd numbers.
@@ -243,6 +240,35 @@ public class Arrays {
         return maxProfit;
     }
 
+    /* 6.10 - Compute the next permutation.
+    Lexicographic ordered.
+    645720 -> 645|720 --> 647|520 --> 647|025 --> 647025
+    12354 -> 12453 -> 12435
+    12345 -> 12354
+     */
+    public static void nextPermutation(List<Integer> ints) {
+        print(ints);
+
+        //Find the longest increasing sequence
+        int i = ints.size() - 1;
+        for (; i > 0 && ints.get(i-1) > ints.get(i); i--) {
+        }
+        if (i - 1 == 0)
+            return;
+        --i;
+
+        /*There must be some element just bigger than ints[i]
+         */
+        int j = ints.size() - 1;
+        for (; j > i && ints.get(i) > ints.get(j); j--) {
+        }
+        Collections.swap(ints, i, j);
+        for (int s = i+1, e = ints.size() - 1; s < e; s++, e--) {
+            Collections.swap(ints, s, e);
+        }
+        print(ints);
+    }
+
     /* 6.19 - Compute Pascal's triangle
     O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
     O(n)
@@ -275,10 +301,13 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        maxProfit(10);
+        nextPermutation(new ArrayList<>(List.of(5,4,7,6,3,1)));
+
+
         if (true) {
             return;
         }
+        maxProfit(10);
         multiply(getNumberAsList(4), getNumberAsList(2));
         pascal(5);
         deleteDuplicates();
