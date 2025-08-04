@@ -285,13 +285,13 @@ public class Arrays {
     If k > population.size / 2, then change k to pop.size - k, and sample is from k to pop.size.
      */
     public static List<Integer> sampleKItems(List<Integer> population, int k) {
-        print(population);
+        //print(population);
         Random r = new Random();
         for (int i = 0; i < k; i++) {
             int idx = r.nextInt(population.size() - i) + i;
             Collections.swap(population, i, idx);
         }
-        print(population, k);
+        //print(population, k);
         return population;
     }
 
@@ -314,6 +314,17 @@ public class Arrays {
         }
         print(sample);
         return sample;
+    }
+
+    /* 6.13 - Generate a random permutation.
+    * */
+    public static List<Integer> randomPermutation(int n) {
+        List<Integer> perm = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            perm.add(i);
+        }
+        sampleKItems(perm, n);
+        return perm;
     }
 
     /* 6.19 - Compute Pascal's triangle
@@ -348,11 +359,12 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        List<Integer> lst = getArrayList(15);
-        sampleKItems2(lst.iterator(), 5);
         if (true) {
             return;
         }
+        print(randomPermutation(4));
+        List<Integer> lst = getArrayList(15);
+        sampleKItems2(lst.iterator(), 5);
         sampleKItems(getArrayList(10), 5);
         nextPermutation(new ArrayList<>(List.of(5,4,7,6,3,1)));
         ArrayList<Integer> l = new ArrayList<>(List.of(1,2,3,4,5));
