@@ -295,6 +295,27 @@ public class Arrays {
         return population;
     }
 
+    /* 6.12 - Sample k items from online data where at least n items are streamed.
+    O(stream.len), O(k)
+     */
+    public static List<Integer> sampleKItems2(Iterator<Integer> stream, int k) {
+        List<Integer> sample = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            sample.add(stream.next());
+        }
+        int soFar = k;
+        Random r = new Random();
+        while (stream.hasNext()) {
+            Integer e = stream.next();
+            int idx = r.nextInt(soFar++);
+            if (idx < k) {
+                sample.set(idx, e);
+            }
+        }
+        print(sample);
+        return sample;
+    }
+
     /* 6.19 - Compute Pascal's triangle
     O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
     O(n)
@@ -327,10 +348,12 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        sampleKItems(getArrayList(10), 5);
+        List<Integer> lst = getArrayList(15);
+        sampleKItems2(lst.iterator(), 5);
         if (true) {
             return;
         }
+        sampleKItems(getArrayList(10), 5);
         nextPermutation(new ArrayList<>(List.of(5,4,7,6,3,1)));
         ArrayList<Integer> l = new ArrayList<>(List.of(1,2,3,4,5));
         for (int i = 0; i < 10; i++) {
