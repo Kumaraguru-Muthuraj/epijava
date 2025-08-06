@@ -327,6 +327,42 @@ public class Arrays {
         return perm;
     }
 
+    /* 6.14 - Consider the population of numbers 0,1,2,...,n. Given only n and k.
+    Generate a random subset of k numbers from this.
+    Looks like 6.11, but the set is not given, only n and k are given.
+    Soln - For 6.11, the population was given so we used it to store the result, but
+    here, only the number is given. Storing all n (being high) is a waste of space if
+    k << n. Use a hash table to store the result.
+     */
+    public static List<Integer> randomSubset(int n, int k) {
+        HashMap<Integer, Integer> h = new LinkedHashMap<>();
+        Random r = new Random();
+        int idx = 0;
+        for (int i = 0; i < k; i++) {
+            idx = r.nextInt(n) + i;
+
+            Integer iVal = h.get(i);
+            Integer idxVal = h.get(idx);
+
+            if (iVal == null && idxVal == null) {
+                h.put(i, idx);
+                h.put(idx, i);
+            } else if (iVal == null) {
+                h.put(i, idxVal);
+                h.put(idx, i);
+            } else if (idxVal == null) {
+                h.put(i,idx);
+                h.put(idx, iVal);
+            }
+        }
+
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            res.add(h.get(i));
+        }
+        return res;
+    }
+
     /* 6.19 - Compute Pascal's triangle
     O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
     O(n)
@@ -359,6 +395,7 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
+        print(randomSubset(20, 10));
         if (true) {
             return;
         }
