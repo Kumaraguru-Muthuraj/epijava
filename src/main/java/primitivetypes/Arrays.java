@@ -218,7 +218,7 @@ public class Arrays {
         print(al);
         int wIdx = 1, rIdx = 1;
         for (; rIdx < al.size(); rIdx++) {
-            if (al.get(rIdx) != al.get(wIdx - 1)) {
+            if (!al.get(rIdx).equals(al.get(wIdx - 1))) {
                 al.set(wIdx++, al.get(rIdx));
             }
         }
