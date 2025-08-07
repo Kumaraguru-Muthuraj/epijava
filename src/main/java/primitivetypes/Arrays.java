@@ -494,34 +494,49 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        int[][] matrix1 = generateRandomMatrix(5);
-        printMatrix(matrix1);
-        spiralPrint(matrix1);
+
         if (true) {
             return;
         }
+
+        int[][] matrix1 = generateRandomMatrix(5);
+        printMatrix(matrix1);
+        spiralPrint(matrix1);
+
         int[][] matrix = generateRandomMatrix(7);
         printMatrix(matrix);
         rotateMatrix(matrix);
         printMatrix(matrix);
+
         print(randomSubset(20, 10));
+
         print(randomPermutation(4));
+
         List<Integer> lst = getArrayList(15);
         sampleKItems2(lst.iterator(), 5);
         sampleKItems(getArrayList(10), 5);
+
         nextPermutation(new ArrayList<>(List.of(5,4,7,6,3,1)));
         ArrayList<Integer> l = new ArrayList<>(List.of(1,2,3,4,5));
         for (int i = 0; i < 10; i++) {
             nextPermutation(l);
         }
+
         maxProfit(10);
+
         multiply(getNumberAsList(4), getNumberAsList(2));
+
         pascal(5);
+
         deleteDuplicates();
+
         ArrayList<Integer> num = getNumberAsList(4);
         getNext(num);
+
         dutchFlag();
+
         quickSort();
+
         orderEvenOdd();
     }
 }
