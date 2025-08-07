@@ -363,6 +363,45 @@ public class Arrays {
         return res;
     }
 
+    /* 6.17 - Spiral printing of a 2D matrix clockwise.
+    O(elements), O(1)
+     */
+    public static int iMin = 0, iMax = 0, jMin = 0, jMax = 0;
+    public static void spiralPrint(int[][] matrix) {
+        iMin = 0; iMax = matrix.length;
+        jMin = 0; jMax = matrix.length;
+        while (iMin <= iMax) {
+            printLR(matrix);
+            printTB(matrix);
+            printRL(matrix);
+            printBT(matrix);
+        }
+    }
+    public static void printLR(int[][] matrix) {
+        for (int j = jMin; j < jMax; j++) {
+            System.out.print(matrix[iMin][j] + ", ");
+        }
+        iMin++;
+    }
+    public static void printRL(int[][] matrix) {
+        for (int j = jMax - 1; j >= jMin ; j--) {
+            System.out.print(matrix[iMax - 1][j] + ", ");
+        }
+        iMax--;
+    }
+    public static void printTB(int[][] matrix) {
+        for (int i = iMin; i < iMax; i++) {
+            System.out.print(matrix[i][jMax - 1] + ", ");
+        }
+        jMax--;
+    }
+    public static void printBT(int[][] matrix) {
+        for (int i = iMax - 1; i >= iMin; i--) {
+            System.out.print(matrix[i][jMin] + ", ");
+        }
+        jMin++;
+    }
+
     /* 6.18 - Rotate a 2D matrix clockwise.
     We have to just get that a[i,j] = a[n-1-j,i]
     O(elements), O(1)
@@ -455,13 +494,16 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
+        int[][] matrix1 = generateRandomMatrix(5);
+        printMatrix(matrix1);
+        spiralPrint(matrix1);
+        if (true) {
+            return;
+        }
         int[][] matrix = generateRandomMatrix(7);
         printMatrix(matrix);
         rotateMatrix(matrix);
         printMatrix(matrix);
-        if (true) {
-            return;
-        }
         print(randomSubset(20, 10));
         print(randomPermutation(4));
         List<Integer> lst = getArrayList(15);
