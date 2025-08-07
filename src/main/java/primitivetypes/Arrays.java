@@ -365,6 +365,7 @@ public class Arrays {
 
     /* 6.18 - Rotate a 2D matrix clockwise.
     We have to just get that a[i,j] = a[n-1-j,i]
+    O(elements), O(1)
      */
     public static void rotateMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length/2; i++) {
