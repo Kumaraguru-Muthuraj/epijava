@@ -363,6 +363,65 @@ public class Arrays {
         return res;
     }
 
+    /* 6.18 - Rotate a 2D matrix clockwise.
+    We have to just get that a[i,j] = a[n-1-j,i]
+     */
+    public static void rotateMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length/2; i++) {
+            for (int j = i; j < matrix.length - 1 - i; j++) {
+                int temp = matrix[i][j];
+                IndexAndValue res1 = getIndexAndValue(i, j, matrix);
+                matrix[i][j] = matrix[res1.i][res1.j];
+
+                IndexAndValue res2 = getIndexAndValue(res1.i, res1.j, matrix);
+                matrix[res1.i][res1.j] = matrix[res2.i][res2.j];
+
+                IndexAndValue res3 = getIndexAndValue(res2.i, res2.j, matrix);
+                matrix[res2.i][res2.j] = matrix[res3.i][res3.j];
+
+                matrix[res3.i][res3.j] = temp;
+
+                //printMatrix(matrix);
+            }
+        }
+    }
+
+    public static IndexAndValue getIndexAndValue(int i, int j, int[][] matrix) {
+        return new IndexAndValue(matrix.length - 1 - j, i);
+    }
+
+    static class IndexAndValue {
+        public IndexAndValue(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+        public int i, j;
+    }
+    // Function to generate a random n x n matrix with numbers from 0 to 100
+    public static int[][] generateRandomMatrix(int n) {
+        int[][] matrix = new int[n][n];
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = rand.nextInt(101); // 0 to 100 inclusive
+            }
+        }
+        return matrix;
+    }
+
+    // Utility function to print the matrix
+    public static void printMatrix(int[][] matrix) {
+        System.out.println();
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.printf("%4d", val);
+            }
+            System.out.println();
+        }
+    }
+
+
     /* 6.19 - Compute Pascal's triangle
     O(n^2) = number of elements in the triangle - 1 + 2 + 3 ... n
     O(n)
@@ -395,10 +454,14 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        print(randomSubset(20, 10));
+        int[][] matrix = generateRandomMatrix(7);
+        printMatrix(matrix);
+        rotateMatrix(matrix);
+        printMatrix(matrix);
         if (true) {
             return;
         }
+        print(randomSubset(20, 10));
         print(randomPermutation(4));
         List<Integer> lst = getArrayList(15);
         sampleKItems2(lst.iterator(), 5);
