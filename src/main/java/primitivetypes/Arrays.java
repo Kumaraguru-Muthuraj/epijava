@@ -71,7 +71,12 @@ public class Arrays {
             System.out.print(l.get(i) + ", ");
         }
     }
-
+    public static void printPrimesAndIndices(List<Boolean> l) {
+        System.out.println("******");
+        for (int i = 0; i < l.size(); i++) {
+            System.out.println("Idx: " + i + " - Num: " + getNumAtIdx(i) + " - Bool: " + l.get(i));
+        }
+    }
     public static void print(List<Integer> l) {
         System.out.println();
         for (int i : l) {
@@ -247,6 +252,58 @@ public class Arrays {
         System.out.println("Profit - " + maxProfit);
         return maxProfit;
     }
+
+    /* 6.8 - Enumerate all primes to n.
+    2, 3, 5, 7, 11, 13, ... till n.
+    Sieve of Eratosthenes.
+    Optimization - For a given n, start sieving from n*n because every k < n is already sifted.
+    We are doing this for each prime number, 3, 5, 7, 9 - The loop that sifts happens
+    n/3, n/5, n/7 etc., times.
+    It is O(n.log.log(n)). Check the notebook and Chat GPT.
+     */
+    public static List<Integer> primes(int n) {
+        /*Just for odd numbers, starting from 3 - 3, 5, 7, ... n/2
+                                            Idx - 0, 1, 2, ...
+         */
+        List<Boolean> isPrime = new ArrayList<>(Collections.nCopies(n/2, true));
+        List<Integer> nums = new ArrayList<>();
+        nums.add(2);
+
+        for (int i = 0; i < isPrime.size(); i++) {
+            if (isPrime.get(i).equals(true)) {
+                int primeNum = getNumAtIdx(i);
+                nums.add(primeNum);
+
+                int curNum = primeNum * primeNum;
+                int pIdx = getIdxForNum(curNum);
+                while (pIdx < isPrime.size()) {
+                    if (pIdx > 0) {
+                        isPrime.set(pIdx, false);
+                    }
+                    curNum += primeNum;
+                    pIdx = getIdxForNum(curNum);
+                    //printPrimesAndIndices(isPrime);
+
+                }
+            }
+            //print(nums);
+        }
+
+        return nums;
+    }
+
+    // Idx, Num pair goes like this - (0,3), (1,5), (2,7)
+    public static int getNumAtIdx(int idx) {
+        return 2 * idx + 3;
+    }
+    public static int getIdxForNum(int n) {
+        if (n % 2 == 0) {
+            //Even numbers are not here.
+            return -1;
+        }
+        return (n - 3)/2;
+    }
+
 
     /* 6.10 - Compute the next permutation.
     Lexicographic ordered.
@@ -494,7 +551,7 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-
+        print(primes(100));
         if (true) {
             return;
         }
