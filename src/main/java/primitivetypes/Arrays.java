@@ -253,6 +253,10 @@ public class Arrays {
         return maxProfit;
     }
 
+    /* 6.7 - Buy and sell a stock twice
+
+     */
+
     /* 6.8 - Enumerate all primes to n.
     2, 3, 5, 7, 11, 13, ... till n.
     Sieve of Eratosthenes.
@@ -420,6 +424,63 @@ public class Arrays {
         return res;
     }
 
+    /* 6.15 - Generate non-uniform random numbers.
+     */
+    public static void genNumbersByProbability(List<Integer> nums, List<Float> probabilities) {
+        print(nums);
+        printFloat(probabilities);
+        List<Float> prs = generateCumulativeNums(probabilities);
+        printFloat(prs);
+        Random r = new Random();
+        float f = r.nextFloat();
+        int idx = Collections.binarySearch(prs, f);
+        if (idx < 0) {
+            idx = Math.abs(idx) - 2;
+        }
+        System.out.println("\nRand - " + f + ", " + nums.get(idx));
+    }
+
+    public static void printFloat(List<Float> numbers) {
+        System.out.println();
+        for (float num : numbers) {
+            System.out.print(num + ", ");
+        }
+    }
+
+    public static List<Float> generateFloatsSumToOne(int n) {
+        if (n <= 0) throw new IllegalArgumentException("n must be > 0");
+        Random rand = new Random();
+        List<Float> arr = new ArrayList<>(n);
+        float total = 0f;
+
+        // Step 1: Generate random ints
+        for (int i = 0; i < n; i++) {
+            arr.add(i, 0.0f);
+            arr.set(i, (float) (rand.nextInt(100) + 1));
+            total += arr.get(i);
+        }
+
+        // Step 2: Normalize (n-1 elements)
+        float runningSum = 0f;
+        for (int i = 0; i < n; i++) {
+            arr.set(i, arr.get(i) / total);
+            runningSum += arr.get(i);
+        }
+
+        return arr;
+    }
+
+    public static List<Float> generateCumulativeNums(List<Float> arr) {
+        float runningSum = 0f;
+        arr.add(0, 0.0f);
+        for (int i = 0; i < arr.size(); i++) {
+            runningSum += arr.get(i);
+            arr.set(i, runningSum);
+        }
+        return arr;
+    }
+
+
     /* 6.17 - Spiral printing of a 2D matrix clockwise.
     O(elements), O(1)
      */
@@ -551,10 +612,12 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        print(primes(100));
+        genNumbersByProbability(getArrayList(10), generateFloatsSumToOne(10));
         if (true) {
             return;
         }
+
+        print(primes(100));
 
         int[][] matrix1 = generateRandomMatrix(5);
         printMatrix(matrix1);
