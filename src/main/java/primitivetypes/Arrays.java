@@ -241,7 +241,7 @@ public class Arrays {
     O(n), O(1)
      */
     public static int maxProfit(int n) {
-        ArrayList<Integer> al = getArrayList(10);
+        ArrayList<Integer> al = getArrayList(n);
         print(al);
         int maxProfit = 0;
         int minSoFar = Integer.MAX_VALUE;
@@ -253,9 +253,50 @@ public class Arrays {
         return maxProfit;
     }
 
-    /* 6.7 - Buy and sell a stock twice
-
+    //THERE IS A SUBTLE DIFFERENCE IN THE LOGIC FOR 6.6 AND THE FIRST PASS OF 6.7
+    /* 6.7 - Buy and sell a stock twice.
+    O(n), O(n).
+    The second space for s is not required. For clarity, I have added that here.
+    Variants:
+    1) Get the indexes for first and second buy & sell.
+    2) There is an O(n) Time and O(1) Space algorithm for this.
      */
+    public static int maxProfitSellTwice(int n) {
+        ArrayList<Integer> al = getArrayList(n);
+        print(al);
+
+        int totalMaxProfit = 0;
+
+        //First pass profits
+        ArrayList<Integer> f = new ArrayList<>(n);
+        int maxProfit = 0;
+        int minPriceSoFar = Integer.MAX_VALUE;
+        int curProfit = 0;
+        for (int i = 0; i < n; i++) {
+            minPriceSoFar = Math.min(minPriceSoFar, al.get(i));
+            curProfit = al.get(i) - minPriceSoFar;
+            maxProfit = Math.max(maxProfit, curProfit);
+            f.add(maxProfit);
+        }
+        print(f);
+
+        //Second pass profits in second sale
+        ArrayList<Integer> s = new ArrayList<>(n);
+        int maxPriceSoFar = Integer.MIN_VALUE;
+        curProfit = 0;
+        maxProfit = 0;
+        for (int i = n - 1; i > 0; i--) {
+            maxPriceSoFar = Math.max(al.get(i), maxPriceSoFar);
+            curProfit = maxPriceSoFar - al.get(i);
+            maxProfit = Math.max(maxProfit, curProfit);
+            s.add(maxProfit);
+
+            totalMaxProfit = Math.max(totalMaxProfit, f.get(i - 1) + maxProfit);
+        }
+        printReverse(s);
+        System.out.println("Profit - " + totalMaxProfit);
+        return totalMaxProfit;
+    }
 
     /* 6.8 - Enumerate all primes to n.
     2, 3, 5, 7, 11, 13, ... till n.
@@ -612,10 +653,12 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        genNumbersByProbability(getArrayList(10), generateFloatsSumToOne(10));
+        maxProfitSellTwice(10);
+
         if (true) {
             return;
         }
+        genNumbersByProbability(getArrayList(10), generateFloatsSumToOne(10));
 
         print(primes(100));
 
