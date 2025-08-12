@@ -1,6 +1,5 @@
-package primitivetypes;
+package epi;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Countbits {
