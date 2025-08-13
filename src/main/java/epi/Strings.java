@@ -39,6 +39,24 @@ public class Strings {
 
     }
 
+    /* 7.5 - Test palindromicity, ignore non alphabet characters.
+     */
+    public static boolean checkPalindrome(String str) {
+        System.out.println(str);
+        for (int i = 0, j = str.length() - 1; i < j; i++, j--) {
+            while (!Character.isLetterOrDigit(str.charAt(i))) {
+                i++;
+            }
+            while (!Character.isLetterOrDigit(str.charAt(j))) {
+                j--;
+            }
+            if (i < j && Character.toLowerCase(str.charAt(i)) != Character.toLowerCase(str.charAt(j))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /* 7.11 - Write a String Sinusoidally.
     O(n), O(n)
      */
@@ -87,10 +105,13 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        bootCamp();
+        System.out.println(checkPalindrome("kumar, is my name. eman ym si, ramuk."));
+        System.out.println(checkPalindrome("A man, a plan, a canal, Panama."));
+        System.out.println(checkPalindrome("Able was I, ere I saw Elba!"));
         if (true) {
             return;
         }
+        bootCamp();
         System.out.print(palindrome("abcdefedcba"));
         printSine("kumaragurumuthurajofCoimbatore");
     }
