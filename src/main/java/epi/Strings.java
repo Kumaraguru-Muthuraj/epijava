@@ -40,6 +40,7 @@ public class Strings {
     }
 
     /* 7.5 - Test palindromicity, ignore non alphabet characters.
+    O(n), O(1)
      */
     public static boolean checkPalindrome(String str) {
         System.out.println(str);
