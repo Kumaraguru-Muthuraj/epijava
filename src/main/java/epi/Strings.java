@@ -59,6 +59,8 @@ public class Strings {
     }
 
     /* 7.6 - Reverse all words in a sentence.
+    O(n) - Traverse once to reverse and again traverse word by word to reverse. 2.n
+    O(1)
      */
     public static void reverseSentence(String sentence) {
         System.out.println(sentence);
