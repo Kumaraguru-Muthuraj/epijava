@@ -73,6 +73,7 @@ public class Strings {
         while (i < len) {
             wordBegin = i;
             while (i < len && sentence[i++] != ' ') { }
+            // We can even write a function to return the index of the next ' ' or end of sentence.
             wordEnd = i >= len ? i : i - 2;
             reverse(sentence, wordBegin, wordEnd);
         }
