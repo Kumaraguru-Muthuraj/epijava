@@ -58,6 +58,35 @@ public class Strings {
         return true;
     }
 
+    /* 7.6 - Reverse all words in a sentence.
+     */
+    public static void reverseSentence(String sentence) {
+        System.out.println(sentence);
+        char[] chars = sentence.toCharArray();
+        reverseSentence(chars);
+        System.out.println(new String(chars));
+    }
+    public static void reverseSentence(char[] sentence) {
+        int i = 0, len = sentence.length - 1;
+        reverse(sentence, 0, len);
+        int wordBegin = 0, wordEnd = 0;
+        while (i < len) {
+            wordBegin = i;
+            while (i < len && sentence[i++] != ' ') { }
+            wordEnd = i >= len ? i : i - 2;
+            reverse(sentence, wordBegin, wordEnd);
+        }
+    }
+    public static void reverse(char[] sentence, int s, int e) {
+        while (s < e) {
+            char temp = sentence[s];
+            sentence[s] = sentence[e];
+            sentence[e] = temp;
+            s++;
+            e--;
+        }
+    }
+
     /* 7.11 - Write a String Sinusoidally.
     O(n), O(n)
      */
@@ -106,12 +135,17 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        System.out.println(checkPalindrome("kumar, is my name. eman ym si, ramuk."));
-        System.out.println(checkPalindrome("A man, a plan, a canal, Panama."));
-        System.out.println(checkPalindrome("Able was I, ere I saw Elba!"));
         if (true) {
             return;
         }
+
+        reverseSentence("This sentence is reversed");
+        reverseSentence("This sentence i reversed");
+        reverseSentence("I");
+
+        System.out.println(checkPalindrome("kumar, is my name. eman ym si, ramuk."));
+        System.out.println(checkPalindrome("A man, a plan, a canal, Panama."));
+        System.out.println(checkPalindrome("Able was I, ere I saw Elba!"));
         bootCamp();
         System.out.print(palindrome("abcdefedcba"));
         printSine("kumaragurumuthurajofCoimbatore");
