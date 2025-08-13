@@ -1,6 +1,44 @@
 package epi;
 
 public class Strings {
+    /* 7.0 - Plaindrome
+     */
+    public static boolean palindrome(String str) {
+        for (int i = 0, j = str.length() - 1; i < j; i++, j--) {
+            if (str.charAt(i) != str.charAt(j)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*Boot camp
+     */
+    public static void bootCamp() {
+        String s1 = "kumaran";
+        String s2 = "kumara";
+        String s3 = "ara";
+        System.out.println(s1.compareTo(s2));
+        System.out.println(s1.concat(s2));
+        System.out.println(s1.contains(s3));
+        System.out.println(s1.indexOf(s3));
+        System.out.println(s2.endsWith(s3));
+        System.out.println(s1.indexOf("a", 4));
+        System.out.println(s1.lastIndexOf("a"));
+        System.out.println(s1.replace('a', 'A'));
+        System.out.println(s1.replace("a", "AAA"));
+        System.out.println(s1.substring(4));
+        System.out.println(s1.substring(2, 5));
+        char[] c = s1.toCharArray();
+        s1.charAt(4);
+
+        System.out.println("**********");
+        StringBuilder sb = new StringBuilder(s1);
+        sb.append(true);
+        System.out.println(sb);
+
+    }
+
     /* 7.11 - Write a String Sinusoidally.
     O(n), O(n)
      */
@@ -49,6 +87,11 @@ public class Strings {
     }
 
     public static void main(String[] args) {
+        bootCamp();
+        if (true) {
+            return;
+        }
+        System.out.print(palindrome("abcdefedcba"));
         printSine("kumaragurumuthurajofCoimbatore");
     }
 }
