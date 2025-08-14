@@ -39,6 +39,43 @@ public class Strings {
 
     }
 
+    /* 7.1 - Convert String <---> Integer
+     */
+    // Don't go from back, go from front. This makes it simple.
+    // O(n), O(1)
+    public static int strToInteger(String str) {
+        int res = 0;
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            i = 1;
+        }
+        for (; i < str.length(); i++) {
+            int d = str.charAt(i) - '0';
+            res = res * 10 + d;
+        }
+        return (str.charAt(0) == '-') ? -res : res;
+    }
+
+    // Inserting chars in the beginning of the String is expensive, we do append and reverse.
+    //O(n), O(n)
+    public static String intToString(int i) {
+        int val = Math.abs(i);
+        StringBuilder sb = new StringBuilder();
+        int d = 0;
+        char c;
+        while (val > 0) {
+            d = val % 10;
+            c = (char) ('0' + d);
+            sb.append(c); //Even sb.append(d) would work.
+            val /= 10;
+        }
+        if (i < 0) {
+            sb.append("-");
+        }
+        sb.reverse();
+        return sb.toString();
+    }
+
     /* 7.5 - Test palindromicity, ignore non alphabet characters.
     O(n), O(1)
      */
@@ -138,6 +175,8 @@ public class Strings {
     }
 
     public static void main(String[] args) {
+        System.out.println(strToInteger("-4521"));
+        System.out.println(intToString(-2534));
         if (true) {
             return;
         }
