@@ -76,6 +76,47 @@ public class Strings {
         return sb.toString();
     }
 
+    /* 7.2 - Convert to different bases.
+     */
+    public static String convert(String num, int fromB1, int toB2) {
+        int b10 = convertToBase10(num, fromB1);
+        String str = convertBase10ToB(b10,toB2);
+        return str;
+    }
+
+    public static int convertToBase10(String num, int b) {
+        System.out.println("Converting " + num + "to b10 from base" + b);
+        int asB10 = 0;
+        System.out.println(num);
+        //Handle negative too
+        boolean neg = num.charAt(0) == '-';
+        int i = neg ? 1 : 0;
+        for (; i < num.length(); i++) {
+            int digit = Character.isDigit(num.charAt(i))
+                            ? num.charAt(i) - '0'
+                            : num.charAt(i) - 'A' + 10;
+            asB10 *= b;
+            asB10 += digit;
+        }
+
+        return asB10;
+    }
+
+    public static String convertBase10ToB(int num, int b) {
+        System.out.println("Converting "+ num + " from b10 to base" + b);
+        StringBuilder sb = new StringBuilder();
+
+        while(num > 0) {
+            int digit = num % b;
+            char c = digit >= 10 ? (char) (digit - 10 + 'A') : (char) (digit + '0');
+            sb.append(c);
+            num /= b;
+        }
+        sb.reverse();
+        return sb.toString();
+    }
+
+
     /* 7.5 - Test palindromicity, ignore non alphabet characters.
     O(n), O(1)
      */
@@ -175,11 +216,20 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        System.out.println(strToInteger("-4521"));
-        System.out.println(intToString(-2534));
+
         if (true) {
             return;
         }
+        System.out.println(convert("10111010110000010000", 2, 16));
+
+        System.out.println(convertToBase10("53AB", 16));
+        System.out.println(convertToBase10("10101100", 2));
+        System.out.println(convertBase10ToB(532541, 16));
+        System.out.println(convertBase10ToB(53, 8));
+        System.out.println(convertBase10ToB(53, 2));
+
+        System.out.println(strToInteger("-4521"));
+        System.out.println(intToString(-2534));
 
         reverseSentence("This sentence is reversed");
         reverseSentence("This sentence i reversed");
