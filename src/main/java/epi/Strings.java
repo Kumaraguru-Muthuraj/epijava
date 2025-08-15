@@ -240,7 +240,27 @@ public class Strings {
     aaaabbcdddggg -> 4a2b1c3d3g - Encoding
     2r11t4g -> rrtttttttttttgggg - Decoding
      */
-
+    public static String rleEncode(String data) {
+        StringBuilder sb = new StringBuilder();
+        if (data.length() == 1) {
+            sb.append(1);
+            sb.append(data);
+            return sb.toString();
+        }
+        int count = 1;
+        for (int i = 1; i < data.length(); i++) {
+            if (data.charAt(i - 1) == data.charAt(i)) {
+                count++;
+            } else {
+                sb.append(count);
+                sb.append(data.charAt(i - 1));
+                count = 1;
+            }
+        }
+        sb.append(count);
+        sb.append(data.charAt(data.length() - 1));
+        return sb.toString();
+    }
 
     /* 7.13 - Rolling hash / Rabin-Karp. Find the first substring.
     O(m+n) - m and n are lengths of the strings.
@@ -283,15 +303,16 @@ public class Strings {
     }
 
     public static void main(String[] args) {
+        System.out.println(rleEncode("aabbcccc"));
+        if (true) {
+            return;
+        }
         System.out.println(convertToBase26("A"));
         System.out.println(convertToBase26("Z"));
         System.out.println(convertToBase26("AA"));
         System.out.println(convertToBase26("AB"));
         System.out.println(convertToBase26("AZ"));
         System.out.println(convertToBase26("BAA"));
-        if (true) {
-            return;
-        }
 
         System.out.println(getSubstringIdx("abcdefghijklmn", "bc"));
 
