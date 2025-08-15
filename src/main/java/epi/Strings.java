@@ -262,6 +262,24 @@ public class Strings {
         return sb.toString();
     }
 
+    // 2r12t4g -> rrtttttttttttgggg - Decoding
+    public static String rleDecode(String compressed) {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for (int i = 0; i < compressed.length() ; i++) {
+            char c = compressed.charAt(i);
+            if (Character.isDigit(c)) {
+                count = count * 10 + (c - '0');
+            } else {
+                while (count > 0) {
+                    sb.append(c);
+                    count--;
+                }
+            }
+        }
+        return sb.toString();
+    }
+
     /* 7.13 - Rolling hash / Rabin-Karp. Find the first substring.
     O(m+n) - m and n are lengths of the strings.
     O(1).
@@ -303,7 +321,9 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        System.out.println(rleEncode("aabbcccc"));
+        System.out.println(rleEncode("rrttttttttttttgggg"));
+        System.out.println(rleDecode("2b3f"));
+
         if (true) {
             return;
         }
