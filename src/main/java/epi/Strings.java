@@ -215,8 +215,42 @@ public class Strings {
         }
     }
 
-    public static void main(String[] args) {
+    /* 7.13 - Rolling hash / Rabin-Karp. Find the first substring.
+     */
+    public static int getSubstringIdx(String text, String s) {
+        System.out.println(text);
+        System.out.println(s);
 
+        int BASE = 26;
+        long pToSubtract = (int) Math.pow(BASE, s.length() - 1);
+        long sHash = hash(s, 0, s.length() - 1);
+        long tHash = hash(text, 0, s.length() - 1);
+        int tS = 0, tE = text.length() - 1;
+        while (tS <= tE - s.length() + 1) {
+            if (sHash == tHash) {
+                // Might have to check the strings if the hash is not spread well.
+                return tS;
+            }
+            tHash = tHash - text.charAt(tS) * pToSubtract;
+            tHash = tHash * BASE + text.charAt(tS + s.length() - 1);
+
+            tS++;
+        }
+
+        return 0;
+    }
+
+    public static long hash(String str, int s, int e) {
+        int BASE = 26;
+        long value = 0;
+        for (int i = s; i <= e; i++) {
+            value = value * BASE + str.charAt(i);
+        }
+        return value;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getSubstringIdx("abcdefghijklmn", "pqrs"));
         if (true) {
             return;
         }
