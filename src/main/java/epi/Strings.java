@@ -238,7 +238,8 @@ public class Strings {
 
     /* 7.12 - Run Length Encoding.
     aaaabbcdddggg -> 4a2b1c3d3g - Encoding
-    2r11t4g -> rrtttttttttttgggg - Decoding
+        TC - O(n)
+        SC - O(n)
      */
     public static String rleEncode(String data) {
         StringBuilder sb = new StringBuilder();
@@ -262,7 +263,10 @@ public class Strings {
         return sb.toString();
     }
 
-    // 2r12t4g -> rrtttttttttttgggg - Decoding
+    /* 2r12t4g -> rrtttttttttttgggg - Decoding
+        TC - O(n) - n is the sum of all numbers in the encoded string.
+        SC - O(n)
+    */
     public static String rleDecode(String compressed) {
         StringBuilder sb = new StringBuilder();
         int count = 0;
