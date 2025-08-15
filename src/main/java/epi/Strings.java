@@ -77,7 +77,7 @@ public class Strings {
     }
 
     /* 7.2 - Convert to different bases.
-    * O(n + n log b1) <-- log b1 is base b2, where n is the number of digits.
+    * O(n + n log(fromB1)) <-- log(fromB1) is base toB2, where n is the number of digits.
     * O(n) - For the StringBuilder
     *
      */
@@ -87,6 +87,7 @@ public class Strings {
         return str;
     }
 
+    // O(n)
     public static int convertToBase10(String num, int b) {
         System.out.println("Converting " + num + "to b10 from base" + b);
         int asB10 = 0;
@@ -105,6 +106,12 @@ public class Strings {
         return asB10;
     }
 
+    /*
+    Consider converting a decimal to binary. How many divisions would you do?
+    num = 2 ^ k, and k is the number of times => k = log(num) base 2.
+    If you have to convert a decimal num to base b, we divide it k = log(num) base b times.
+    ******* NOT FINISHED YET ******* Express num w.r.t b
+     */
     public static String convertBase10ToB(int num, int b) {
         System.out.println("Converting "+ num + " from b10 to base" + b);
         StringBuilder sb = new StringBuilder();
