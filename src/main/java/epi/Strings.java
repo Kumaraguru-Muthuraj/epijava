@@ -225,19 +225,23 @@ public class Strings {
         long pToSubtract = (int) Math.pow(BASE, s.length() - 1);
         long sHash = hash(s, 0, s.length() - 1);
         long tHash = hash(text, 0, s.length() - 1);
-        int tS = 0, tE = text.length() - 1;
-        while (tS <= tE - s.length() + 1) {
+        int tS = 0;
+        while (tS < text.length() - s.length()) {
             if (sHash == tHash) {
                 // Might have to check the strings if the hash is not spread well.
                 return tS;
             }
             tHash = tHash - text.charAt(tS) * pToSubtract;
-            tHash = tHash * BASE + text.charAt(tS + s.length() - 1);
+            tHash = tHash * BASE + text.charAt(tS + s.length());
 
             tS++;
         }
+        if (sHash == tHash) {
+            // Might have to check the strings if the hash is not spread well.
+            return tS;
+        }
 
-        return 0;
+        return -1;
     }
 
     public static long hash(String str, int s, int e) {
@@ -250,7 +254,7 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        System.out.println(getSubstringIdx("abcdefghijklmn", "pqrs"));
+        System.out.println(getSubstringIdx("abcdefghijklmn", "bc"));
         if (true) {
             return;
         }
