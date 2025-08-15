@@ -126,6 +126,17 @@ public class Strings {
         return sb.toString();
     }
 
+    /* 7.3 - Spreadsheet column encoding.
+    A, B, ...Z, AA, AB ... AZ, AAA, AAB ... BAA, BAB, BAC...
+    O(n)
+     */
+    public static int convertToBase26(String columnCode) {
+        int b10 = 0;
+        for (int i = 0; i < columnCode.length(); i++) {
+            b10 = b10 * 26 + columnCode.charAt(i) - 'A' + 1;
+        }
+        return b10;
+    }
 
     /* 7.5 - Test palindromicity, ignore non alphabet characters.
     O(n), O(1)
@@ -225,6 +236,12 @@ public class Strings {
         }
     }
 
+    /* 7.12 - Run Length Encoding.
+    aaaabbcdddggg -> 4a2b1c3d3g - Encoding
+    2r11t4g -> rrtttttttttttgggg - Decoding
+     */
+
+
     /* 7.13 - Rolling hash / Rabin-Karp. Find the first substring.
     O(m+n) - m and n are lengths of the strings.
     O(1).
@@ -266,10 +283,18 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        System.out.println(getSubstringIdx("abcdefghijklmn", "bc"));
+        System.out.println(convertToBase26("A"));
+        System.out.println(convertToBase26("Z"));
+        System.out.println(convertToBase26("AA"));
+        System.out.println(convertToBase26("AB"));
+        System.out.println(convertToBase26("AZ"));
+        System.out.println(convertToBase26("BAA"));
         if (true) {
             return;
         }
+
+        System.out.println(getSubstringIdx("abcdefghijklmn", "bc"));
+
         System.out.println(convert("10111010110000010000", 2, 16));
 
         System.out.println(convertToBase10("53AB", 16));
