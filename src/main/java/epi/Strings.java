@@ -77,6 +77,9 @@ public class Strings {
     }
 
     /* 7.2 - Convert to different bases.
+    * O(n + n log b1) <-- log b1 is base b2, where n is the number of digits.
+    * O(n) - For the StringBuilder
+    *
      */
     public static String convert(String num, int fromB1, int toB2) {
         int b10 = convertToBase10(num, fromB1);
@@ -216,6 +219,8 @@ public class Strings {
     }
 
     /* 7.13 - Rolling hash / Rabin-Karp. Find the first substring.
+    O(m+n) - m and n are lengths of the strings.
+    O(1).
      */
     public static int getSubstringIdx(String text, String s) {
         System.out.println(text);
