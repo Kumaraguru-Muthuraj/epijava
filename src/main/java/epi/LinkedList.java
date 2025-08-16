@@ -6,6 +6,7 @@ public class LinkedList<T> {
     public Node<T> add(T val) {
         if (head == null) {
             head = new Node<>(val);
+            tail = head;
             return head;
         }
         Node<T> cur = head;
@@ -14,6 +15,7 @@ public class LinkedList<T> {
         }
         Node<T> node = new Node<>(val);
         cur.next = node;
+        tail = node;
         return node;
     }
     public Node<T> getHead() {
