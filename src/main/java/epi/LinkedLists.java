@@ -29,10 +29,15 @@ public class LinkedLists {
             }
         });
         l.add(23);
+        l.delete(23);
         l.add(34);
         l.add(1);
+        l.delete(1);
         l.add(-200);
+        l.delete(34);
+        l.add(10);
         l.add(50);
         l.print();
+        System.out.println("\n\n");
     }
 }

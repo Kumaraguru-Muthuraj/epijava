@@ -7,6 +7,8 @@ public class SortedLinkedList<T> extends LinkedList<T> {
     public SortedLinkedList(Comparator<T> c) {
         super(c);
     }
+
+    @Override
     public Node<T> add(T val) {
         if (head == null) {
             head = new Node<>(val);
@@ -30,5 +32,29 @@ public class SortedLinkedList<T> extends LinkedList<T> {
             }
         }
         return node;
+    }
+
+    @Override
+    public boolean delete(T val) {
+        Node<T> cur = head, prev = head;
+        while (cur != null) {
+            if (comparator.compare(val, cur.value) == 0) {
+                if (head == tail) {
+                    head = null;
+                    tail = null;
+                } else if (head == cur) {
+                    head = head.next;
+                } else if (tail == cur) {
+                    tail = prev;
+                    prev.next = null;
+                } else {
+                    prev.next = cur.next;
+                }
+                return true;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        return false;
     }
 }
