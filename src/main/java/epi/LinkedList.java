@@ -47,6 +47,10 @@ public class LinkedList<T> {
         return false;
     }
 
+    /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
+    If we have a dummy tail, then its possible to delete the last node.
+    O(1), O(1)
+     */
     public boolean deleteCurrent(Node<T> cur) {
         if (cur != null && cur.next != null) {
             if (cur.next == tail) {
