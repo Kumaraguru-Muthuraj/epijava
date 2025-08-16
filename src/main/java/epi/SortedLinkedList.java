@@ -25,6 +25,9 @@ public class SortedLinkedList<T> extends LinkedList<T> {
         } else {
             node.next = cur;
             prev.next = node;
+            if (tail.next == node) {
+                tail = node;
+            }
         }
         return node;
     }
