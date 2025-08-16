@@ -9,7 +9,9 @@ public class LinkedList<T> {
             return head;
         }
         Node<T> cur = head;
-        for (; cur.next != null; cur = cur.next) {}
+        while (cur.next != null) {
+            cur = cur.next;
+        }
         Node<T> node = new Node<>(val);
         cur.next = node;
         return node;
@@ -26,15 +28,6 @@ public class LinkedList<T> {
         }
     }
 
-    private Node<T> head;
-    private Node<T> tail;
-}
-
-class Node<T> {
-    public Node(T val) {
-        this.value = val;
-        this.next = null;
-    }
-    public T value;
-    public Node<T> next;
+    protected Node<T> head;
+    protected Node<T> tail;
 }
