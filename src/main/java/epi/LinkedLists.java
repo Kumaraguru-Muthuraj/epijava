@@ -27,8 +27,10 @@ public class LinkedLists {
     public static void main(String[] args) {
         LinkedList<Integer> sl = getNewLinkedList(10);
         sl.print();
-        System.out.println(sl.deleteCurrent(sl.getRandomNode()));
-        sl.print();
+        while (sl.getHead() != null) {
+            System.out.println(sl.deleteCurrent(sl.getRandomNode()));
+            sl.print();
+        }
         if (true) {
             return;
         }
