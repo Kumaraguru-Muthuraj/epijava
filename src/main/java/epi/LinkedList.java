@@ -2,6 +2,7 @@ package epi;
 
 
 import java.util.Comparator;
+import java.util.Random;
 
 public class LinkedList<T> {
     public LinkedList(Comparator<T> c) {
@@ -46,6 +47,19 @@ public class LinkedList<T> {
         return false;
     }
 
+    public boolean deleteCurrent(Node<T> cur) {
+        if (cur != null && cur.next != null) {
+            if (cur.next == tail) {
+                //There are only 2 nodes and tail is getting deleted.
+                tail = cur;
+            }
+            cur.value = cur.next.value;
+            cur.next = cur.next.next;
+            return true;
+        }
+        return false;
+    }
+
     public Node<T> getHead() {
         return head;
     }
@@ -56,7 +70,20 @@ public class LinkedList<T> {
         for (Node<T> cur = head; cur != null; cur = cur.next) {
             System.out.print(cur.value + ", ");
         }
+        System.out.println();
     }
+    public Node<T> getRandomNode() {
+        Random r = new Random();
+        Node<T> cur = head;
+        while (cur != null) {
+            if (r.nextBoolean()) {
+                return cur;
+            }
+            cur = cur.next;
+        }
+        return tail;
+    }
+
 
     protected Node<T> head;
     protected Node<T> tail;

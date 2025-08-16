@@ -1,9 +1,37 @@
 package epi;
 
 import java.util.Comparator;
+import java.util.Random;
 
 public class LinkedLists {
+
+    public static void deleteCurrent(Node<Integer> c) {
+
+    }
+
+    public static LinkedList<Integer> getNewLinkedList(int n) {
+        LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            ll.add(r.nextInt(120) + 1);
+        }
+        return ll;
+    }
+
     public static void main(String[] args) {
+        LinkedList<Integer> sl = getNewLinkedList(10);
+        sl.print();
+        System.out.println(sl.deleteCurrent(sl.getRandomNode()));
+        sl.print();
+        if (true) {
+            return;
+        }
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
