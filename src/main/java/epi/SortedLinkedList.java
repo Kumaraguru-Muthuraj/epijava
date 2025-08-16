@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class SortedLinkedList<T> extends LinkedList<T> {
     public SortedLinkedList(Comparator<T> c) {
-        this.comparator = c;
+        super(c);
     }
     public Node<T> add(T val) {
         if (head == null) {
@@ -31,6 +31,4 @@ public class SortedLinkedList<T> extends LinkedList<T> {
         }
         return node;
     }
-
-    private Comparator<T> comparator;
 }

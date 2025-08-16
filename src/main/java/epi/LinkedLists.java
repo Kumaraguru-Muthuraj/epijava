@@ -3,15 +3,22 @@ package epi;
 import java.util.Comparator;
 
 public class LinkedLists {
-
-
-
     public static void main(String[] args) {
-        LinkedList<Integer> ll = new LinkedList<>();
+        LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
         ll.add(23);
+        ll.delete(23);
         ll.add(34);
         ll.add(1);
+        ll.delete(1);
         ll.add(-200);
+        ll.delete(34);
+        ll.add(10);
+        ll.add(50);
         ll.print();
         System.out.println("\n\n");
 

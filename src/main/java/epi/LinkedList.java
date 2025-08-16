@@ -1,8 +1,12 @@
 package epi;
 
 
+import java.util.Comparator;
+
 public class LinkedList<T> {
-    public LinkedList() {}
+    public LinkedList(Comparator<T> c) {
+        this.comparator = c;
+    }
     public Node<T> add(T val) {
         if (head == null) {
             head = new Node<>(val);
@@ -18,6 +22,30 @@ public class LinkedList<T> {
         tail = node;
         return node;
     }
+    public boolean delete(T val) {
+        Node<T> cur = head, prev = head;
+        while (cur != null) {
+            if (this.comparator.compare(val, cur.value) == 0) {
+                if (head == tail) {
+                    head = null;
+                    tail = null;
+                } else if (cur == head) {
+                    head = cur.next;
+                } else if (cur == tail) {
+                    tail = prev;
+                    prev.next = null;
+                } else {
+                    prev.next = cur.next;
+                }
+                return true;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+
+        return false;
+    }
+
     public Node<T> getHead() {
         return head;
     }
@@ -32,4 +60,5 @@ public class LinkedList<T> {
 
     protected Node<T> head;
     protected Node<T> tail;
+    protected Comparator<T> comparator;
 }
