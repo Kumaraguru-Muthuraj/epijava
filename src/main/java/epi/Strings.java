@@ -139,6 +139,47 @@ public class Strings {
         return b10;
     }
 
+    /* 7.4 - Replace and remove.
+    Replace 'a' with 2 'd's.
+    Delete all 'b's.
+     */
+    public static void replaceAndRemove(String str) {
+        char[] chars = str.toCharArray();
+        int len = str.length();
+        int aCnt = 0;
+        //First pass - Delete 'b'
+        int newLen = 0;
+        int wI = 0, rI = 0;
+        for (; rI < len; wI++, rI++) {
+            if (chars[rI] == 'a') {
+                aCnt++;
+            }
+            while (rI < len && chars[rI] == 'b') {
+                rI++;
+            }
+            if (rI < len) {
+                chars[wI] = chars[rI];
+                newLen = wI + 1;
+            } else {
+                newLen = wI;
+            }
+        }
+        System.out.println(newLen + ", " + chars[newLen]);
+
+        //Second pass - Replace 'a' with 2 'd's.
+        rI = newLen - 1;
+        wI = rI + aCnt;
+        while (rI >= 0) {
+            if (chars[rI] == 'a') {
+                chars[wI--] = 'd';
+                chars[wI--] = 'd';
+            } else {
+                chars[wI--] = chars[rI];
+            }
+            rI--;
+        }
+    }
+
     /* 7.5 - Test palindromicity, ignore non alphabet characters.
     O(n), O(1)
      */
@@ -326,12 +367,14 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        System.out.println(rleEncode("rrttttttttttttgggg"));
-        System.out.println(rleDecode("2b3f"));
-
+        replaceAndRemove("bbba          ");
         if (true) {
             return;
         }
+
+        System.out.println(rleEncode("rrttttttttttttgggg"));
+        System.out.println(rleDecode("2b3f"));
+
         System.out.println(convertToBase26("A"));
         System.out.println(convertToBase26("Z"));
         System.out.println(convertToBase26("AA"));
