@@ -1,5 +1,9 @@
 package epi;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 // Chapter 7.
 public class Strings {
     /* 7.0 - Plaindrome
@@ -238,6 +242,43 @@ public class Strings {
         }
     }
 
+    /* 7.8 - Look and say problem.
+    1, 11, 21, 1211, 111221, 312211, ...
+    NOTE: In this problem, the regular setting of cur and next and checking (next < len)
+    doesn't work. When you are stuck with index issues, TRY CHANGING THE CHECKS.
+
+    I did a curve fitting for this and Chat GPT gave the answer y = a. pow(b,x)
+    The best values for a and b are a = 2.042 and b = 1.3036.
+    T.C = O(n. 2 . pow(1.3, n)) where n is the number of iterations.
+        = O(n. pow(1.3, n))
+    S.C = O(n. pow(1.3, n))
+    */
+    public static List<String> lookAndSay(int n) {
+        List<String> strs = new LinkedList<>();
+        String str = "1";
+        for (int i = 1; i <= n; i++) {
+            str = nextString(str);
+            strs.add(str);
+            System.out.println(i + "," + str.length());
+        }
+        return strs;
+    }
+    public static String nextString(String s) {
+        StringBuilder sb = new StringBuilder();
+        int count;
+        for (int cur = 0, next = 1; cur < s.length(); cur++, next++) {
+            count = 1;
+            while (next < s.length() && s.charAt(cur) == s.charAt(next)) {
+                count++;
+                cur++;
+                next++;
+            }
+            sb.append(count);
+            sb.append(s.charAt(cur));
+        }
+        return sb.toString();
+    }
+
     /* 7.11 - Write a String Sinusoidally.
     O(n), O(n)
      */
@@ -374,10 +415,12 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        replaceAndRemove("ab");
+        lookAndSay(70);
+
         if (true) {
             return;
         }
+        replaceAndRemove("ab");
 
         System.out.println(rleEncode("rrttttttttttttgggg"));
         System.out.println(rleDecode("2b3f"));
