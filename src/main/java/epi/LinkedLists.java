@@ -3,6 +3,7 @@ package epi;
 import java.util.Comparator;
 import java.util.Random;
 
+// Chapter 8.
 public class LinkedLists {
 
     public static void deleteCurrent(Node<Integer> c) {

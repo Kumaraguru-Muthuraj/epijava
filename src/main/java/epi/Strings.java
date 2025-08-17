@@ -1,5 +1,6 @@
 package epi;
 
+// Chapter 7.
 public class Strings {
     /* 7.0 - Plaindrome
      */

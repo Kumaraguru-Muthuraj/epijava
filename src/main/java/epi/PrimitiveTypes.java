@@ -2,7 +2,8 @@ package epi;
 
 import java.util.Random;
 
-public class Countbits {
+// Chapter 5.
+public class PrimitiveTypes {
     public static short count1sV0(int x) {
         short count = 0;
         while (x != 0) {
