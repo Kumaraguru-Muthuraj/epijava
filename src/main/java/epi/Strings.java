@@ -142,12 +142,14 @@ public class Strings {
     /* 7.4 - Replace and remove.
     Replace 'a' with 2 'd's.
     Delete all 'b's.
+    O(n), O(n).
      */
     public static void replaceAndRemove(String str) {
-        char[] chars = str.toCharArray();
         int len = str.length();
+        //Since we don't know how much space we need, we allocate the space.
+        char[] chars = (str + "                  ").toCharArray();
         int aCnt = 0;
-        //First pass - Delete 'b'
+        //First pass - Delete 'b' from first to last
         int newLen = 0;
         int wI = 0, rI = 0;
         for (; rI < len; wI++, rI++) {
@@ -166,9 +168,10 @@ public class Strings {
         }
         System.out.println(newLen + ", " + chars[newLen]);
 
-        //Second pass - Replace 'a' with 2 'd's.
+        //Second pass - Replace 'a' with 2 'd's, from last to first
         rI = newLen - 1;
         wI = rI + aCnt;
+        len = wI + 1;
         while (rI >= 0) {
             if (chars[rI] == 'a') {
                 chars[wI--] = 'd';
@@ -178,6 +181,10 @@ public class Strings {
             }
             rI--;
         }
+        for (int i = 0; i < len; i++) {
+            System.out.print(chars[i]);
+        }
+        System.out.println();
     }
 
     /* 7.5 - Test palindromicity, ignore non alphabet characters.
@@ -367,7 +374,7 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        replaceAndRemove("bbba          ");
+        replaceAndRemove("ab");
         if (true) {
             return;
         }
