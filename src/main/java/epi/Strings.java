@@ -1,5 +1,6 @@
 package epi;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -242,6 +243,53 @@ public class Strings {
         }
     }
 
+    /* 7.7 - Compute mnemonics.
+    TC - O(pow(4, n))
+    SC - O(n.pow(4,n))
+    * */
+    private static StringBuilder mnemonic = new StringBuilder();
+    private static List<String> alphabetSeq = new ArrayList<>();
+    private static List<String> mnemonics = new ArrayList<>();
+    public static List<String> getMnemonics(List<String> strs) {
+        alphabetSeq = strs;
+        mnemonicsHelper(0);
+        return mnemonics;
+    }
+
+    public static void mnemonicsHelper(int rowId) {
+        if (rowId < alphabetSeq.size()) {
+            String row = alphabetSeq.get(rowId);
+            for (int i = 0; i < row.length(); i++) {
+                mnemonic.append(row.charAt(i));
+                mnemonicsHelper(rowId + 1);
+                if (rowId == alphabetSeq.size() - 1) {
+                    mnemonics.add(mnemonic.toString());
+                }
+                mnemonic.deleteCharAt(mnemonic.length() - 1);
+            }
+        }
+    }
+
+    public static List<String> getMnemonics(String phoneNumber, List<String> strs) {
+        alphabetSeq = strs;
+        phoneMnemonicsHelper(phoneNumber, 0);
+        return mnemonics;
+    }
+    public static void phoneMnemonicsHelper(String phoneNumber, int digitIdx) {
+        if (digitIdx < phoneNumber.length()) {
+            String row = alphabetSeq.get(phoneNumber.charAt(digitIdx) - '0');
+            for (int i = 0; i < row.length(); i++) {
+                mnemonic.append(row.charAt(i));
+                phoneMnemonicsHelper(phoneNumber, digitIdx + 1);
+                if (digitIdx == phoneNumber.length() - 1) {
+                    mnemonics.add(mnemonic.toString());
+                }
+                mnemonic.deleteCharAt(mnemonic.length() - 1);
+            }
+        }
+    }
+
+
     /* 7.8 - Look and say problem.
     1, 11, 21, 1211, 111221, 312211, ...
     NOTE: In this problem, the regular setting of cur and next and checking (next < len)
@@ -415,11 +463,35 @@ public class Strings {
     }
 
     public static void main(String[] args) {
-        lookAndSay(70);
+        ArrayList<String> alphabets = new ArrayList<>();
+
+        alphabets.clear();
+        alphabets.add("0");
+        alphabets.add("1");
+        alphabets.add("ABC");
+        alphabets.add("DEF");
+        alphabets.add("GHI");
+        alphabets.add("JKL");
+        alphabets.add("MNO");
+        alphabets.add("PQRS");
+        alphabets.add("TUV");
+        alphabets.add("WXYZ");
+
+        getMnemonics("9880292215", alphabets);
 
         if (true) {
             return;
         }
+        alphabets.add("abc");
+        alphabets.add("def");
+        alphabets.add("  ");
+        alphabets.add("ghi");
+
+        getMnemonics(alphabets);
+
+
+        lookAndSay(50);
+
         replaceAndRemove("ab");
 
         System.out.println(rleEncode("rrttttttttttttgggg"));
