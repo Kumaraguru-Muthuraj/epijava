@@ -1,6 +1,7 @@
 package epi;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 /* Chapter 8.
@@ -79,6 +80,42 @@ public class LinkedLists {
         return true;
     }
 
+    /* 8.8 - Remove duplicates from a LL.
+     ********** VERY TRICKY ALGORITHM **********
+     */
+    public static void deleteDuplicates(LinkedList<Integer> l) {
+        //Null checks for l
+        l.print();
+        Node<Integer> cur = l.getHead();
+        Node<Integer> nextNode = cur.next;
+        while (cur != null) {
+            while (nextNode != null && cur.value.equals(nextNode.value)) {
+                nextNode = nextNode.next;
+            }
+            cur.next = nextNode;
+            cur = nextNode;
+        }
+
+        l.print();
+    }
+    public static void deleteDuplicatesV0(LinkedList<Integer> l) {
+        //Null checks for l
+        l.print();
+        Node<Integer> prev = l.getHead();
+        Node<Integer> cur = prev.next;
+        while(cur != null) {
+            while (cur != null && prev.value.equals(cur.value)) {
+                cur = cur.next;
+                prev.next = cur;
+            }
+            if (cur != null) {
+                cur = cur.next;
+                prev = prev.next;
+            }
+        }
+        l.print();
+    }
+
     public static LinkedList<Integer> getNewLinkedList(int n) {
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
             @Override
@@ -110,10 +147,22 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        deleteKthLast(getNewLinkedList(5), 5);
+        LinkedList<Integer> sl = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        List<Integer> is = List.of(15, 16, 20, 22, 27, 31, 49, 56, 66, 71, 75, 75, 83, 86, 88, 88, 98, 105, 112, 112);
+        for (Integer i : is) {
+            sl.add(i);
+        }
+        deleteDuplicatesV0(sl);
         if (true) {
             return;
         }
+        deleteKthLast(getNewLinkedList(5), 5);
+
         merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
 
         deleteCurrent();
