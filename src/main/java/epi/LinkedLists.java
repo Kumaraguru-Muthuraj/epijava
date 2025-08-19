@@ -51,6 +51,34 @@ public class LinkedLists {
         }
     }
 
+    /* 8.7 - Remove the kth last element from a LL.
+    O(n)
+    O(1)
+     */
+    public static boolean deleteKthLast(LinkedList<Integer> l, int k) {
+        l.print();
+        Node<Integer> dummyHead = new Node<>(Integer.MIN_VALUE);
+        dummyHead.next = l.getHead();
+        Node<Integer> slow = dummyHead, fast = l.getHead();
+        while (k > 0) {
+            fast = fast.next;
+            k--;
+        }
+        if (k < 0)
+            return false;
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+
+        //Set this to make sure the LL has a new head if deleted 1st element.
+        l.head =  dummyHead.next;
+        l.print();
+        return true;
+    }
+
     public static LinkedList<Integer> getNewLinkedList(int n) {
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
             @Override
@@ -82,11 +110,11 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
-
+        deleteKthLast(getNewLinkedList(5), 5);
         if (true) {
             return;
         }
+        merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
 
         deleteCurrent();
 
