@@ -1,12 +1,19 @@
 package epi;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 /* Chapter 8.
 Use dummy head and tail, called Sentinel nodes, to avoid null check errors.
 */
 public class LinkedLists {
+    /* 8.1 - Merge 2 sorted lists
+     */
+    public static List<Integer> merge(List<Integer> l1, List<Integer> l2) {
+
+        return null;
+    }
 
     /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
     If we have a dummy tail, then its possible to delete the last node.
@@ -36,11 +43,33 @@ public class LinkedLists {
         return ll;
     }
 
+    public static LinkedList<Integer> getNewSortedLinkedList(int n) {
+        SortedLinkedList<Integer> ll = new SortedLinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            ll.add(r.nextInt(120) + 1);
+        }
+        return ll;
+    }
+
     public static void main(String[] args) {
-        deleteCurrent();
+        LinkedList<Integer> l1 = getNewSortedLinkedList(10);
+        l1.print();
+        LinkedList<Integer> l2 = getNewSortedLinkedList(10);
+        l2.print();
+
         if (true) {
             return;
         }
+
+        deleteCurrent();
+
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
