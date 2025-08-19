@@ -3,11 +3,22 @@ package epi;
 import java.util.Comparator;
 import java.util.Random;
 
-// Chapter 8.
+/* Chapter 8.
+Use dummy head and tail, called Sentinel nodes, to avoid null check errors.
+*/
 public class LinkedLists {
 
-    public static void deleteCurrent(Node<Integer> c) {
-
+    /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
+    If we have a dummy tail, then its possible to delete the last node.
+    O(1), O(1)
+     */
+    public static void deleteCurrent() {
+        LinkedList<Integer> sl = getNewLinkedList(10);
+        sl.print();
+        if (sl.getHead() != null) {
+            System.out.println(sl.deleteCurrent(sl.getRandomNode()));
+            sl.print();
+        }
     }
 
     public static LinkedList<Integer> getNewLinkedList(int n) {
@@ -26,12 +37,7 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        LinkedList<Integer> sl = getNewLinkedList(10);
-        sl.print();
-        while (sl.getHead() != null) {
-            System.out.println(sl.deleteCurrent(sl.getRandomNode()));
-            sl.print();
-        }
+        deleteCurrent();
         if (true) {
             return;
         }
