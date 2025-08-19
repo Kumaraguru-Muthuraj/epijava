@@ -11,6 +11,7 @@ public class LinkedLists {
     O(m + n)
     O(1)
      */
+    // If it were a doubly linked list, first write this code and fix the reverse pointer.
     public static Node<Integer> merge(LinkedList<Integer> l1, LinkedList<Integer> l2) {
         l1.print();
         l2.print();
