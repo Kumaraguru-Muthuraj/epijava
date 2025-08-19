@@ -1,18 +1,40 @@
 package epi;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
 
 /* Chapter 8.
 Use dummy head and tail, called Sentinel nodes, to avoid null check errors.
 */
 public class LinkedLists {
-    /* 8.1 - Merge 2 sorted lists
+    /* 8.1 - Merge 2 sorted lists.
+    O(m + n)
+    O(1)
      */
-    public static List<Integer> merge(List<Integer> l1, List<Integer> l2) {
+    public static Node<Integer> merge(LinkedList<Integer> l1, LinkedList<Integer> l2) {
+        l1.print();
+        l2.print();
+        Node<Integer> m = new Node<>(Integer.MAX_VALUE);
+        Node<Integer> mh = m;
+        Node<Integer> c1 = l1.getHead();
+        Node<Integer> c2 = l2.getHead();
+        while (c1 != null && c2 != null) {
+            if (c1.value < c2.value) {
+                m.next = c1;
+                c1 = c1.next;
+            } else {
+                m.next = c2;
+                c2 = c2.next;
+            }
+            m = m.next;
+        }
+        m.next = c1 == null ? c2 : c1;
 
-        return null;
+        for (Node<Integer> cur = mh; cur != null; cur = cur.next) {
+            System.out.print(cur.value + ", ");
+        }
+        System.out.println();
+        return m;
     }
 
     /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
@@ -59,10 +81,7 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        LinkedList<Integer> l1 = getNewSortedLinkedList(10);
-        l1.print();
-        LinkedList<Integer> l2 = getNewSortedLinkedList(10);
-        l2.print();
+        merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
 
         if (true) {
             return;
