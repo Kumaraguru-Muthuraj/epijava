@@ -116,6 +116,66 @@ public class LinkedLists {
         l.print();
     }
 
+    /* 8.9 - Cyclic right shift by k, 0 <= k, k can be > n too. - SLLs.
+     */
+    public static void rightShift(LinkedList<Integer> ll, int k) {
+        ll.print();
+        //Get length and k % n
+        Node<Integer> dH = new Node<>(0);
+        dH.next = ll.getHead();
+        Node<Integer> cur = dH;
+        int len = 0;
+        while (cur.next != null) {
+            len++;
+            cur = cur.next;
+        }
+
+        //Get the current head and tail.
+        Node<Integer> nH = ll.getHead();
+        Node<Integer> nT = cur;
+        //Connect tail to head and close the cycle.
+        cur.next = ll.getHead();
+
+        /*Difference between right and left shift
+        Just adjust k.
+         */
+        k %= len;
+        k = len - k;
+        while (k-- > 0) {
+            nH = nH.next;
+            nT = nT.next;
+        }
+        nT.next = null;
+        ll.head = nH;
+        ll.print();
+    }
+
+    public static void leftShift(LinkedList<Integer> ll, int k) {
+        ll.print();
+        //Get length and k % n
+        Node<Integer> dH = new Node<>(0);
+        dH.next = ll.getHead();
+        Node<Integer> cur = dH;
+        int len = 0;
+        while (cur.next != null) {
+            len++;
+            cur = cur.next;
+        }
+
+        Node<Integer> nH = ll.getHead();
+        Node<Integer> nT = cur;
+        cur.next = ll.getHead();
+
+        k %= len;
+        while (k-- > 0) {
+            nH = nH.next;
+            nT = nT.next;
+        }
+        nT.next = null;
+        ll.head = nH;
+        ll.print();
+    }
+
     public static LinkedList<Integer> getNewLinkedList(int n) {
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
             @Override
@@ -147,6 +207,11 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
+        //8.9
+        rightShift(getNewLinkedList(6), 6);
+        if (true) {
+            return;
+        }
         LinkedList<Integer> sl = new LinkedList<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
@@ -158,9 +223,6 @@ public class LinkedLists {
             sl.add(i);
         }
         deleteDuplicatesV0(sl);
-        if (true) {
-            return;
-        }
         deleteKthLast(getNewLinkedList(5), 5);
 
         merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
