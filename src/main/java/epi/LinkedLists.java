@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 /* Chapter 8.
-Use dummy head and tail, called Sentinel nodes, to avoid null check errors.
-*/
+***** USE DUMMY HEAD AND TAIL, CALLED SENTINEL NODES, TO AVOID NULL CHECK ERRORS. *****
+ */
 public class LinkedLists {
     /* 8.1 - Merge 2 sorted lists.
     O(m + n)
