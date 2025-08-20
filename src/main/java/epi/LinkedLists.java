@@ -256,7 +256,7 @@ public class LinkedLists {
             return;
         }
 
-        //8.9
+        //8.9 - Right and left shift
         rightShift(getNewLinkedList(6), 3);
         LinkedList<Integer> sl = new LinkedList<>(new Comparator<Integer>() {
             @Override
@@ -268,11 +268,17 @@ public class LinkedLists {
         for (Integer i : is) {
             sl.add(i);
         }
+
+        //8.8 - Delete duplicates
         deleteDuplicatesV0(sl);
+
+        // 8.7 - Delete kth last
         deleteKthLast(getNewLinkedList(5), 5);
 
+        //8.1 - Merge 2 sorted lists
         merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
 
+        //8.6 - Delete current
         deleteCurrent();
 
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
