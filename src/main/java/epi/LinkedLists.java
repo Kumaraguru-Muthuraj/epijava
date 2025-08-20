@@ -1,9 +1,6 @@
 package epi;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /* Chapter 8.
 ***** USE DUMMY HEAD AND TAIL, CALLED SENTINEL NODES, TO AVOID NULL CHECK ERRORS. *****
@@ -223,9 +220,37 @@ public class LinkedLists {
     }
 
     /* 8.11 - Test if SLL is palindromic.
+    O(n)
+    O(n/2) = O(n) Even though we don't allocate memory, we use pointers to refer to elements.
      */
-    public static boolean palindrome(LinkedList<>) {
+    public static boolean palindrome(LinkedList<Integer> ll) {
+        ll.print();
 
+        Node<Integer> slow = ll.getHead();
+        Node<Integer> fast = ll.getHead();
+
+        Stack<Node<Integer>> sk = new Stack<>();
+        while (fast != null && fast.next != null) {
+            sk.push(slow);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node<Integer> higherPtr = null;
+        if (fast != null) {
+            higherPtr = slow.next;
+        } else {
+            higherPtr = slow;
+        }
+        while (higherPtr != null) {
+            Node<Integer> el = sk.pop();
+            if (!el.value.equals(higherPtr.value)) {
+                return false;
+            }
+            higherPtr = higherPtr.next;
+        }
+
+        return true;
     }
 
 
@@ -260,12 +285,25 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        ///8.10 - Even - Odd merge. Even nodes followed by odd.
-        evenOddMerge(getNewLinkedList(10));
+        //8.11 - Palindrome
+        LinkedList<Integer> sl1 = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        List<Integer> is = List.of(1, 2, 3, 4, 4, 3, 2, 0);
+        for (Integer i : is) {
+            sl1.add(i);
+        }
+        palindrome(sl1);
 
         if (true) {
             return;
         }
+
+        ///8.10 - Even - Odd merge. Even nodes followed by odd.
+        evenOddMerge(getNewLinkedList(10));
 
         //8.9 - Right and left shift
         rightShift(getNewLinkedList(6), 3);
@@ -275,8 +313,8 @@ public class LinkedLists {
                 return o1.compareTo(o2);
             }
         });
-        List<Integer> is = List.of(15, 16, 20, 22, 27, 31, 49, 56, 66, 71, 75, 75, 83, 86, 88, 88, 98, 105, 112, 112);
-        for (Integer i : is) {
+        List<Integer> palLst = List.of(15, 16, 20, 22, 27, 31, 49, 56, 66, 71, 75, 75, 83, 86, 88, 88, 98, 105, 112, 112);
+        for (Integer i : palLst) {
             sl.add(i);
         }
 
