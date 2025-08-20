@@ -124,6 +124,8 @@ public class LinkedLists {
     }
 
     /* 8.9 - Cyclic right shift by k, 0 <= k, k can be > n too. - SLLs.
+    T.C - O(n) if length is not known. O(len - k) if len is known.
+    S.C - O(1)
      */
     public static void rightShift(LinkedList<Integer> ll, int k) {
         ll.print();
@@ -157,7 +159,35 @@ public class LinkedLists {
         ll.print();
     }
 
+    public static void leftShift(LinkedList<Integer> ll, int k) {
+        ll.print();
+        //Get length and k % n
+        Node<Integer> dH = new Node<>(0);
+        dH.next = ll.getHead();
+        Node<Integer> cur = dH;
+        int len = 0;
+        while (cur.next != null) {
+            len++;
+            cur = cur.next;
+        }
+
+        Node<Integer> nH = ll.getHead();
+        Node<Integer> nT = cur;
+        cur.next = ll.getHead();
+
+        k %= len;
+        while (k-- > 0) {
+            nH = nH.next;
+            nT = nT.next;
+        }
+        nT.next = null;
+        ll.head = nH;
+        ll.print();
+    }
+
     /* 8.10 - Even - Odd merge. Even nodes followed by odd.
+    O(n).
+    O(1).
      */
     public static void evenOddMerge(LinkedList<Integer> ll) {
         ll.print();
@@ -192,31 +222,12 @@ public class LinkedLists {
         print(evenHead.next);
     }
 
-    public static void leftShift(LinkedList<Integer> ll, int k) {
-        ll.print();
-        //Get length and k % n
-        Node<Integer> dH = new Node<>(0);
-        dH.next = ll.getHead();
-        Node<Integer> cur = dH;
-        int len = 0;
-        while (cur.next != null) {
-            len++;
-            cur = cur.next;
-        }
+    /* 8.11 - Test if SLL is palindromic.
+     */
+    public static boolean palindrome(LinkedList<>) {
 
-        Node<Integer> nH = ll.getHead();
-        Node<Integer> nT = cur;
-        cur.next = ll.getHead();
-
-        k %= len;
-        while (k-- > 0) {
-            nH = nH.next;
-            nT = nT.next;
-        }
-        nT.next = null;
-        ll.head = nH;
-        ll.print();
     }
+
 
     public static LinkedList<Integer> getNewLinkedList(int n) {
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
