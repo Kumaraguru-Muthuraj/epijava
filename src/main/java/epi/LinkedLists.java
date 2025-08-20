@@ -250,7 +250,7 @@ public class LinkedLists {
 
     public static void main(String[] args) {
         ///8.10 - Even - Odd merge. Even nodes followed by odd.
-        evenOddMerge(getNewLinkedList(6));
+        evenOddMerge(getNewLinkedList(10));
 
         if (true) {
             return;
