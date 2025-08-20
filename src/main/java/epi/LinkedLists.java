@@ -1,5 +1,6 @@
 package epi;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -8,6 +9,12 @@ import java.util.Random;
 ***** USE DUMMY HEAD AND TAIL, CALLED SENTINEL NODES, TO AVOID NULL CHECK ERRORS. *****
  */
 public class LinkedLists {
+    public static void print(Node<Integer> cur) {
+        for (; cur != null; cur = cur.next) {
+            System.out.print(cur.value + ", ");
+        }
+        System.out.println();
+    }
     /* 8.1 - Merge 2 sorted lists.
     O(m + n)
     O(1)
@@ -150,6 +157,41 @@ public class LinkedLists {
         ll.print();
     }
 
+    /* 8.10 - Even - Odd merge. Even nodes followed by odd.
+     */
+    public static void evenOddMerge(LinkedList<Integer> ll) {
+        ll.print();
+        Node<Integer> evenCur = new Node<>(Integer.MIN_VALUE);
+        Node<Integer> oddCur = new Node<>(Integer.MIN_VALUE);
+        Node<Integer> evenHead = evenCur;
+        Node<Integer> oddHead = oddCur;
+
+        Node<Integer> dH = new Node<>(Integer.MIN_VALUE);
+        dH.next = ll.getHead();
+
+        int evenOddFlip = 0;
+        Node<Integer> cur = dH.next;
+        while (cur != null) {
+            if (evenOddFlip == 0) {
+                evenCur.next = cur;
+                evenCur = cur;
+            } else {
+                oddCur.next = cur;
+                oddCur = cur;
+            }
+            cur = cur.next;
+            evenOddFlip ^= 1;
+        }
+        evenCur.next = null;
+        oddCur.next = null;
+
+        print(evenHead);
+        print(oddHead);
+
+        evenCur.next = oddHead.next;
+        print(evenHead.next);
+    }
+
     public static void leftShift(LinkedList<Integer> ll, int k) {
         ll.print();
         //Get length and k % n
@@ -207,11 +249,15 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        //8.9
-        rightShift(getNewLinkedList(6), 6);
+        ///8.10 - Even - Odd merge. Even nodes followed by odd.
+        evenOddMerge(getNewLinkedList(6));
+
         if (true) {
             return;
         }
+
+        //8.9
+        rightShift(getNewLinkedList(6), 3);
         LinkedList<Integer> sl = new LinkedList<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
