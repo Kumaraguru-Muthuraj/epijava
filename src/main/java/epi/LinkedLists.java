@@ -253,6 +253,46 @@ public class LinkedLists {
         return true;
     }
 
+    /* 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
+     */
+    public static void pivotTheList(LinkedList<Integer> l, int k) {
+        l.print();
+        Node<Integer> cur = l.head;
+        Node<Integer> lessHead = new Node<>(Integer.MIN_VALUE);
+        Node<Integer> equalHead = new Node<>(Integer.MIN_VALUE);
+        Node<Integer> greaterHead = new Node<>(Integer.MIN_VALUE);
+
+        Node<Integer> lessPtr = lessHead;
+        Node<Integer> equalPtr = equalHead;
+        Node<Integer> greaterPtr = greaterHead;
+
+        while (cur != null) {
+            if (cur.value < k) {
+                lessPtr.next = cur;
+                lessPtr = lessPtr.next;
+            } else if (cur.value == k) {
+                equalPtr.next = cur;
+                equalPtr = equalPtr.next;
+            } else {
+                greaterPtr.next = cur;
+                greaterPtr = greaterPtr.next;
+            }
+            cur = cur.next;
+        }
+        lessPtr.next = null;
+        equalPtr.next = null;
+        greaterPtr.next = null;
+
+        print(lessHead);
+        print(equalHead);
+        print(greaterHead);
+
+        lessPtr.next = equalHead.next;
+        equalPtr.next = greaterHead.next;
+        l.head = lessHead.next;
+        l.print();
+    }
+
 
     public static LinkedList<Integer> getNewLinkedList(int n) {
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
@@ -285,6 +325,23 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
+        // 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
+        LinkedList<Integer> pivList = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        List<Integer> pivI = List.of(10, 80, 20, 10, 40, 45, 10, 20, 50, 20, 10, 80);
+        for (Integer i : pivI) {
+            pivList.add(i);
+        }
+        pivotTheList(pivList, 20);
+
+        if (true) {
+            return;
+        }
+
         //8.11 - Palindrome
         LinkedList<Integer> sl1 = new LinkedList<>(new Comparator<Integer>() {
             @Override
@@ -297,10 +354,6 @@ public class LinkedLists {
             sl1.add(i);
         }
         palindrome(sl1);
-
-        if (true) {
-            return;
-        }
 
         ///8.10 - Even - Odd merge. Even nodes followed by odd.
         evenOddMerge(getNewLinkedList(10));
