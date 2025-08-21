@@ -61,6 +61,7 @@ public class LinkedLists {
     }
 
     /* 8.3 - Find cycles in a list.
+    ****** TC Pending ******
     * */
     public static Node<Integer> findCycle(LinkedList<Integer> l) {
         int cycleLen = 0;
@@ -379,12 +380,12 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        /* 8.3 - Find cycles in a list.
-         * */
-        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(15));
+
         if (true) {
             return;
         }
+        // 8.3 - Find cycles in a list.
+        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(15));
 
         // 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
         LinkedList<Integer> pivList = new LinkedList<>(new Comparator<Integer>() {
