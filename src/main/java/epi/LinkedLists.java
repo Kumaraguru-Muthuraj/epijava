@@ -95,6 +95,75 @@ public class LinkedLists {
         return null;
     }
 
+    public static List<LinkedList<Integer>> getOverlappingLinkedLists(int n) {
+        int cnt = 5;
+        LinkedList<Integer> l1 = getNewLinkedList(n);
+        l1.print();
+        LinkedList<Integer> l2 = getNewLinkedList(2 * n);
+        l2.print();
+
+        l1.tail.next = l2.head.next.next.next;
+        ArrayList<LinkedList<Integer>> two = new ArrayList<>();
+        two.add(l1);two.add(l2);
+        return  two;
+    }
+
+    /* 8.4 - Find the point of overlap between 2 SLLs. There are no cycles.
+    Consider lengths are not known.
+    Traverse twice the whole length - O(n).
+    Space - O(1).
+     */
+    public static Node<Integer> tandemTraverse(Node<Integer> longer, Node<Integer> shorter, int travLen) {
+        while (travLen-- > 0) {
+            longer = longer.next;
+        }
+        while (longer != shorter) {
+            longer = longer.next;
+            shorter = shorter.next;
+        }
+        return longer;
+    }
+
+    public static Node<Integer> getOverlappingNode(List<LinkedList<Integer>> lists) {
+        Node<Integer> l1head = lists.get(0).head;
+        Node<Integer> l2head = lists.get(1).head;
+        Node<Integer> curl1 = new Node<>(Integer.MIN_VALUE); curl1.next = l1head;
+        Node<Integer> curl2 = new Node<>(Integer.MIN_VALUE); curl2.next = l2head;
+        //Get lengths and check if the tails are same
+        int l1Len = 0;
+        int l2Len = 0;
+        while (curl1.next != null && curl2.next != null) {
+            l1Len++;
+            l2Len++;
+            curl1 = curl1.next;
+            curl2 = curl2.next;
+        }
+        if (curl1.next == null) {
+            while (curl2.next != null) {
+                l2Len++;
+                curl2 = curl2.next;
+            }
+        } else if (curl2.next == null) {
+            while (curl1.next != null) {
+                l1Len++;
+                curl1 = curl1.next;
+            }
+        }
+
+        //Tails don't match
+        if (curl1 != curl2) {
+            return null;
+        }
+        int travLen = 0;
+        if (l1Len < l2Len) {
+            travLen = l2Len - l1Len;
+            return tandemTraverse(l2head, l1head, travLen);
+        } else {
+            travLen = l1Len - l2Len;
+            return tandemTraverse(l1head, l2head, travLen);
+        }
+    }
+
     /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
     If we have a dummy tail, then its possible to delete the last node.
     O(1), O(1)
@@ -380,10 +449,16 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-
         if (true) {
             return;
         }
+        //8.4 - Find the point of overlap between 2 SLLs. There are no cycles.
+        List<LinkedList<Integer>> ol = getOverlappingLinkedLists(6);
+        ol.get(0).print();
+        ol.get(1).print();
+
+        getOverlappingNode(ol);
+
         // 8.3 - Find cycles in a list.
         Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(15));
 
