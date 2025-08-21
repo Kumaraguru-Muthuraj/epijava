@@ -254,6 +254,9 @@ public class LinkedLists {
     }
 
     /* 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
+    O(n);
+    O(1);
+    This is a variant of even-odd merge.
      */
     public static void pivotTheList(LinkedList<Integer> l, int k) {
         l.print();
