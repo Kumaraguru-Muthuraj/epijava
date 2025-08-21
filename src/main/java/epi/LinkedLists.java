@@ -43,6 +43,57 @@ public class LinkedLists {
         return m;
     }
 
+    public static LinkedList<Integer> getLinkedListWithCycle(int n) {
+        int cnt = 5;
+        LinkedList<Integer> l = getNewLinkedList(n);
+        l.print();
+        Node<Integer> cycleStart = null;
+        Node<Integer> cur = l.head;
+        while (cur.next != null) {
+            if (cnt == 0) {
+                cycleStart = cur;
+            }
+            cur = cur.next;
+            --cnt;
+        }
+        cur.next = cycleStart;
+        return l;
+    }
+
+    /* 8.3 - Find cycles in a list.
+    * */
+    public static Node<Integer> findCycle(LinkedList<Integer> l) {
+        int cycleLen = 0;
+        Node<Integer> slow = l.head;
+        Node<Integer> fast = l.head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            //Check if fast and slow meet
+            if (slow == fast) {
+                //We are in the cycle. Get the length
+                do {
+                    ++cycleLen;
+                    fast = fast.next;
+                } while (slow != fast);
+
+                /*Allow a new Iter to go cycleLen from head.
+                Slow will touch fast and that is the start of the cycle.
+                */
+                Node<Integer> cycleStart = l.head, newSlow = l.head;
+                while (cycleLen-- > 0) {
+                    cycleStart = cycleStart.next;
+                }
+                while (newSlow != cycleStart) {
+                    newSlow = newSlow.next;
+                    cycleStart = cycleStart.next;
+                }
+                return cycleStart;
+            }
+        }
+        return null;
+    }
+
     /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
     If we have a dummy tail, then its possible to delete the last node.
     O(1), O(1)
@@ -328,6 +379,13 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
+        /* 8.3 - Find cycles in a list.
+         * */
+        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(15));
+        if (true) {
+            return;
+        }
+
         // 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
         LinkedList<Integer> pivList = new LinkedList<>(new Comparator<Integer>() {
             @Override
@@ -340,10 +398,6 @@ public class LinkedLists {
             pivList.add(i);
         }
         pivotTheList(pivList, 20);
-
-        if (true) {
-            return;
-        }
 
         //8.11 - Palindrome
         LinkedList<Integer> sl1 = new LinkedList<>(new Comparator<Integer>() {
