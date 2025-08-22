@@ -60,6 +60,47 @@ public class LinkedLists {
         return l;
     }
 
+    /* 8.2 - Reverse a sublist.
+    index starts at 0.
+     */
+    public static void reverseSublist(LinkedList<Integer> l, int start, int end) {
+        if (start < 0)
+            return;
+        l.print();
+        Node<Integer> dH = new Node<>(Integer.MIN_VALUE);
+        dH.next = l.head;
+
+        Node<Integer> prev = dH;
+        Node<Integer> cur = l.head;
+        Node<Integer> next = null;
+        int idx = 0;
+        while (cur != null && idx < start) {
+            prev = cur;
+            cur = cur.next;
+            idx++;
+        }
+
+        if (cur == null) {
+            return;
+        }
+
+        Node<Integer> connector = prev;
+        while (cur != null && idx < end) {
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+            idx++;
+        }
+        connector.next.next = next;
+        connector.next = prev;
+        if (dH == connector) {
+            l.head = dH.next;
+        }
+
+        l.print();
+    }
+
     /* 8.3 - Find cycles in a list.
     ****** TC Pending ******
     * */
@@ -449,6 +490,9 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
+        // 8.2 - Reverse a sublist.
+        reverseSublist(getNewLinkedList(5), 5, 5);
+
         if (true) {
             return;
         }
