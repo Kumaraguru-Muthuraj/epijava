@@ -458,6 +458,42 @@ public class LinkedLists {
         l.print();
     }
 
+    /* 8.13 - Add list based integers.
+    O(max(n1.len, n2.len))
+    O(max(n1.len, n2.len))
+     */
+    public static LinkedList<Integer> add(LinkedList<Integer> n1, LinkedList<Integer> n2) {
+        n1.print();
+        n2.print();
+        int carry = 0, sumVal = 0;
+        LinkedList<Integer> sum = getNewLinkedList(0);
+        Node<Integer> c1 = n1.head;
+        Node<Integer> c2 = n2.head;
+        while (c1 != null && c2 != null) {
+            sumVal = c1.value + c2.value + carry;
+            carry = sumVal / 10;
+            sumVal = sumVal % 10;
+            sum.add(sumVal);
+
+            c1 = c1.next;
+            c2 = c2.next;
+        }
+        Node<Integer> cur = c1 != null ? c1 : c2;
+        if (cur == null && carry > 0) {
+            sum.add(carry);
+        } else {
+            while (cur != null) {
+                sumVal = cur.value + carry;
+                carry = sumVal / 10;
+                sumVal = sumVal % 10;
+                sum.add(sumVal);
+
+                cur = cur.next;
+            }
+        }
+        sum.print();
+        return sum;
+    }
 
     public static LinkedList<Integer> getNewLinkedList(int n) {
         LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
@@ -470,6 +506,21 @@ public class LinkedLists {
         Random r = new Random();
         for (int i = 0; i < n; i++) {
             ll.add(r.nextInt(120) + 1);
+        }
+        return ll;
+    }
+
+    public static LinkedList<Integer> getSingleDigitLinkedList(int n) {
+        LinkedList<Integer> ll = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            ll.add(r.nextInt(10));
         }
         return ll;
     }
@@ -490,12 +541,15 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        // 8.2 - Reverse a sublist.
-        reverseSublist(getNewLinkedList(5), 5, 5);
+        // 8.13 - Add list based integers.
+        LinkedList<Integer> sum = add(getSingleDigitLinkedList(2), getSingleDigitLinkedList(2));
 
         if (true) {
             return;
         }
+        // 8.2 - Reverse a sublist.
+        reverseSublist(getNewLinkedList(5), 5, 5);
+
         //8.4 - Find the point of overlap between 2 SLLs. There are no cycles.
         List<LinkedList<Integer>> ol = getOverlappingLinkedLists(6);
         ol.get(0).print();
