@@ -312,9 +312,6 @@ public class LinkedLists {
         Node<Integer> oNode = getCommonNodeThatHaveCycles(lists);
         lists.clear();
 
-        if (true) {
-            return;
-        }
         //Case 2
         lists = getOverlappingLinkedLists(5);
         oNode = getCommonNodeThatHaveCycles(lists);
