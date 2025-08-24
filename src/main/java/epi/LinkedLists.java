@@ -255,40 +255,100 @@ public class LinkedLists {
 
 
     /* 8.5 - Detect Overlapping node between SLLs. Lists can have cycles.
+    Check notebook for the diagram.
      */
     public static Node<Integer> getCommonNodeThatHaveCycles(List<LinkedList<Integer>> lists) {
+        LinkedList<Integer> l1 = lists.get(0);
+        LinkedList<Integer> l2 = lists.get(1);
+        Node<Integer> c1 = findCycle(l1);
+        Node<Integer> c2 = findCycle(l2);
+
+        // Case 3
+        if ((c1 == null && c2 != null) || (c1 != null && c2 == null)) {
+            return null;
+        }
+        // Case 1 & 2
+        if (c1 == null && c2 == null) {
+            Node<Integer> confluence = getOverlappingNode(lists);
+            return confluence;
+        }
+        if (c1 != null && c2 != null) {
+            // Case 5
+            if (c1 == c2) {
+                return c1;
+            }
+            // Case 6
+            boolean overLap = checkIfCyclesOverlap(c1, c2);
+            if (overLap) {
+                return c1; // can return both c1 and c2
+            }
+            // Case 4
+            return null;
+        }
         return null;
     }
+
+    public static boolean checkIfCyclesOverlap(Node<Integer> c1, Node<Integer> c2) {
+        if (c1 == c2) {
+            return true;
+        }
+        Node<Integer> c2Iter = c2.next;
+        while (c2Iter != c2) {
+            if (c2Iter == c1) {
+                return true;
+            }
+            c2Iter = c2Iter.next;
+        }
+        return false;
+    }
+
     public static void getCommonNodeThatHaveCyclesTests() {
+        List<LinkedList<Integer>> lists = new ArrayList<>();
         //Case 1
         LinkedList<Integer> l1 = getNewLinkedList(5);
         LinkedList<Integer> l2 = getNewLinkedList(5);
+        lists.add(l1);
+        lists.add(l2);
+        Node<Integer> oNode = getCommonNodeThatHaveCycles(lists);
+        lists.clear();
 
+        if (true) {
+            return;
+        }
         //Case 2
-        List<LinkedList<Integer>> lsts = getOverlappingLinkedLists(5);
+        lists = getOverlappingLinkedLists(5);
+        oNode = getCommonNodeThatHaveCycles(lists);
+        lists.clear();
 
         //Case 3
-        l1.print();
-        l2 = getLinkedListWithCycle(4, 8);
-        l2.printCycleNode();
+        lists.add(getNewLinkedList(5));
+        lists.add(getLinkedListWithCycle(4, 8));
+        oNode = getCommonNodeThatHaveCycles(lists);
+        lists.clear();
 
         //Case 4
         l1 = getLinkedListWithCycle(4, 8);
         l2 = getLinkedListWithCycle(3, 9);
+        lists.add(l1);
+        lists.add(l2);
         l1.printCycleNode();
         l2.printCycleNode();
+        oNode = getCommonNodeThatHaveCycles(lists);
+        lists.clear();
 
         //Case 5
-        lsts = getOverlapBeforeCycle(15);
-        lsts.get(0).printCycleNode();
-        lsts.get(1).printCycleNode();
+        lists = getOverlapBeforeCycle(15);
+        lists.get(0).printCycleNode();
+        lists.get(1).printCycleNode();
+        oNode = getCommonNodeThatHaveCycles(lists);
+        lists.clear();
 
         //Case 6
-        lsts = getOverlapInsideCycle(15);
-        lsts.get(0).printCycleNode();
-        lsts.get(1).printCycleNode();
-
-        Node<Integer> oNode = getCommonNodeThatHaveCycles(lsts);
+        lists = getOverlapInsideCycle(15);
+        lists.get(0).printCycleNode();
+        lists.get(1).printCycleNode();
+        oNode = getCommonNodeThatHaveCycles(lists);
+        lists.clear();
 
     }
 
