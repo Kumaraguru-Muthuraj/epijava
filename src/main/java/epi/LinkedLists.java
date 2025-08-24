@@ -145,6 +145,10 @@ public class LinkedLists {
         l2.print();
 
         l1.tail.next = l2.head.next.next.next;
+        System.out.println("After overlapping");
+        l1.print();
+        l2.print();
+
         ArrayList<LinkedList<Integer>> two = new ArrayList<>();
         two.add(l1);two.add(l2);
         return  two;
@@ -156,7 +160,7 @@ public class LinkedLists {
         l1.printCycleNode();
         int n2 = n1/3;
         LinkedList<Integer> l2 = getNewLinkedList(n2);
-        l2.print();
+        l2.printCycleNode();
 
         Node<Integer> l1Cur = l1.head;
         Node<Integer> cur = l2.head;
@@ -165,6 +169,7 @@ public class LinkedLists {
             cur = cur.next;
         }
         cur.next = l1Cur;
+        l2.cycleIdx = l1.cycleIdx;
 
         ArrayList<LinkedList<Integer>> two = new ArrayList<>();
         two.add(l1);two.add(l2);
@@ -184,6 +189,7 @@ public class LinkedLists {
             cur = cur.next;
         }
         cur.next = l1.randomNodeInCycle;
+        l2.cycleIdx = l1.randomNodeInCycle;
 
         ArrayList<LinkedList<Integer>> two = new ArrayList<>();
         two.add(l1);two.add(l2);
@@ -264,22 +270,25 @@ public class LinkedLists {
         //Case 3
         l1.print();
         l2 = getLinkedListWithCycle(4, 8);
+        l2.printCycleNode();
 
         //Case 4
         l1 = getLinkedListWithCycle(4, 8);
         l2 = getLinkedListWithCycle(3, 9);
+        l1.printCycleNode();
+        l2.printCycleNode();
 
         //Case 5
         lsts = getOverlapBeforeCycle(15);
+        lsts.get(0).printCycleNode();
+        lsts.get(1).printCycleNode();
 
         //Case 6
         lsts = getOverlapInsideCycle(15);
+        lsts.get(0).printCycleNode();
+        lsts.get(1).printCycleNode();
 
-
-        List<LinkedList<Integer>> ol1 = getOverlappingLinkedLists(6);
-        ol1.get(0).print();
-        ol1.get(1).print();
-        Node<Integer> oNode = getCommonNodeThatHaveCycles(ol1);
+        Node<Integer> oNode = getCommonNodeThatHaveCycles(lsts);
 
     }
 
