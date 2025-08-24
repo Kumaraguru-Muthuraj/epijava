@@ -43,8 +43,8 @@ public class LinkedLists {
         return m;
     }
 
-    public static LinkedList<Integer> getLinkedListWithCycle(int n) {
-        int cnt = 5;
+    public static LinkedList<Integer> getLinkedListWithCycle(int cycleIdx, int n) {
+        int cnt = cycleIdx;
         LinkedList<Integer> l = getNewLinkedList(n);
         l.print();
         Node<Integer> cycleStart = null;
@@ -57,6 +57,8 @@ public class LinkedLists {
             --cnt;
         }
         cur.next = cycleStart;
+        l.cycleIdx = cycleStart;
+        l.randomNodeInCycle = cycleStart.next.next;
         return l;
     }
 
@@ -137,13 +139,52 @@ public class LinkedLists {
     }
 
     public static List<LinkedList<Integer>> getOverlappingLinkedLists(int n) {
-        int cnt = 5;
         LinkedList<Integer> l1 = getNewLinkedList(n);
         l1.print();
         LinkedList<Integer> l2 = getNewLinkedList(2 * n);
         l2.print();
 
         l1.tail.next = l2.head.next.next.next;
+        ArrayList<LinkedList<Integer>> two = new ArrayList<>();
+        two.add(l1);two.add(l2);
+        return  two;
+    }
+
+    public static List<LinkedList<Integer>> getOverlapBeforeCycle(int n1) {
+        int cnt = n1 - 4;
+        LinkedList<Integer> l1 = getLinkedListWithCycle(cnt, n1);
+        l1.printCycleNode();
+        int n2 = n1/3;
+        LinkedList<Integer> l2 = getNewLinkedList(n2);
+        l2.print();
+
+        Node<Integer> l1Cur = l1.head;
+        Node<Integer> cur = l2.head;
+        while (cur.next != null){
+            l1Cur = l1Cur.next;
+            cur = cur.next;
+        }
+        cur.next = l1Cur;
+
+        ArrayList<LinkedList<Integer>> two = new ArrayList<>();
+        two.add(l1);two.add(l2);
+        return  two;
+    }
+
+    public static List<LinkedList<Integer>> getOverlapInsideCycle(int n1) {
+        int cnt = n1 - 6;
+        LinkedList<Integer> l1 = getLinkedListWithCycle(cnt, n1);
+        l1.printCycleNode();
+        int n2 = n1/3;
+        LinkedList<Integer> l2 = getNewLinkedList(n2);
+        l2.print();
+
+        Node<Integer> cur = l2.head;
+        while (cur.next != null){
+            cur = cur.next;
+        }
+        cur.next = l1.randomNodeInCycle;
+
         ArrayList<LinkedList<Integer>> two = new ArrayList<>();
         two.add(l1);two.add(l2);
         return  two;
@@ -203,6 +244,43 @@ public class LinkedLists {
             travLen = l1Len - l2Len;
             return tandemTraverse(l1head, l2head, travLen);
         }
+    }
+
+
+
+    /* 8.5 - Detect Overlapping node between SLLs. Lists can have cycles.
+     */
+    public static Node<Integer> getCommonNodeThatHaveCycles(List<LinkedList<Integer>> lists) {
+        return null;
+    }
+    public static void getCommonNodeThatHaveCyclesTests() {
+        //Case 1
+        LinkedList<Integer> l1 = getNewLinkedList(5);
+        LinkedList<Integer> l2 = getNewLinkedList(5);
+
+        //Case 2
+        List<LinkedList<Integer>> lsts = getOverlappingLinkedLists(5);
+
+        //Case 3
+        l1.print();
+        l2 = getLinkedListWithCycle(4, 8);
+
+        //Case 4
+        l1 = getLinkedListWithCycle(4, 8);
+        l2 = getLinkedListWithCycle(3, 9);
+
+        //Case 5
+        lsts = getOverlapBeforeCycle(15);
+
+        //Case 6
+        lsts = getOverlapInsideCycle(15);
+
+
+        List<LinkedList<Integer>> ol1 = getOverlappingLinkedLists(6);
+        ol1.get(0).print();
+        ol1.get(1).print();
+        Node<Integer> oNode = getCommonNodeThatHaveCycles(ol1);
+
     }
 
     /* 8.6 - Delete current node. Limitation - Cannot delete if its last node.
@@ -541,12 +619,16 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        // 8.13 - Add list based integers.
-        LinkedList<Integer> sum = add(getSingleDigitLinkedList(2), getSingleDigitLinkedList(2));
+        // 8.5 - Detect Overlapping node between SLLs. Lists can have cycles.
+        getCommonNodeThatHaveCyclesTests();
 
         if (true) {
             return;
         }
+
+        // 8.13 - Add list based integers.
+        LinkedList<Integer> sum = add(getSingleDigitLinkedList(2), getSingleDigitLinkedList(2));
+
         // 8.2 - Reverse a sublist.
         reverseSublist(getNewLinkedList(5), 5, 5);
 
@@ -558,7 +640,7 @@ public class LinkedLists {
         getOverlappingNode(ol);
 
         // 8.3 - Find cycles in a list.
-        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(15));
+        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(5, 15));
 
         // 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
         LinkedList<Integer> pivList = new LinkedList<>(new Comparator<Integer>() {

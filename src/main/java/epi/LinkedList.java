@@ -76,6 +76,18 @@ public class LinkedList<T> {
         }
         System.out.println();
     }
+
+    public void printCycleNode() {
+        int cycleCnt = 0;
+        for (Node<T> cur = head; cur != null && cycleCnt <= 1; cur = cur.next) {
+            if (cur == cycleIdx) {
+                cycleCnt++;
+            }
+            System.out.print(cur.value + ", ");
+        }
+        System.out.println();
+    }
+
     public Node<T> getRandomNode() {
         Random r = new Random();
         Node<T> cur = head;
@@ -88,8 +100,9 @@ public class LinkedList<T> {
         return tail;
     }
 
-
     protected Node<T> head;
     protected Node<T> tail;
+    protected Node<T> cycleIdx;
+    protected Node<T> randomNodeInCycle;
     protected Comparator<T> comparator;
 }
