@@ -83,7 +83,36 @@ public class StacksAndQueues {
         return bst;
     }
 
+    /* 9.9 - Implement Queue with Stacks
+     */
+    public static void testQueueWithStacks(int n) {
+        QueueWithStacks q = new QueueWithStacks();
+        Random r1 = new Random();
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            Integer k = r.nextInt(100);
+            if (r1.nextBoolean()) {
+                System.out.println("Adding " + k);
+                q.add(k);
+            } else {
+                System.out.println("Polling " + q.poll());
+            }
+        }
+        System.out.println("Done...");
+        for (int i = 0; i < n; i++) {
+            Integer p = q.poll();
+            if (p != null) {
+                System.out.println("Polling " + p);
+            }
+        }
+    }
+
     public static void main(String[] args) {
+        // 9.9 - Implement Queue with Stacks
+        testQueueWithStacks(25);
+        Integer k = null;
+        System.out.print(k);
+
         if (true) {
             return;
         }
