@@ -1,5 +1,7 @@
 package epi;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
 
@@ -49,11 +51,48 @@ public class StacksAndQueues {
         return true;
     }
 
+    /* 9.7 - Level order traversing.
+     */
+    public static void printByLevels() {
+        BinarySearchTree bst = getBST(15);
+        Queue<Node2> nodes = new LinkedList<>();
+        nodes.add(bst.root);
+
+        while (!nodes.isEmpty()) {
+            Node2 curNode = nodes.poll();
+            if (curNode.left != null) {
+                nodes.add(curNode.left);
+            }
+            if (curNode.right != null) {
+                nodes.add(curNode.right);
+            }
+            System.out.print(curNode.value + ", ");
+        }
+    }
+
+    public static BinarySearchTree getBST(int n) {
+        BinarySearchTree bst = new BinarySearchTree();
+        Integer val;
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            val = r.nextInt(1000) + 1;
+            System.out.println("Adding " + val);
+            bst.add(val);
+        }
+        bst.print();
+        return bst;
+    }
+
     public static void main(String[] args) {
-        System.out.println(bracketsBalanced("()[]{}([{}])"));
         if (true) {
             return;
         }
+        // 9.7 - Level order traversing.
+        printByLevels();
+
+        // 9.3 - Check a sequence of (), {}, [] for well-formedness.
+        System.out.println(bracketsBalanced("()[]{}([{}])"));
+
         // 9.1 - Stack with Max API.
         testStackWithMaxAPI();
     }
