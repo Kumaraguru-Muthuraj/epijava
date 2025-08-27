@@ -151,6 +151,12 @@ public class StacksAndQueues {
         return bst;
     }
 
+    /* 9.8 - Circular queue with array.
+     */
+    public static void testCircularQueue(int k) {
+
+    }
+
     /* 9.9 - Implement Queue with Stacks
      */
     public static void testQueueWithStacks(int n) {
@@ -187,12 +193,15 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
-        // 9.10 - Queue with Max API.
-        testQueueWithMaxAPI(20);
-
+        // 9.8 - Circular queue with array.
+        testCircularQueue(10);
         if (true) {
             return;
         }
+
+        // 9.10 - Queue with Max API.
+        testQueueWithMaxAPI(20);
+
         // 9.6 - Buildings with sunset view.
         testBuildingSunset();
 
