@@ -51,6 +51,74 @@ public class StacksAndQueues {
         return true;
     }
 
+    /* 9.6 - Buildings with sunset view.
+     */
+    public static Stack<Building> getSunsetViewBuildings(LinkedList<Building> buildings) {
+        Stack<Building> stk = new Stack<>();
+        for (int idx = buildings.size() - 1; idx >= 0; idx--) {
+            while (!stk.isEmpty() && buildings.get(idx).height > stk.peek().height) {
+                stk.pop();
+            }
+            stk.push(buildings.get(idx));
+        }
+        return stk;
+    }
+
+    static class Building {
+        public Building(Integer id, Integer height) {
+            this.id = id;
+            this.height = height;
+        }
+        public String toString() {
+            return "Id - " + id + ", " + "Height - " + height;
+        }
+        Integer id;
+        Integer height;
+    }
+
+    public static void print(Stack<Building> stack) {
+        System.out.println("Printing buildings...");
+        for (Building b: stack) {
+            System.out.println(b);
+        }
+    }
+    public static void testBuildingSunset() {
+        LinkedList<Building> buildings = new LinkedList<>();
+        buildings.add(new Building(1, 3));
+        buildings.add(new Building(2, 5));
+        buildings.add(new Building(3, 6));
+        buildings.add(new Building(4, 8));
+        buildings.add(new Building(5, 7));
+        buildings.add(new Building(6, 6));
+        buildings.add(new Building(7, 5));
+        buildings.add(new Building(8, 9));
+
+        Stack<Building> buildingsWithView = getSunsetViewBuildings(buildings);
+        print(buildingsWithView);
+
+        buildings.clear();
+        buildings.add(new Building(1, 3));
+        buildings.add(new Building(2, 5));
+        buildings.add(new Building(3, 6));
+        buildings.add(new Building(4, 8));
+        buildings.add(new Building(5, 7));
+        buildings.add(new Building(6, 6));
+        buildings.add(new Building(7, 5));
+        buildings.add(new Building(8, 4));
+        buildings.add(new Building(9, 3));
+        buildings.add(new Building(10, 1));
+        buildings.add(new Building(11, 2));
+        buildings.add(new Building(12, 3));
+        buildings.add(new Building(13, 4));
+        buildings.add(new Building(14, 5));
+        buildings.add(new Building(15, 8));
+        buildings.add(new Building(16, 9));
+
+        buildingsWithView = getSunsetViewBuildings(buildings);
+        print(buildingsWithView);
+    }
+
+
     /* 9.7 - Level order traversing.
      */
     public static void printByLevels() {
@@ -108,14 +176,16 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
+        // 9.6 - Buildings with sunset view.
+        testBuildingSunset();
+        if (true) {
+            return;
+        }
         // 9.9 - Implement Queue with Stacks
         testQueueWithStacks(25);
         Integer k = null;
         System.out.print(k);
 
-        if (true) {
-            return;
-        }
         // 9.7 - Level order traversing.
         printByLevels();
 
