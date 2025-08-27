@@ -175,12 +175,27 @@ public class StacksAndQueues {
         }
     }
 
+    /* 9.10 - Queue with Max API.
+     */
+    public static void testQueueWithMaxAPI(int n) {
+        QueueWithMax queueWithMax = new QueueWithMax();
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            queueWithMax.add(r.nextInt(20));
+            queueWithMax.print();
+        }
+    }
+
     public static void main(String[] args) {
-        // 9.6 - Buildings with sunset view.
-        testBuildingSunset();
+        // 9.10 - Queue with Max API.
+        testQueueWithMaxAPI(20);
+
         if (true) {
             return;
         }
+        // 9.6 - Buildings with sunset view.
+        testBuildingSunset();
+
         // 9.9 - Implement Queue with Stacks
         testQueueWithStacks(25);
         Integer k = null;
