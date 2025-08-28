@@ -157,11 +157,13 @@ public class StacksAndQueues {
         try {
             CicularQueueWithArray queue = new CicularQueueWithArray(5);
             Random r = new Random();
+            Random rb = new Random();
             for (int c = 1; c <= k; c++) {
                 queue.add(r.nextInt(50));
+                if (rb.nextBoolean()) {
+                    System.out.println("Polling - " + queue.poll());
+                }
             }
-            System.out.println("Polling - " + queue.poll());
-
         } catch(Exception e) {
             e.printStackTrace();
         }
