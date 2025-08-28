@@ -154,7 +154,17 @@ public class StacksAndQueues {
     /* 9.8 - Circular queue with array.
      */
     public static void testCircularQueue(int k) {
+        try {
+            CicularQueueWithArray queue = new CicularQueueWithArray(5);
+            Random r = new Random();
+            for (int c = 1; c <= k; c++) {
+                queue.add(r.nextInt(50));
+            }
+            System.out.println("Polling - " + queue.poll());
 
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /* 9.9 - Implement Queue with Stacks
