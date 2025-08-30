@@ -18,7 +18,7 @@ public class CicularQueueWithArray {
                 array[idx] = old.get((head + idx) % array.length);
             }
             head = 0;
-            tail = numElements - 1;
+            tail = numElements;
         }
         tail = (tail + 1) % array.length;
         array[tail] = n;
