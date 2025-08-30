@@ -7,7 +7,7 @@ public class CicularQueueWithArray {
         array = new Integer[capacity];
         numElements = 0;
         head = 0;
-        tail = -1;
+        tail = 0;
     }
 
     public void add(int n) {
