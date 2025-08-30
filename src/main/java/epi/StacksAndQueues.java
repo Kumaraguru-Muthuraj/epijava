@@ -21,6 +21,53 @@ public class StacksAndQueues {
         }
     }
 
+    /* 9.2 - Reverse Polish Notation.
+     */
+    public static String rpnEvaluation(String rpn) {
+        String[] tokens = rpn.split(",");
+        Stack<Integer> partialEval = new Stack<>();
+        for (String token : tokens) {
+            if (token.length() == 1 && "+-/*".contains(token)) {
+                if (partialEval.isEmpty()) {
+                    return "ERROR";
+                }
+                Integer operand2 = partialEval.pop();
+                if (partialEval.isEmpty()) {
+                    return "ERROR";
+                }
+                Integer operand1 = partialEval.pop();
+                Integer v = 1;
+                if (token.equals("+")) {
+                    v = operand1 + operand2;
+                } else if (token.equals("-")) {
+                    v = operand1 - operand2;
+                } else if (token.equals("*")) {
+                    v = operand1 * operand2;
+                } else if (token.equals("/")) {
+                    v = operand1 / operand2;
+                }
+                partialEval.push(v);
+            } else {
+                try {
+                    Integer v = Integer.parseInt(token);
+                    partialEval.push(v);
+                } catch (Exception e) {
+                    return "ERROR";
+                }
+            }
+        }
+        if (partialEval.size() > 1) {
+            return "ERROR";
+        }
+        return String.valueOf(partialEval.pop());
+    }
+
+    public static void rpnTests() {
+        System.out.println(rpnEvaluation("3,9,+,24,-"));
+        System.out.println(rpnEvaluation("3,9,+,-24,-,-5,/"));
+        System.out.println(rpnEvaluation("3,9"));
+    }
+
     /* 9.3 - Check a sequence of (), {}, [] for well-formedness.
      */
     public static boolean bracketsBalanced(String sequence) {
@@ -209,11 +256,14 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
-        // 9.8 - Circular queue with array.
-        testCircularQueue(5);
+        // 9.2 - rpnEvaluation.
+        rpnTests();
         if (true) {
             return;
         }
+
+        // 9.8 - Circular queue with array.
+        testCircularQueue(5);
 
         // 9.10 - Queue with Max API.
         testQueueWithMaxAPI(20);
