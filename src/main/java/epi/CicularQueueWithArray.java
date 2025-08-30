@@ -20,8 +20,8 @@ public class CicularQueueWithArray {
             head = 0;
             tail = numElements;
         }
-        tail = (tail + 1) % array.length;
         array[tail] = n;
+        tail = (tail + 1) % array.length;
         ++numElements;
     }
 
