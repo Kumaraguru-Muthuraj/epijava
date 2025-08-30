@@ -152,6 +152,7 @@ public class StacksAndQueues {
     }
 
     /* 9.8 - Circular queue with array.
+    ******* This is a very tricky index manipulation problem. Go through it many times *******
      */
     public static void testCircularQueue(int k) {
         try {
@@ -160,10 +161,13 @@ public class StacksAndQueues {
             Random rb = new Random();
             for (int c = 1; c <= k; c++) {
                 queue.add(r.nextInt(50));
-                if (rb.nextBoolean()) {
-                    System.out.println("Polling - " + queue.poll());
-                }
             }
+            System.out.println("Polling - " + queue.poll());
+            System.out.println("Polling - " + queue.poll());
+            queue.add(r.nextInt(50));
+            queue.add(r.nextInt(50));
+            queue.add(r.nextInt(50));
+            queue.add(r.nextInt(50));
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -206,7 +210,7 @@ public class StacksAndQueues {
 
     public static void main(String[] args) {
         // 9.8 - Circular queue with array.
-        testCircularQueue(10);
+        testCircularQueue(5);
         if (true) {
             return;
         }

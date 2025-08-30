@@ -15,7 +15,7 @@ public class CicularQueueWithArray {
             List<Integer> old = List.of(array);
             array = new Integer[array.length * 2];
             for (int idx = 0; idx < numElements; idx++) {
-                array[idx] = old.get((head + idx) % array.length);
+                array[idx] = old.get((head + idx) % old.size());
             }
             head = 0;
             tail = numElements;
