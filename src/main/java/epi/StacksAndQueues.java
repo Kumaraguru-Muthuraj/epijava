@@ -104,6 +104,12 @@ public class StacksAndQueues {
         PostingsLinkedList postings = PostingsLinkedList.getAPostingsList(10);
         postings.print();
         postings.printJumpOrder(postings.head);
+        postings.clearVisited();
+        postings.printJumpOrder2(postings.head);
+    }
+
+    public static void testPostingsList2() {
+
     }
 
     /* 9.6 - Buildings with sunset view.

@@ -1,6 +1,7 @@
 package epi;
 
 import java.util.Random;
+import java.util.Stack;
 
 public class PostingsLinkedList {
     public PostingNode add(Integer id) {
@@ -40,6 +41,32 @@ public class PostingsLinkedList {
             printJumpOrder(cur.jumpNext);
             printJumpOrder(cur.next);
         }
+    }
+
+    Stack<PostingNode> stack = new Stack<>();
+    public void clearVisited() {
+        for (PostingNode cur = head; cur != null; cur = cur.next) {
+            cur.visited = false;
+        }
+    }
+    public void printJumpOrderHelper2() {
+        while (!stack.isEmpty()) {
+            PostingNode cur = stack.pop();
+            if (!cur.visited) {
+                cur.visited = true;
+                System.out.print(cur.id + ", ");
+                if (cur.next != null)
+                    stack.push(cur.next);
+                if (cur.jumpNext != null)
+                    stack.push(cur.jumpNext);
+            }
+        }
+    }
+    public void printJumpOrder2(PostingNode cur) {
+        System.out.println();
+        stack.clear();
+        stack.push(cur);
+        printJumpOrderHelper2();
     }
 
     public void print() {
