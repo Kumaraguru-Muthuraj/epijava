@@ -74,6 +74,8 @@ public class StacksAndQueues {
     }
 
     /* 9.3 - Check a sequence of (), {}, [] for well-formedness.
+    O(n).
+    O(n). For well-formed. For all open brackets till the end.
      */
     public static boolean bracketsBalanced(String sequence) {
         System.out.println(sequence);
