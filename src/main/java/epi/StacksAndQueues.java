@@ -121,6 +121,10 @@ public class StacksAndQueues {
     }
 
     /* 9.6 - Buildings with sunset view.
+    T.C - O(n).
+    S.C - If building heights from west to east are 1, 2, 3, 4 ... n, it O(n).
+    If buildings are K, 1, 2, 3, 4,...n, n<K, for every element that you touch, its is O(1), because you push and pop
+    everytime.
      */
     public static Stack<Building> getSunsetViewBuildings(LinkedList<Building> buildings) {
         Stack<Building> stk = new Stack<>();
@@ -189,6 +193,8 @@ public class StacksAndQueues {
 
 
     /* 9.7 - Level order traversing.
+    T.C - O(n).
+    S.C - Stack has pow(2,level-1) = pow(2, log n - 1)
      */
     public static void printByLevels() {
         BinarySearchTree bst = getBST(15);
@@ -222,6 +228,8 @@ public class StacksAndQueues {
 
     /* 9.8 - Circular queue with array.
     ******* This is a very tricky index manipulation problem. Go through it many times *******
+    * T.C - O(1) for both add and poll. Look at amortization logic in CTCI.
+    * S.C - O(n)
      */
     public static void testCircularQueue(int k) {
         try {

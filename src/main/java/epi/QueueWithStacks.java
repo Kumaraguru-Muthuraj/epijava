@@ -10,9 +10,14 @@ public class QueueWithStacks {
         this.addStack = new Stack<>();
         this.pollStack = new Stack<>();
     }
+    /* T.C - O(1).
+     */
     public void add(int i) {
         addStack.add(i);
     }
+    /* T.C - For every element we have 1 add to addStack, 1 move to pollStack, so its O(1)
+    S.C - O(n).
+     */
     public Integer poll() {
         if (pollStack.isEmpty()) {
             while (!addStack.isEmpty()) {
