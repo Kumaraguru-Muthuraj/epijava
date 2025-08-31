@@ -685,18 +685,18 @@ public class LinkedLists {
     }
 
     public static void main(String[] args) {
-        // 8.5 - Detect Overlapping node between SLLs. Lists can have cycles.
-        getCommonNodeThatHaveCyclesTests();
-
         if (true) {
             return;
         }
 
-        // 8.13 - Add list based integers.
-        LinkedList<Integer> sum = add(getSingleDigitLinkedList(2), getSingleDigitLinkedList(2));
+        //8.1 - Merge 2 sorted lists
+        merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
 
         // 8.2 - Reverse a sublist.
         reverseSublist(getNewLinkedList(5), 5, 5);
+
+        // 8.3 - Find cycles in a list.
+        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(5, 15));
 
         //8.4 - Find the point of overlap between 2 SLLs. There are no cycles.
         List<LinkedList<Integer>> ol = getOverlappingLinkedLists(6);
@@ -705,59 +705,8 @@ public class LinkedLists {
 
         getOverlappingNode(ol);
 
-        // 8.3 - Find cycles in a list.
-        Node<Integer> cycleStart = findCycle(getLinkedListWithCycle(5, 15));
-
-        // 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
-        LinkedList<Integer> pivList = new LinkedList<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        List<Integer> pivI = List.of(10, 80, 20, 10, 40, 45, 10, 20, 50, 20, 10, 80);
-        for (Integer i : pivI) {
-            pivList.add(i);
-        }
-        pivotTheList(pivList, 20);
-
-        //8.11 - Palindrome
-        LinkedList<Integer> sl1 = new LinkedList<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        List<Integer> is = List.of(1, 2, 3, 4, 4, 3, 2, 0);
-        for (Integer i : is) {
-            sl1.add(i);
-        }
-        palindrome(sl1);
-
-        ///8.10 - Even - Odd merge. Even nodes followed by odd.
-        evenOddMerge(getNewLinkedList(10));
-
-        //8.9 - Right and left shift
-        rightShift(getNewLinkedList(6), 3);
-        LinkedList<Integer> sl = new LinkedList<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        List<Integer> palLst = List.of(15, 16, 20, 22, 27, 31, 49, 56, 66, 71, 75, 75, 83, 86, 88, 88, 98, 105, 112, 112);
-        for (Integer i : palLst) {
-            sl.add(i);
-        }
-
-        //8.8 - Delete duplicates
-        deleteDuplicatesV0(sl);
-
-        // 8.7 - Delete kth last
-        deleteKthLast(getNewLinkedList(5), 5);
-
-        //8.1 - Merge 2 sorted lists
-        merge(getNewSortedLinkedList(3), getNewSortedLinkedList(5));
+        // 8.5 - Detect Overlapping node between SLLs. Lists can have cycles.
+        getCommonNodeThatHaveCyclesTests();
 
         //8.6 - Delete current
         deleteCurrent();
@@ -797,5 +746,57 @@ public class LinkedLists {
         l.add(50);
         l.print();
         System.out.println("\n\n");
+
+        // 8.7 - Delete kth last
+        deleteKthLast(getNewLinkedList(5), 5);
+
+        //8.8 - Delete duplicates
+        LinkedList<Integer> sl = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        List<Integer> palLst = List.of(15, 16, 20, 22, 27, 31, 49, 56, 66, 71, 75, 75, 83, 86, 88, 88, 98, 105, 112, 112);
+        for (Integer i : palLst) {
+            sl.add(i);
+        }
+        deleteDuplicatesV0(sl);
+
+        //8.9 - Right and left shift
+        rightShift(getNewLinkedList(6), 3);
+
+
+        ///8.10 - Even - Odd merge. Even nodes followed by odd.
+        evenOddMerge(getNewLinkedList(10));
+
+        //8.11 - Palindrome
+        LinkedList<Integer> sl1 = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        List<Integer> is = List.of(1, 2, 3, 4, 4, 3, 2, 0);
+        for (Integer i : is) {
+            sl1.add(i);
+        }
+        palindrome(sl1);
+
+        // 8.12 - List pivoting. Given k, arrange all i, such that i < k, i = k , i > k.
+        LinkedList<Integer> pivList = new LinkedList<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        List<Integer> pivI = List.of(10, 80, 20, 10, 40, 45, 10, 20, 50, 20, 10, 80);
+        for (Integer i : pivI) {
+            pivList.add(i);
+        }
+        pivotTheList(pivList, 20);
+
+        // 8.13 - Add list based integers.
+        LinkedList<Integer> sum = add(getSingleDigitLinkedList(2), getSingleDigitLinkedList(2));
     }
 }

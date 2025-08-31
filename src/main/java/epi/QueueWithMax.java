@@ -17,6 +17,9 @@ public class QueueWithMax {
     /* If we could store the numbers in descending order in the aux,
     we are good.
     */
+    /* T.C - O(1) because we evict elements in the aux. Evicting n elements in aux happens once a while.
+    S.C - O(n)
+     */
     public void add(Integer i) {
         queue.add(i);
         while (!aux.isEmpty() && aux.peek() < i) {
@@ -25,6 +28,9 @@ public class QueueWithMax {
         aux.push(i);
     }
 
+    /* T.C - O(1).
+    S.C - O(n)
+     */
     public Integer poll() {
         if (aux.get(0).equals(queue.peek())) {
             aux.remove(0);
