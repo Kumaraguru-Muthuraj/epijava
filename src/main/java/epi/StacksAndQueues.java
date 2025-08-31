@@ -7,6 +7,9 @@ import java.util.Stack;
 
 public class StacksAndQueues {
     /* 9.1 - Stack with Max API.
+    Question of T.C doesn't arise - It's O(1).
+    Space - O(n) if every new element added is higher than the previous.
+    If the first element added is the max ever, then its O(1).
      */
     public static void testStackWithMaxAPI() {
         StackWithMax stk = new StackWithMax();
@@ -22,6 +25,8 @@ public class StacksAndQueues {
     }
 
     /* 9.2 - Reverse Polish Notation.
+    T.C - O(n).
+    S.C - O(1) - The stack has a max of 3 elements at any point, which is constant.
      */
     public static String rpnEvaluation(String rpn) {
         String[] tokens = rpn.split(",");
@@ -99,6 +104,7 @@ public class StacksAndQueues {
     }
 
     /* 9.5 - Search a postings list.
+    O(n), O(n)
      */
     public static void testPostingsList() {
         PostingsLinkedList postings = PostingsLinkedList.getAPostingsList(10);
