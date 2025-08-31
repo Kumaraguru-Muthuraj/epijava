@@ -98,6 +98,14 @@ public class StacksAndQueues {
         return true;
     }
 
+    /* 9.5 - Search a postings list.
+     */
+    public static void testPostingsList() {
+        PostingsLinkedList postings = PostingsLinkedList.getAPostingsList(10);
+        postings.print();
+        postings.printJumpOrder(postings.head);
+    }
+
     /* 9.6 - Buildings with sunset view.
      */
     public static Stack<Building> getSunsetViewBuildings(LinkedList<Building> buildings) {
@@ -256,33 +264,36 @@ public class StacksAndQueues {
     }
 
     public static void main(String[] args) {
-        // 9.2 - rpnEvaluation.
-        rpnTests();
+        // 9.5 - Postings list
+        testPostingsList();
         if (true) {
             return;
         }
+        // 9.1 - Stack with Max API.
+        testStackWithMaxAPI();
 
-        // 9.8 - Circular queue with array.
-        testCircularQueue(5);
+        // 9.2 - rpnEvaluation.
+        rpnTests();
 
-        // 9.10 - Queue with Max API.
-        testQueueWithMaxAPI(20);
+        // 9.3 - Check a sequence of (), {}, [] for well-formedness.
+        System.out.println(bracketsBalanced("()[]{}([{}])"));
 
         // 9.6 - Buildings with sunset view.
         testBuildingSunset();
+
+        // 9.7 - Level order traversing.
+        printByLevels();
+
+        // 9.8 - Circular queue with array.
+        testCircularQueue(5);
 
         // 9.9 - Implement Queue with Stacks
         testQueueWithStacks(25);
         Integer k = null;
         System.out.print(k);
 
-        // 9.7 - Level order traversing.
-        printByLevels();
+        // 9.10 - Queue with Max API.
+        testQueueWithMaxAPI(20);
 
-        // 9.3 - Check a sequence of (), {}, [] for well-formedness.
-        System.out.println(bracketsBalanced("()[]{}([{}])"));
-
-        // 9.1 - Stack with Max API.
-        testStackWithMaxAPI();
     }
 }
