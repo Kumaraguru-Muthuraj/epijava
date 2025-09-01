@@ -28,6 +28,15 @@ public class BinarySearchTree {
         return n;
     }
 
+    public Integer height(Node2 root) {
+        if (root != null) {
+            Integer lH = 1 + height(root.left);
+            Integer rH = 1 + height(root.right);
+            return Math.max(lH, rH);
+        }
+        return -1;
+    }
+
     public void print() {
         System.out.println();
         _print(this.root);
