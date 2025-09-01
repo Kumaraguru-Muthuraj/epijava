@@ -42,7 +42,7 @@ public class BinarySearchTree {
         _print(this.root);
     }
 
-    private void _print(Node2 cur) {
+    public void _print(Node2 cur) {
         if (cur != null) {
             _print(cur.left);
             System.out.print(cur.value + ", ");

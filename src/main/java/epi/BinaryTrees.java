@@ -9,9 +9,56 @@ public class BinaryTrees {
     /* 10.1 - Balanced check? Every node should be balanced.
      */
     public static void testHeightCheck() {
-        BinarySearchTree t = getCustomBST();//getBST(10);
+        BinarySearchTree t = getCustomBST(); //getBST(10);
         System.out.println("\nHeight - " + t.height(t.root));
         System.out.println(("Balanced check - " + balancedCheck(t.root).balanced));
+    }
+
+    /* 10.2 - Check if tree is symmetric.
+     */
+    public static void testSymmetric() {
+        BinarySearchTree t = getSymmetricTree();
+        System.out.println(symmetric(t.root));
+    }
+
+    public static boolean symmetric(Node2 root) {
+        if (root != null) {
+            return checkSymmetry(root.left, root.right);
+        }
+        return true;
+    }
+    public static boolean checkSymmetry(Node2 tree0, Node2 tree1) {
+        if (tree0 != null && tree1 != null) {
+            boolean dataMatch = tree0.value.equals(tree1.value);
+            if (!dataMatch)
+                return false;
+            boolean outerSymm = checkSymmetry(tree0.left, tree1.right);
+            if (!outerSymm)
+                return false;
+            return checkSymmetry(tree0.right, tree1.left);
+        }
+        return true;
+    }
+    public static BinarySearchTree getSymmetricTree() {
+        BinarySearchTree t = getCustomBST();
+        t.print();
+        Node2 mT = getMirrorTree(t.root);
+        t._print(mT);
+        BinarySearchTree symm = new BinarySearchTree();
+        symm.add(10000);
+        symm.root.left = t.root;
+        symm.root.right = mT;
+        return symm;
+    }
+
+    public static Node2 getMirrorTree(Node2 root) {
+        Node2 nRoot = null;
+        if (root != null) {
+            nRoot = new Node2(root.value);
+            nRoot.left = getMirrorTree(root.right);
+            nRoot.right = getMirrorTree(root.left);
+        }
+        return nRoot;
     }
 
     /* This works because when null, we return (-1, true)
@@ -59,8 +106,16 @@ public class BinaryTrees {
         return bst;
     }
 
+
+
     public static void main(String[] args) {
+        if (true) {
+            return;
+        }
         // 10.1 - Balanced?
         testHeightCheck();
+
+        //10.2 - Check for mirror
+        testSymmetric();
     }
 }
