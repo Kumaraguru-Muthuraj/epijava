@@ -9,7 +9,7 @@ public class BinaryTrees {
     /* 10.1 - Balanced check? Every node should be balanced.
      */
     public static void testHeightCheck() {
-        BinarySearchTree t = getBST(10);
+        BinarySearchTree t = getCustomBST();//getBST(10);
         System.out.println("\nHeight - " + t.height(t.root));
         System.out.println(("Balanced check - " + balancedCheck(t.root).balanced));
     }
@@ -41,6 +41,20 @@ public class BinaryTrees {
             System.out.println("Adding " + val);
             bst.add(val);
         }
+        bst.print();
+        return bst;
+    }
+
+    public static BinarySearchTree getCustomBST() {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.add(78);
+        bst.add(50);
+        bst.add(100);
+        bst.add(25);
+        bst.add(65);
+        bst.add(90);
+        bst.add(110);
+        bst.add(60);
         bst.print();
         return bst;
     }
