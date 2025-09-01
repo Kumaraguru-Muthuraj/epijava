@@ -30,9 +30,9 @@ public class BinarySearchTree {
 
     public Integer height(Node2 root) {
         if (root != null) {
-            Integer lH = 1 + height(root.left);
-            Integer rH = 1 + height(root.right);
-            return Math.max(lH, rH);
+            Integer lH = height(root.left);
+            Integer rH = height(root.right);
+            return 1 + Math.max(lH, rH);
         }
         return -1;
     }
