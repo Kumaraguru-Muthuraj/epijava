@@ -1,5 +1,8 @@
 package epi;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class BinarySearchTree {
     public BinarySearchTree() {
         root = null;
@@ -49,6 +52,22 @@ public class BinarySearchTree {
             _print(cur.right);
         }
     }
+
+    public List<Node2> getLeavesAsList() {
+        leaves = new LinkedList<>();
+        getLeaves(root);
+        return leaves;
+    }
+    public void getLeaves(Node2 cur) {
+        if (cur != null) {
+            if (cur.left == null && cur.right == null) {
+                leaves.add(cur);
+            }
+            getLeaves(cur.left);
+            getLeaves(cur.right);
+        }
+    }
+    public List<Node2> leaves;
 
     public Node2 root;
 }

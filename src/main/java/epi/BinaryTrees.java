@@ -1,5 +1,6 @@
 package epi;
 
+import java.util.List;
 import java.util.Random;
 
 /* Level starts from 0. Height = the deepest level.
@@ -79,6 +80,17 @@ public class BinaryTrees {
         return new TreeBalancedStatus(height, balanced);
     }
 
+    /* 10.14 - Compute the leaves of a BT.
+    * */
+    public static void computeLeaves() {
+        BinarySearchTree b = getCustomBST();//getBST(10);
+        System.out.println();
+        List<Node2> l = b.getLeavesAsList();
+        for (Node2 n : l) {
+            System.out.print(n.value + ", ");
+        }
+    }
+
     public static BinarySearchTree getBST(int n) {
         BinarySearchTree bst = new BinarySearchTree();
         Integer val;
@@ -109,6 +121,8 @@ public class BinaryTrees {
 
 
     public static void main(String[] args) {
+        // 10.14 - computeLeaves
+        computeLeaves();
         if (true) {
             return;
         }
