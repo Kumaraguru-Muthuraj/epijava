@@ -41,7 +41,7 @@ public class BinarySearchTree {
     }
 
     public void print() {
-        System.out.println();
+        System.out.println("\nInorder");
         _print(this.root);
     }
 
@@ -50,6 +50,19 @@ public class BinarySearchTree {
             _print(cur.left);
             System.out.print(cur.value + ", ");
             _print(cur.right);
+        }
+    }
+
+    public void printPreorder() {
+        System.out.println("\nPreorder");
+        _printPreorder(this.root);
+    }
+
+    public void _printPreorder(Node2 cur) {
+        if (cur != null) {
+            System.out.print(cur.value + ", ");
+            _printPreorder(cur.left);
+            _printPreorder(cur.right);
         }
     }
 
