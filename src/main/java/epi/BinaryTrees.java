@@ -1,7 +1,9 @@
 package epi;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 /* Level starts from 0. Height = the deepest level.
 Check the book for the diagram in the first page.
@@ -91,6 +93,31 @@ public class BinaryTrees {
         }
     }
 
+    /* 10.7 - Inorder with Stack.
+    EXTREMELY SUCCINT CODE. JUST GET THIS ITS SIMPLE.
+    OBSERVE HOW THE RECURSIVE CODE WORKS. THIS SIMULATES IT.
+     */
+    public static void inorder(int n) {
+        BinarySearchTree t = getBST(n);
+        List<Node2> res = new LinkedList<>();
+        Stack<Node2> stack = new Stack<>();
+        Node2 cur = t.root;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                res.add(cur);
+                cur = cur.right;
+            }
+        }
+        System.out.println();
+        for (Node2 node : res) {
+            System.out.print(node.value + ", ");
+        }
+    }
+
     public static BinarySearchTree getBST(int n) {
         BinarySearchTree bst = new BinarySearchTree();
         Integer val;
@@ -121,11 +148,16 @@ public class BinaryTrees {
 
 
     public static void main(String[] args) {
-        // 10.14 - computeLeaves
-        computeLeaves();
+        // 10.7 - Inorder
+        inorder(15);
+        // 10.8 - Preorder
+
         if (true) {
             return;
         }
+        // 10.14 - computeLeaves
+        computeLeaves();
+
         // 10.1 - Balanced?
         testHeightCheck();
 
