@@ -82,6 +82,64 @@ public class BinaryTrees {
         return new TreeBalancedStatus(height, balanced);
     }
 
+    /* 10.4 - LCA when nodes have parent pointers.
+     */
+    public static Node2 lcaWithParent() {
+        BinarySearchTree b = getBST(15); //getCustomBST();
+        System.out.println();
+        List<Node2> nodes = get2RandomNodes(b.root);
+        Node2 n0 = nodes.get(0);
+        Node2 n1 = nodes.get(1);
+        int n0Cnt = 0;
+        int n1Cnt = 0;
+        while (n0 != b.root) {
+            n0 = n0.parent;
+            n0Cnt++;
+        }
+        while (n1 != b.root) {
+            n1 = n1.parent;
+            n1Cnt++;
+        }
+
+        int offSet = Math.abs(n0Cnt - n1Cnt);
+        n0 = nodes.get(0);
+        n1 = nodes.get(1);
+        if (n0Cnt < n1Cnt) {
+            while(offSet > 0) {
+                n1 = n1.parent;
+                offSet--;
+            }
+        } else if (n1Cnt < n0Cnt) {
+            while(offSet > 0) {
+                n0 = n0.parent;
+                offSet--;
+            }
+        }
+
+        while (n0 != b.root && n0 != n1) {
+            n0 = n0.parent;
+            n1 = n1.parent;
+        }
+        return n0;
+    }
+
+    public static List<Node2> get2RandomNodes(Node2 root) {
+        Random r = new Random();
+        List<Node2> nodes = new LinkedList<>();
+        get2RandomNodes(r, nodes, root, root);
+        return nodes;
+    }
+
+    public static void get2RandomNodes(Random r, List<Node2> nodes, Node2 cur, Node2 root) {
+        if (cur != null && nodes.size() < 2) {
+            if (r.nextBoolean() && cur != root) {
+                nodes.add(cur);
+            }
+            get2RandomNodes(r, nodes, cur.left, root);
+            get2RandomNodes(r, nodes, cur.right, root);
+        }
+    }
+
     /* 10.14 - Compute the leaves of a BT.
     * */
     public static void computeLeaves() {
@@ -174,13 +232,17 @@ public class BinaryTrees {
 
 
 
+
     public static void main(String[] args) {
-        // 10.8 - Preorder
-        preorder(10);
+        // 10.4 - lcaWithParent
+        lcaWithParent();
 
         if (true) {
             return;
         }
+        // 10.8 - Preorder
+        preorder(10);
+
         // 10.7 - Inorder
         inorder(15);
 

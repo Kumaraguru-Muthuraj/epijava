@@ -28,6 +28,7 @@ public class BinarySearchTree {
         } else {
             parent.right = n;
         }
+        n.parent = parent;
         return n;
     }
 
