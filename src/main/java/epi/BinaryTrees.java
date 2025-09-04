@@ -162,6 +162,32 @@ public class BinaryTrees {
         return partialSum;
     }
 
+    /* 10.6 - Target Sum from root to LEAF****
+    Variant, what if the sum is till any node?
+     **** SUPER TRICKY ****
+     */
+    public static void targetSumExistsTest() {
+        System.out.println(targetSumExists(280));
+    }
+    public static boolean targetSumExists(Integer target) {
+        BinarySearchTree b = getCustomBST();
+        b.print();
+        return targetSumExists(0, target, b.root);
+    }
+    public static boolean targetSumExists(Integer partialSum, Integer target, Node2 cur) {
+        if (cur == null) {
+            return false;
+        }
+        partialSum += cur.value;
+        if (cur.left == null && cur.right == null) {
+            return partialSum.equals(target);
+        }
+
+        boolean lExists = targetSumExists (partialSum, target, cur.left);
+        boolean rExists = targetSumExists (partialSum, target, cur.right);
+        return lExists || rExists;
+    }
+
     /* 10.14 - Compute the leaves of a BT.
     * */
     public static void computeLeaves() {
@@ -273,11 +299,15 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
-        // 10.5 - Compute sums from root to leaf.
-        computeSumsFromRootToLeaf();
+        // 10.6 - targetSumExists
+        targetSumExistsTest();
+
         if (true) {
             return;
         }
+        // 10.5 - Compute sums from root to leaf.
+        computeSumsFromRootToLeaf();
+
         // 10.1 - Balanced?
         testHeightCheck();
 
