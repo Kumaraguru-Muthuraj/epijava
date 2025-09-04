@@ -140,6 +140,28 @@ public class BinaryTrees {
         }
     }
 
+    /* 10.5 - Sum of all <root to leaf> that is binary.
+    **** SUPER TRICKY ****
+     */
+    public static void computeSumsFromRootToLeaf() {
+        BinarySearchTree b = getCustomBSTWith01();
+        b.print();
+        System.out.println(computeSumsBinary(0, b.root));
+    }
+    public static Integer computeSumsBinary(Integer partialSum, Node2 cur) {
+        if (cur == null) {
+            return 0;
+        }
+        partialSum = partialSum * 2 + cur.value;
+        if (cur.left == null && cur.right == null) {
+            return partialSum;
+        }
+        Integer l1S = computeSumsBinary(partialSum, cur.left);
+        Integer l2S = computeSumsBinary(partialSum, cur.right);
+        partialSum = l1S + l2S;
+        return partialSum;
+    }
+
     /* 10.14 - Compute the leaves of a BT.
     * */
     public static void computeLeaves() {
@@ -229,30 +251,49 @@ public class BinaryTrees {
         bst.printPreorder();
         return bst;
     }
-
-
-
+    public static BinarySearchTree getCustomBSTWith01() {
+        BinarySearchTree t = getCustomBST();
+        set01(t.root);
+        return t;
+    }
+    public static void set01(Node2 root) {
+        Random r = new Random();
+        set01(r, root);
+    }
+    public static void set01(Random r, Node2 cur) {
+        if (cur != null) {
+            if (r.nextBoolean()) {
+                cur.value = 1;
+            } else {
+                cur.value = 0;
+            }
+            set01(r, cur.left);
+            set01(r, cur.right);
+        }
+    }
 
     public static void main(String[] args) {
-        // 10.4 - lcaWithParent
-        lcaWithParent();
-
+        // 10.5 - Compute sums from root to leaf.
+        computeSumsFromRootToLeaf();
         if (true) {
             return;
         }
-        // 10.8 - Preorder
-        preorder(10);
-
-        // 10.7 - Inorder
-        inorder(15);
-
-        // 10.14 - computeLeaves
-        computeLeaves();
-
         // 10.1 - Balanced?
         testHeightCheck();
 
         //10.2 - Check for mirror
         testSymmetric();
+
+        // 10.4 - lcaWithParent
+        lcaWithParent();
+
+        // 10.7 - Inorder
+        inorder(15);
+
+        // 10.8 - Preorder
+        preorder(10);
+
+        // 10.14 - computeLeaves
+        computeLeaves();
     }
 }
