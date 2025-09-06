@@ -1,6 +1,8 @@
 package epi;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class BinarySearchTrees {
@@ -23,6 +25,28 @@ public class BinarySearchTrees {
             }
         }
         return soFar;
+    }
+
+    /* 15.3 - K largest elements in BST. Reverse inorder traversal.
+     */
+    public static void testKLargestElements(int k) {
+        BinarySearchTree b = BinaryTrees.getCustomBST();
+        List<Node2> l = new LinkedList<>();
+        kLargestElements(l, b.root, k);
+        System.out.println(k + " - largest elements");
+        for (Node2 n : l) {
+            System.out.println(n.value + ", ");
+        }
+    }
+    public static void kLargestElements(List<Node2> kNodes, Node2 cur, int k) {
+        if (cur != null && kNodes.size() < k) {
+            kLargestElements(kNodes, cur.right, k);
+            if (kNodes.size() < k) {
+                // We prevent the calls to left node too if the target k size is achieved.
+                kNodes.add(cur);
+                kLargestElements(kNodes, cur.left, k);
+            }
+        }
     }
 
     /* 15.4 - Compute LCA for BST
@@ -81,11 +105,15 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        //15.2 - first after value k
-        testGreaterThanK(111);
+        //15.3 - K largest elements in BST.
+        testKLargestElements(7);
         if (true) {
             return;
         }
+
+        //15.2 - first after value k
+        testGreaterThanK(111);
+
         //15.4 - LCA
         testLCA(60, 60);
 
