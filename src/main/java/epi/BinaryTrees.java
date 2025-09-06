@@ -249,6 +249,33 @@ public class BinaryTrees {
         }
     }
 
+    /* 10.9 - kth node in inorder traversal.
+     */
+    public static Node2 testKthElementInorder(int k) {
+        BinarySearchTree b = BinaryTrees.getCustomBST();
+        b.print();
+        Node2 kthNode = kthElementInorder(b, k);
+        System.out.println("Kth Node - (" + k + ") - "+ kthNode.value);
+        return kthNode;
+    }
+    public static Node2 kthElementInorder(BinarySearchTree b, int k) {
+        /* We check the number of nodes in left tree + 1 for the current node.
+         */
+        Node2 cur = b.root;
+        while (cur != null) {
+            int lCnt = cur.left != null ? cur.left.count : 0;
+            if (lCnt + 1 < k) {
+                k = k - (lCnt + 1);
+                cur = cur.right;
+            } else if (lCnt + 1 == k) {
+                return cur; // Target count achieved.
+            } else {
+                cur = cur.left;
+            }
+        }
+        return null;
+    }
+
     public static BinarySearchTree getBST(int n) {
         BinarySearchTree bst = new BinarySearchTree();
         Integer val;
@@ -299,12 +326,15 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
-        // 10.6 - targetSumExists
-        targetSumExistsTest();
+        // 10.9 - testKthElementInorder
+        testKthElementInorder(3);
 
         if (true) {
             return;
         }
+        // 10.6 - targetSumExists
+        targetSumExistsTest();
+
         // 10.5 - Compute sums from root to leaf.
         computeSumsFromRootToLeaf();
 
