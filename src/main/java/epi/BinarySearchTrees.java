@@ -1,5 +1,10 @@
 package epi;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class BinarySearchTrees {
     /* 15.4 - Compute LCA for BST
      */
@@ -20,7 +25,7 @@ public class BinarySearchTrees {
                 cur = cur.right;
             }
         }
-        //Check if s & b exist in the respective subtrees.
+        //Check if s & b exist in the respective subtrees. NOT DONE.
         if (s == b) {
             return parent;
         }
@@ -30,13 +35,41 @@ public class BinarySearchTrees {
         return null;
     }
 
-    public static void main(String[] args) {
-        //15.4 - LCA
-        testLCA(60, 60);
+    /* 15.9 - Minimum height BST from a sorted array.
+     */
+    public static BinarySearchTree minimumHeightBST(int n) {
+        Random r = new Random();
+        Integer[] lst = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            lst[i] = r.nextInt(500);
+        }
+        Arrays.sort(lst);
 
+        BinarySearchTree b = new BinarySearchTree();
+        minHeightBSTBuilder(b, lst, 0, lst.length - 1);
+        b.print();
+        return b;
+    }
+    public static void minHeightBSTBuilder(BinarySearchTree b, Integer[] lst, int minIdx, int maxIdx) {
+        if (minIdx <= maxIdx) {
+            int nextRootIdx = minIdx + (maxIdx - minIdx) / 2;
+            Integer nextRoot = lst[nextRootIdx];
+            b.add(nextRoot);
+            minHeightBSTBuilder(b, lst, minIdx, nextRootIdx - 1);
+            minHeightBSTBuilder(b, lst, nextRootIdx + 1, maxIdx);
+        }
+    }
+
+
+    public static void main(String[] args) {
         if (true) {
             return;
         }
+        //15.4 - LCA
+        testLCA(60, 60);
+
+        //15.9 - minimumHeightBST
+        minimumHeightBST(11);
     }
 
 }
