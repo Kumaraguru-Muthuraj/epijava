@@ -300,6 +300,7 @@ public class BinaryTrees {
         bst.add(90);
         bst.add(110);
         bst.add(60);
+        bst.add(80);
         bst.print();
         bst.printPreorder();
         return bst;

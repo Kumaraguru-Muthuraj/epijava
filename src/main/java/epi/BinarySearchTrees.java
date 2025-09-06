@@ -1,11 +1,30 @@
 package epi;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class BinarySearchTrees {
+    /* 15.2 - First Key greater than k.
+     */
+    public static void testGreaterThanK(int k) {
+        BinarySearchTree b = BinaryTrees.getCustomBST();
+        Node2 n = firstGreaterThanK(b, k);
+        System.out.println("First greater than " + k + " - " + n.value);
+    }
+    public static Node2 firstGreaterThanK(BinarySearchTree b, int k) {
+        Node2 cur = b.root;
+        Node2 soFar = null;
+        while (cur != null) {
+            if (cur.value > k) {
+                soFar = cur;
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        return soFar;
+    }
+
     /* 15.4 - Compute LCA for BST
      */
     public static void testLCA(int s, int b) {
@@ -62,7 +81,8 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-
+        //15.2 - first after value k
+        testGreaterThanK(111);
         if (true) {
             return;
         }
