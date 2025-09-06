@@ -16,6 +16,7 @@ public class BinarySearchTree {
         Node2 cur = root;
         while (cur != null) {
             parent = cur;
+            cur.count++;
             if (i < cur.value) {
                 cur = cur.left;
             } else {
