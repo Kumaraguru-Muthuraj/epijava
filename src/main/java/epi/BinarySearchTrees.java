@@ -6,6 +6,33 @@ import java.util.List;
 import java.util.Random;
 
 public class BinarySearchTrees {
+    /* 15.1 - Validate BST property.
+    There are 3 versions to this problem.
+    *** PRACTISE ALL THE 3 VERSIONS. ***
+     */
+    private static Integer prev;
+    public static void testBSTProperty() {
+        prev = Integer.MIN_VALUE;
+        BinarySearchTree b = BinaryTrees.getInvalidBST();
+        System.out.println();
+        System.out.println(testBST(b.root));
+    }
+    public static boolean testBST(Node2 cur) {
+        if (cur != null) {
+            if (!testBST(cur.left)) {
+                return false;
+            }
+            boolean valid = false;
+            if (prev <= cur.value) {
+                System.out.println(prev + "-" + cur.value + ", ");
+                valid = true;
+                prev = cur.value;
+            }
+            return valid && testBST(cur.right);
+        }
+        return true;
+    }
+
     /* 15.2 - First Key greater than k.
      */
     public static void testGreaterThanK(int k) {
@@ -105,11 +132,15 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        //15.3 - K largest elements in BST.
-        testKLargestElements(7);
+        //15.1 - testBSTProperty
+        testBSTProperty();
+
         if (true) {
             return;
         }
+
+        //15.3 - K largest elements in BST.
+        testKLargestElements(7);
 
         //15.2 - first after value k
         testGreaterThanK(111);

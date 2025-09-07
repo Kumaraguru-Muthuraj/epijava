@@ -305,6 +305,27 @@ public class BinaryTrees {
         bst.printPreorder();
         return bst;
     }
+    public static BinarySearchTree getInvalidBST() {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.add(78);
+        bst.add(50);
+        bst.add(100);
+        bst.add(25);
+        bst.add(65);
+        bst.add(90);
+        bst.add(110);
+        bst.add(60);
+        bst.add(80);
+        Node2 cur = bst.root;
+        while (cur.right != null) {
+            cur = cur.right;
+        }
+        cur.value = 0;
+        bst.root.value = -1;
+        bst.print();
+        bst.printPreorder();
+        return bst;
+    }
     public static BinarySearchTree getCustomBSTWith01() {
         BinarySearchTree t = getCustomBST();
         set01(t.root);
