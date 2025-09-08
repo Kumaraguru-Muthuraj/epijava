@@ -81,6 +81,13 @@ public class BinarySearchTree {
         }
     }
 
+    public List<Integer> getAsList(Queue<Node2> nodes) {
+        List<Integer> q = new LinkedList<>();
+        for (Node2 n : nodes) {
+            q.add(n.value);
+        }
+        return q;
+    }
 
     public List<Node2> getLeavesAsList() {
         leaves = new LinkedList<>();

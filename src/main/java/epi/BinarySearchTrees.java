@@ -159,14 +159,38 @@ public class BinarySearchTrees {
     }
 
     /* 15.5 - Build BST from traversal data. Only preorder traversed data can help.
+    *** NOTE: DON'T REMOVE THE ELEMENTS, IF YOU DO THEN THE RECURSION WILL LOOSE THE ELEMENTS TO ADD.
+    * USE ONLY INDEX TO SCROLL.
+    * The reason this algorithm works is for pre order 78, 50, 25, 65, 60, 100, 90, 80, 110
+    * When a number is touched, we check by min > rootVal || rootVal > max to see if it can be a
+    * child based on the constraint passed by previous node. If it fails, we unwind and since index still
+    * is fixed, we are able to maintain the check.
      */
+    private static int rootIdx = 0;
     public static void testGetBSTFromPreorder() {
         BinarySearchTree b = BinaryTrees.getCustomBST();
         b.printPreorder();
+        Queue<Node2> nList = b.getPreorder(b.root);
+        List<Integer> iLst = b.getAsList(nList);
+        Node2 tree = getBSTFromPreorder(iLst, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        b._print(tree);
     }
-    public static void getBSTFromPreorder() {
+    public static Node2 getBSTFromPreorder(List<Integer> lst, Integer min, Integer max) {
+        if (rootIdx == lst.size() - 1) {
+            return null;
+        }
+        Integer rootVal = lst.get(rootIdx);
+        if (min > rootVal || rootVal > max) {
+            return null;
+        }
+        rootIdx++; // This is critical.
+        Node2 root = new Node2(rootVal);
+        root.left = getBSTFromPreorder(lst, min, root.value);
+        root.right = getBSTFromPreorder(lst, root.value, max);
 
+        return root;
     }
+
 
     /* 15.9 - Minimum height BST from a sorted array.
      */
