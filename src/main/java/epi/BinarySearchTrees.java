@@ -158,6 +158,16 @@ public class BinarySearchTrees {
         return null;
     }
 
+    /* 15.5 - Build BST from traversal data. Only preorder traversed data can help.
+     */
+    public static void testGetBSTFromPreorder() {
+        BinarySearchTree b = BinaryTrees.getCustomBST();
+        b.printPreorder();
+    }
+    public static void getBSTFromPreorder() {
+
+    }
+
     /* 15.9 - Minimum height BST from a sorted array.
      */
     public static BinarySearchTree minimumHeightBST(int n) {
@@ -185,12 +195,14 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        //15.1 - testBSTProperty
-        testBST3Property();
-
+        //15.5 - testGetBSTFromPreorder
+        testGetBSTFromPreorder();
         if (true) {
             return;
         }
+
+        //15.1 - testBSTProperty
+        testBST3Property();
         testBST0Property();
         testBST1Property();
 

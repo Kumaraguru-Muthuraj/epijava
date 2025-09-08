@@ -2,6 +2,7 @@ package epi;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BinarySearchTree {
     public BinarySearchTree() {
@@ -61,12 +62,25 @@ public class BinarySearchTree {
     }
 
     public void _printPreorder(Node2 cur) {
-        if (cur != null) {
-            System.out.print(cur.value + ", ");
-            _printPreorder(cur.left);
-            _printPreorder(cur.right);
+        Queue<Node2> pre = getPreorder(cur);
+        for (Node2 n : pre) {
+            System.out.print(n.value + ", ");
         }
     }
+
+    public Queue<Node2> getPreorder(Node2 cur) {
+        Queue<Node2> preOrder = new LinkedList<>();
+        getPreorderHelper(cur, preOrder);
+        return preOrder;
+    }
+    private void getPreorderHelper(Node2 cur, Queue<Node2> preOrder) {
+        if (cur != null) {
+            preOrder.add(cur);
+            getPreorderHelper(cur.left, preOrder);
+            getPreorderHelper(cur.right, preOrder);
+        }
+    }
+
 
     public List<Node2> getLeavesAsList() {
         leaves = new LinkedList<>();
