@@ -11,15 +11,15 @@ public class BinarySearchTrees {
     *** PRACTISE ALL THE 3 VERSIONS. ***
      */
     private static Integer prev;
-    public static void testBSTProperty() {
+    public static void testBST0Property() {
         prev = Integer.MIN_VALUE;
         BinarySearchTree b = BinaryTrees.getInvalidBST();
         System.out.println();
-        System.out.println(testBST(b.root));
+        System.out.println(testBST0(b.root));
     }
-    public static boolean testBST(Node2 cur) {
+    public static boolean testBST0(Node2 cur) {
         if (cur != null) {
-            if (!testBST(cur.left)) {
+            if (!testBST0(cur.left)) {
                 return false;
             }
             boolean valid = false;
@@ -28,7 +28,25 @@ public class BinarySearchTrees {
                 valid = true;
                 prev = cur.value;
             }
-            return valid && testBST(cur.right);
+            return valid && testBST0(cur.right);
+        }
+        return true;
+    }
+    public static void testBST1Property() {
+        BinarySearchTree b = BinaryTrees.getInvalidBST();
+        System.out.println();
+        System.out.println(testBST1(b.root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+    }
+    public static boolean testBST1(Node2 cur, Integer min, Integer max) {
+        if (cur != null) {
+            if (min <= cur.value && cur.value <= max) {
+                if (!testBST1(cur.left, min, cur.value)) {
+                    return false;
+                }
+                return testBST1(cur.right, cur.value, max);
+            } else {
+                return false;
+            }
         }
         return true;
     }
@@ -133,11 +151,12 @@ public class BinarySearchTrees {
 
     public static void main(String[] args) {
         //15.1 - testBSTProperty
-        testBSTProperty();
+        testBST1Property();
 
         if (true) {
             return;
         }
+        testBST0Property();
 
         //15.3 - K largest elements in BST.
         testKLargestElements(7);
