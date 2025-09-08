@@ -191,6 +191,67 @@ public class BinarySearchTrees {
         return root;
     }
 
+    /* 15.6 - Closest entries in 3 sorted arrays.
+     */
+    static class ArrayInteger implements Comparable<ArrayInteger> {
+        public ArrayInteger(int val, int idx) {
+            this.val = val;
+            this.idx = idx;
+        }
+        Integer val;
+        Integer idx;
+
+        @Override
+        public int compareTo(ArrayInteger o) {
+            return val.compareTo(o.val);
+        }
+    }
+
+    public static void testClosestEntries() {
+        List<ArrayInteger> l1 = getSortedList(7, 0);
+        List<ArrayInteger> l2 = getSortedList(5, 1);
+        List<ArrayInteger> l3 = getSortedList(9, 2);
+
+        LinkedList<List<ArrayInteger>> lists = new LinkedList<>();
+        lists.add(l1);
+        lists.add(l2);
+        lists.add(l3);
+
+        List<ArrayInteger> entries = closestEntries(lists);
+        System.out.print("\nEntries - ");
+        for (ArrayInteger i : entries) {
+            System.out.print(i.val + ", ");
+        }
+    }
+    public static List<ArrayInteger> closestEntries(List<List<ArrayInteger>> lists) {
+        Comparator<ArrayInteger> cmp = new Comparator<>() {
+            @Override
+            public int compare(ArrayInteger o1, ArrayInteger o2) {
+                return o1.compareTo(o2);
+            }
+        };
+        PriorityQueue<ArrayInteger> heap = new PriorityQueue<>(cmp);
+
+        //Add first 3 elements from each list.
+        for (List<ArrayInteger> list : lists) {
+            heap.add(list.remove(0));
+        }
+
+        while (true) {
+            ArrayInteger small = heap.peek();
+            Integer arrayIdx = small.idx;
+            List<ArrayInteger> list = lists.get(arrayIdx);
+            if (list.isEmpty()) {
+                break;
+            }
+            heap.poll();
+            ArrayInteger nextSmall = list.remove(0);
+            heap.add(nextSmall);
+        }
+
+        LinkedList<ArrayInteger> a = new LinkedList<>(heap);
+        return a;
+    }
 
     /* 15.9 - Minimum height BST from a sorted array.
      */
@@ -217,13 +278,32 @@ public class BinarySearchTrees {
         }
     }
 
+    public static List<ArrayInteger> getSortedList(int k, int index) {
+        List<Integer> l = new LinkedList<>();
+        Random r = new Random();
+        for (int i = 0; i < k; i++) {
+            l.add(r.nextInt(100));
+        }
+        Collections.sort(l);
+
+        List<ArrayInteger> al = new LinkedList<>();
+        System.out.println();
+        for (Integer i : l) {
+            al.add(new ArrayInteger(i, index));
+            System.out.print(i + ", ");
+        }
+        return al;
+    }
+
 
     public static void main(String[] args) {
-        //15.5 - testGetBSTFromPreorder
-        testGetBSTFromPreorder();
+        testClosestEntries();
         if (true) {
             return;
         }
+
+        //15.5 - testGetBSTFromPreorder
+        testGetBSTFromPreorder();
 
         //15.1 - testBSTProperty
         testBST3Property();
