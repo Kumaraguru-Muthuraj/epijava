@@ -1,9 +1,8 @@
 package epi;
 
+import java.util.*;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
 public class BinarySearchTrees {
     /* 15.1 - Validate BST property.
@@ -44,6 +43,42 @@ public class BinarySearchTrees {
                     return false;
                 }
                 return testBST1(cur.right, cur.value, max);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+    static class NodeWithRange {
+        public NodeWithRange(Node2 n, Integer min, Integer max) {
+            this.node = n;
+            this.min = min;
+            this.max = max;
+        }
+        Node2 node;
+        Integer min, max;
+    }
+    public static void testBST3Property() {
+        BinarySearchTree b = BinaryTrees.getInvalidBST();
+        System.out.println();
+        Queue<NodeWithRange> q = new LinkedList<>();
+        q.add(new NodeWithRange(b.root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        System.out.println(testBST3(q));
+    }
+    public static boolean testBST3(Queue<NodeWithRange> q) {
+        //This is with BFS
+        while (!q.isEmpty()) {
+            NodeWithRange head = q.poll();
+            Node2 node = head.node;
+            Integer min = head.min;
+            Integer max = head.max;
+            if (min <= node.value && node.value <= max) {
+                if (node.left != null) {
+                    q.add(new NodeWithRange(node.left, min, node.value));
+                }
+                if (node.right != null) {
+                    q.add(new NodeWithRange(node.right, node.value, max));
+                }
             } else {
                 return false;
             }
@@ -151,12 +186,13 @@ public class BinarySearchTrees {
 
     public static void main(String[] args) {
         //15.1 - testBSTProperty
-        testBST1Property();
+        testBST3Property();
 
         if (true) {
             return;
         }
         testBST0Property();
+        testBST1Property();
 
         //15.3 - K largest elements in BST.
         testKLargestElements(7);
