@@ -278,6 +278,16 @@ public class BinarySearchTrees {
         }
     }
 
+    /* 15.10 - Add and Delete in a BST.
+    * */
+    public static void testAddAndDelete() {
+        BinarySearchTree bst = BinaryTrees.getCustomBST();
+        bst.print();
+        bst.delete(78);
+        bst.print();
+    }
+
+
     public static List<ArrayInteger> getSortedList(int k, int index) {
         List<Integer> l = new LinkedList<>();
         Random r = new Random();
@@ -297,13 +307,11 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        testClosestEntries();
+        //15.10
+        testAddAndDelete();
         if (true) {
             return;
         }
-
-        //15.5 - testGetBSTFromPreorder
-        testGetBSTFromPreorder();
 
         //15.1 - testBSTProperty
         testBST3Property();
@@ -318,6 +326,12 @@ public class BinarySearchTrees {
 
         //15.4 - LCA
         testLCA(60, 60);
+
+        //15.5 - testGetBSTFromPreorder
+        testGetBSTFromPreorder();
+
+        //15.6
+        testClosestEntries();
 
         //15.9 - minimumHeightBST
         minimumHeightBST(11);

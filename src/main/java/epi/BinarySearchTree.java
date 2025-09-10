@@ -34,6 +34,81 @@ public class BinarySearchTree {
         return n;
     }
 
+    public boolean delete(Integer i) {
+        //Find the node.
+        Node2 parent = null;
+        Node2 delNode = this.root;
+        while (delNode != null) {
+            /* Don't move parent pointer here.
+            If you move and if delNode exists, both parent
+            and delNode will point to the same, causing
+            issues in the actual deletion block.
+            */
+            if (i.equals(delNode.value)) {
+                break;
+            }
+            parent = delNode;
+            if (i < delNode.value) {
+                delNode = delNode.left;
+            } else {
+                delNode = delNode.right;
+            }
+        }
+        //Return if not exists.
+        if (delNode == null) {
+            return false;
+        }
+        //3 Cases - cur is leaf, cur has 1 child, cur has 2 children.
+        // Case3 - 2 Children -> It doesn't matter if left child is null.
+        if (delNode.right != null) {
+            //This covers for root node too.
+            /*Get successor. Need to track parent because rNode.left can be null.
+            Handled in Marker1
+             */
+            Node2 rNParent = delNode;
+            Node2 rNode = delNode.right;
+            while (rNode.left != null) {
+                rNParent = rNode;
+                rNode = rNode.left;
+            }
+            delNode.value = rNode.value;
+            if (rNParent.left == rNode) {
+                rNParent.left = rNode.right;
+            } else {
+                // Marker1
+                rNParent.right = rNode.right;
+            }
+            //To prevent memory leak / technically complete and correct.
+            rNode.right = null;
+        } else {
+            //Root node
+            if (delNode == root) {
+                root = root.left;
+            } else {
+                //Case2 - Right child is null. delNode could be right or left child of its parent.
+                //This also covers Leaf node - Case1.
+                if (parent.left == delNode) {
+                    parent.left = delNode.left;
+                } else {
+                    parent.right = delNode.left;
+                }
+                delNode.left = null;
+            }
+        }
+
+        //Case 1 - Leaf
+        if (delNode.left == null && delNode.right == null) {
+            if (delNode == parent.left) {
+                parent.left = null;
+            } else {
+                parent.right = null;
+            }
+        }
+
+
+        return true;
+    }
+
     public Integer height(Node2 root) {
         if (root != null) {
             Integer lH = height(root.left);
