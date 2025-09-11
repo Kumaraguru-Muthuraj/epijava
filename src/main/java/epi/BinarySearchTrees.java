@@ -173,7 +173,7 @@ public class BinarySearchTrees {
         Queue<Node2> nList = b.getPreorder(b.root);
         List<Integer> iLst = b.getAsList(nList);
         Node2 tree = getBSTFromPreorder(iLst, Integer.MIN_VALUE, Integer.MAX_VALUE);
-        b._print(tree);
+        b._printInorder(tree);
     }
     public static Node2 getBSTFromPreorder(List<Integer> lst, Integer min, Integer max) {
         if (rootIdx == lst.size() - 1) {

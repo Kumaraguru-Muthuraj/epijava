@@ -120,14 +120,26 @@ public class BinarySearchTree {
 
     public void print() {
         System.out.println("\nInorder");
-        _print(this.root);
+        _printInorder(this.root);
     }
 
-    public void _print(Node2 cur) {
+    public void _printInorder(Node2 cur) {
+        Queue<Node2> pre = getInorder(cur);
+        for (Node2 n : pre) {
+            System.out.print(n.value + ", ");
+        }
+    }
+
+    public Queue<Node2> getInorder(Node2 cur) {
+        Queue<Node2> inOrder = new LinkedList<>();
+        getInorderHelper(cur, inOrder);
+        return inOrder;
+    }
+    private void getInorderHelper(Node2 cur, Queue<Node2> inOrder) {
         if (cur != null) {
-            _print(cur.left);
-            System.out.print(cur.value + ", ");
-            _print(cur.right);
+            getInorderHelper(cur.left, inOrder);
+            inOrder.add(cur);
+            getInorderHelper(cur.right, inOrder);
         }
     }
 

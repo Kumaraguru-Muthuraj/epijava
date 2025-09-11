@@ -1,9 +1,9 @@
 package epi;
 
+import java.util.*;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+
+import static epi.Arrays.print;
 
 /* Level starts from 0. Height = the deepest level.
 Check the book for the diagram in the first page.
@@ -46,7 +46,7 @@ public class BinaryTrees {
         BinarySearchTree t = getCustomBST();
         t.print();
         Node2 mT = getMirrorTree(t.root);
-        t._print(mT);
+        t._printInorder(mT);
         BinarySearchTree symm = new BinarySearchTree();
         symm.add(10000);
         symm.root.left = t.root;
@@ -276,6 +276,25 @@ public class BinaryTrees {
         return null;
     }
 
+    /* 10.12 - Construct BT from preorder data supported by inorder.
+     */
+    public static void testBTReconstruction() {
+        BinarySearchTree bt = getCustomBST();
+        makeBT(bt.root, new Random());
+        List<Integer> preOrder = bt.getAsList(bt.getPreorder(bt.root));
+        List<Integer> inOrder = bt.getAsList(bt.getInorder(bt.root));
+        print(preOrder);
+        print(inOrder);
+    }
+
+    public static void makeBT(Node2 cur, Random r) {
+        if (cur != null) {
+            makeBT(cur.left, r);
+            cur.value = r.nextInt(100);
+            makeBT(cur.right, r);
+        }
+    }
+
     public static BinarySearchTree getBST(int n) {
         BinarySearchTree bst = new BinarySearchTree();
         Integer val;
@@ -348,18 +367,12 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
-        // 10.9 - testKthElementInorder
-        testKthElementInorder(3);
+        //10.12 - Construct BT from traversal data.
+        testBTReconstruction();
 
         if (true) {
             return;
         }
-        // 10.6 - targetSumExists
-        targetSumExistsTest();
-
-        // 10.5 - Compute sums from root to leaf.
-        computeSumsFromRootToLeaf();
-
         // 10.1 - Balanced?
         testHeightCheck();
 
@@ -369,11 +382,20 @@ public class BinaryTrees {
         // 10.4 - lcaWithParent
         lcaWithParent();
 
+        // 10.5 - Compute sums from root to leaf.
+        computeSumsFromRootToLeaf();
+
+        // 10.6 - targetSumExists
+        targetSumExistsTest();
+
         // 10.7 - Inorder
         inorder(15);
 
         // 10.8 - Preorder
         preorder(10);
+
+        // 10.9 - testKthElementInorder
+        testKthElementInorder(3);
 
         // 10.14 - computeLeaves
         computeLeaves();
