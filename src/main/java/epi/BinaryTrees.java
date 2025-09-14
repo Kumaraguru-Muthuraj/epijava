@@ -280,11 +280,47 @@ public class BinaryTrees {
      */
     public static void testBTReconstruction() {
         BinarySearchTree bt = getCustomBST();
-        makeBT(bt.root, new Random());
+        //makeBT(bt.root, new Random());
         List<Integer> preOrder = bt.getAsList(bt.getPreorder(bt.root));
         List<Integer> inOrder = bt.getAsList(bt.getInorder(bt.root));
         print(preOrder);
         print(inOrder);
+        Map<Integer, Integer> elemIdxMap = new HashMap<>();
+        for (Integer i : inOrder) {
+            elemIdxMap.put(i, inOrder.indexOf(i));
+        }
+        Node2 root = buildBST(preOrder, 0, preOrder.size() - 1,
+                                0, inOrder.size() - 1,
+                                elemIdxMap);
+        System.out.println("\nBuild completed");
+        bt._printInorder(root);
+    }
+
+    /*
+    VERY TRICKY PROBLEM.
+    Use the indexes of either of the trees to get the next call's boundary.
+     */
+    public static Node2 buildBST(List<Integer> preOrder, int preSIdx, int preEIdx,
+                                 int inSIdx, int inEIdx,
+                                 Map<Integer, Integer> elemIdxMap) {
+        if (preSIdx > preEIdx || inSIdx > inEIdx) {
+            return null;
+        }
+
+        Node2 root = new Node2(preOrder.get(preSIdx)); // Use the first element as root
+        Integer inRootIdx = elemIdxMap.get(root.value);
+
+        int numLeft = inRootIdx - inSIdx;
+        int numRight = inEIdx - inRootIdx;
+
+        int sLTree = preSIdx + 1; // Start from next element since 1st was used as root.
+        int eLTree = sLTree + numLeft - 1; // From Start, skip numLeft elements in the left tree.
+        int sRTree = eLTree + 1; // Start 1 after the end of left tree.
+        int eRTree = sRTree + numRight - 1; // Skip numRight from start of right tree to get the right tree boundary.
+
+        root.left = buildBST(preOrder, sLTree, eLTree, inSIdx, inRootIdx - 1, elemIdxMap);
+        root.right = buildBST(preOrder, sRTree, eRTree, inRootIdx + 1, inEIdx, elemIdxMap);
+        return root;
     }
 
     public static void makeBT(Node2 cur, Random r) {
