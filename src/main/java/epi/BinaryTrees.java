@@ -323,6 +323,15 @@ public class BinaryTrees {
         return root;
     }
 
+    // 10.16 - Right sibling tree
+    public static void testRightSiblingTree() {
+        BinarySearchTree bst = getPerfectBST();
+        bst.levelOrderPrint();
+        bst.setRightSibling();
+        bst.traverseSibling();
+    }
+
+
     public static void makeBT(Node2 cur, Random r) {
         if (cur != null) {
             makeBT(cur.left, r);
@@ -340,6 +349,29 @@ public class BinaryTrees {
             System.out.println("Adding " + val);
             bst.add(val);
         }
+        bst.print();
+        bst.printPreorder();
+        return bst;
+    }
+
+    public static BinarySearchTree getPerfectBST() {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.add(78);
+        bst.add(50);
+        bst.add(100);
+        bst.add(25);
+        bst.add(65);
+        bst.add(90);
+        bst.add(110);
+        bst.add(60);
+        bst.add(80);
+        bst.add(12);
+        bst.add(37);
+        bst.add(72);
+        bst.add(95);
+        bst.add(105);
+        bst.add(120);
+
         bst.print();
         bst.printPreorder();
         return bst;
@@ -403,9 +435,6 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
-        //10.12 - Construct BT from traversal data.
-        testBTReconstruction();
-
         if (true) {
             return;
         }
@@ -433,7 +462,13 @@ public class BinaryTrees {
         // 10.9 - testKthElementInorder
         testKthElementInorder(3);
 
+        //10.12 - Construct BT from traversal data.
+        testBTReconstruction();
+
         // 10.14 - computeLeaves
         computeLeaves();
+
+        // 10.16 - Right sibling tree
+        testRightSiblingTree();
     }
 }

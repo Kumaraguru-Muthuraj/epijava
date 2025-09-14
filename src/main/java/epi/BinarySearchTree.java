@@ -192,5 +192,61 @@ public class BinarySearchTree {
     }
     public List<Node2> leaves;
 
+    public void levelOrderPrint() {
+        Queue<Node2> q = new LinkedList<>();
+        Node2 cur = root;
+        q.add(cur);
+        System.out.println("\nLevel-order print");
+        while (!q.isEmpty()) {
+            cur = q.poll();
+            System.out.print(cur.value + ", ");
+            if (cur.left != null) {
+                q.add(cur.left);
+            }
+            if (cur.right != null) {
+                q.add(cur.right);
+            }
+        }
+    }
+
+    public void traverseSibling() {
+        Node2 leftMost = root;
+        System.out.println("\nSibling traversal by level");
+        while (leftMost != null) {
+            Node2 sibling = leftMost;
+            while (sibling != null) {
+                System.out.print(sibling.value + ", ");
+                sibling = sibling.rightSibling;
+            }
+            leftMost = leftMost.left;
+        }
+    }
+
+    /* 15.10
+    Note that you CANNOT DO a level-order traversing and
+    set the sibling, without the level or depth.
+    Need to use the recommendation in the book.
+    This algorithm works for ONLY Perfect binary tree.
+    */
+    public void setRightSibling() {
+        Node2 cur = root;
+        while (cur != null) {
+            _setRightSibling(cur);
+            cur = cur.left;
+        }
+    }
+    private void _setRightSibling(Node2 leftMostNode) {
+        Node2 cur = leftMostNode; // Don't iterate directly, assign to cur and move.
+        while (cur != null) {
+            if (cur.left != null) {
+                cur.left.rightSibling = cur.right;
+            }
+            if (cur.rightSibling != null && cur.right != null) {
+                cur.right.rightSibling = cur.rightSibling.left;
+            }
+            cur = cur.rightSibling;
+        }
+    }
+
     public Node2 root;
 }

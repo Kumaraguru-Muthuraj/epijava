@@ -6,11 +6,13 @@ public class Node2 {
         left = null;
         right = null;
         parent = null;
+        rightSibling = null;
         count = 1;
     }
     public Integer value;
     public Node2 left;
     public Node2 right;
     public Node2 parent;
+    public Node2 rightSibling;
     public Integer count;
 }
