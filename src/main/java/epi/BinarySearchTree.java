@@ -155,6 +155,21 @@ public class BinarySearchTree {
         }
     }
 
+    public Queue<Node2> getPreorderWithMarkers(Node2 cur) {
+        Queue<Node2> preOrder = new LinkedList<>();
+        getPreorderHelperWithMarkers(cur, preOrder);
+        return preOrder;
+    }
+    private void getPreorderHelperWithMarkers(Node2 cur, Queue<Node2> preOrder) {
+        if (cur == null) {
+            preOrder.add(null);
+        } else {
+            preOrder.add(cur);
+            getPreorderHelperWithMarkers(cur.left, preOrder);
+            getPreorderHelperWithMarkers(cur.right, preOrder);
+        }
+    }
+
     public Queue<Node2> getPreorder(Node2 cur) {
         Queue<Node2> preOrder = new LinkedList<>();
         getPreorderHelper(cur, preOrder);
@@ -171,7 +186,11 @@ public class BinarySearchTree {
     public List<Integer> getAsList(Queue<Node2> nodes) {
         List<Integer> q = new LinkedList<>();
         for (Node2 n : nodes) {
-            q.add(n.value);
+            if (n == null) {
+                q.add(null);
+            } else {
+                q.add(n.value);
+            }
         }
         return q;
     }

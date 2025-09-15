@@ -323,6 +323,40 @@ public class BinaryTrees {
         return root;
     }
 
+    //10.13 - Reconstruct BT from preorder traversal with markers
+    public static void testGetPreorderWithMarkers() {
+        BinarySearchTree bst = getBST(9); //getCustomBST();
+        Queue<Node2> pre = bst.getPreorderWithMarkers(bst.root);
+        List<Integer> pLst = bst.getAsList(pre);
+        System.out.println("\nPreorder with markers");
+        for (Integer n : pLst) {
+            if (n == null) {
+                System.out.print("null, ");
+            } else {
+                System.out.print(n + ", ");
+            }
+        }
+        Node2 bt = constructTreeWithMarkedPreorder(pLst);
+        System.out.println("\nInorder");
+        bst._printInorder(bt);
+    }
+    private static int nIdx = 0;
+    public static Node2 constructTreeWithMarkedPreorder(List<Integer> pre) {
+        if (nIdx > pre.size() - 1) {
+            return null;
+        }
+        Integer cur = pre.get(nIdx);
+        nIdx++;
+        if (cur == null) {
+            return null;
+        } else {
+            Node2 node = new Node2(cur);
+            node.left = constructTreeWithMarkedPreorder(pre);
+            node.right = constructTreeWithMarkedPreorder(pre);
+            return node;
+        }
+    }
+
     // 10.16 - Right sibling tree
     public static void testRightSiblingTree() {
         BinarySearchTree bst = getPerfectBST();
@@ -435,6 +469,7 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
+
         if (true) {
             return;
         }
@@ -464,6 +499,9 @@ public class BinaryTrees {
 
         //10.12 - Construct BT from traversal data.
         testBTReconstruction();
+
+        //10.13 - Construct BT with preorder markers.
+        testGetPreorderWithMarkers();
 
         // 10.14 - computeLeaves
         computeLeaves();
