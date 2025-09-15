@@ -357,6 +357,45 @@ public class BinaryTrees {
         }
     }
 
+    //10.15 - Compute the exterior
+    public static void testExteriorOfBT() {
+        BinarySearchTree bst = getPerfectBST();
+        List<Node2> exterior = new LinkedList<>();
+        exterior.add(bst.root);
+        exteriorOfLeftBT(exterior, bst.root.left, true);
+        exteriorOfRightBT(exterior, bst.root.right, true);
+        System.out.println("\nExterior");
+        for (Node2 n : exterior) {
+            System.out.print(n.value + ", ");
+        }
+    }
+    // ****** INORDER TRAVERSAL AND CONDITION CHECK ******
+    public static void exteriorOfLeftBT(List<Node2> exterior, Node2 nod, boolean boundary) {
+        if (nod == null) {
+            return;
+        }
+        if (boundary || isLeaf(nod)) {
+            exterior.add(nod);
+        }
+        exteriorOfLeftBT(exterior, nod.left, boundary);
+        exteriorOfLeftBT(exterior, nod.right, false);
+    }
+    // ****** POSTORDER TRAVERSAL AND CONDITION CHECK ******
+    public static void exteriorOfRightBT(List<Node2> exterior, Node2 nod, boolean boundary) {
+        if (nod == null) {
+            return;
+        }
+        exteriorOfRightBT(exterior, nod.left, false);
+        exteriorOfRightBT(exterior, nod.right, boundary);
+        if (boundary || isLeaf(nod)) {
+            exterior.add(nod);
+        }
+    }
+    public static boolean isLeaf(Node2 n) {
+        return n != null && n.left == null && n.right == null;
+    }
+
+
     // 10.16 - Right sibling tree
     public static void testRightSiblingTree() {
         BinarySearchTree bst = getPerfectBST();
@@ -469,6 +508,8 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
+        //10.15 - Compute the exterior
+        testExteriorOfBT();
 
         if (true) {
             return;
