@@ -188,6 +188,39 @@ public class BinaryTrees {
         return lExists || rExists;
     }
 
+    /* 10.10 - Inorder successor
+     */
+    //Parent pointer available.
+    public static void testInorderSuccessorv1() {
+        BinarySearchTree bst = getCustomBST();
+        List<Node2> node2s = get2RandomNodes(bst.root);
+
+        Node2 suc = getSuccessor(node2s.get(0));
+        System.out.println("\nSuccessor of " + node2s.get(0).value + " - " + (suc != null ? suc.value : "NULL"));
+        suc = getSuccessor(node2s.get(1));
+        System.out.println("\nSuccessor of " + node2s.get(1).value + " - " + (suc != null ? suc.value : "NULL"));
+
+    }
+    public static Node2 getSuccessor(Node2 node) {
+        if (node == null) {
+            return null;
+        }
+        //Case 1 - Node has right sub-tree, get the smallest in the left-tree of right
+        if (node.right != null) {
+            node = node.right;
+            while (node.left != null) {
+                node = node.left;
+            }
+            return node;
+        }
+        // Case 2 - Node has no right sub-tree.
+        while (node.parent != null && node == node.parent.right) {
+            node = node.parent;
+        }
+        return node.parent;
+    }
+
+
     /* 10.14 - Compute the leaves of a BT.
     * */
     public static void computeLeaves() {
@@ -508,8 +541,8 @@ public class BinaryTrees {
     }
 
     public static void main(String[] args) {
-        //10.15 - Compute the exterior
-        testExteriorOfBT();
+        //10.10 - testInorderSuccessorv1
+        testInorderSuccessorv1();
 
         if (true) {
             return;
@@ -546,6 +579,9 @@ public class BinaryTrees {
 
         // 10.14 - computeLeaves
         computeLeaves();
+
+        //10.15 - Compute the exterior
+        testExteriorOfBT();
 
         // 10.16 - Right sibling tree
         testRightSiblingTree();
