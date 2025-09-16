@@ -213,7 +213,9 @@ public class BinaryTrees {
             }
             return node;
         }
-        // Case 2 - Node has no right sub-tree.
+        /* Case 2 - Node has no right sub-tree.
+        Traverse up until we get a parent whose right child is we.
+        */
         while (node.parent != null && node == node.parent.right) {
             node = node.parent;
         }
@@ -402,7 +404,7 @@ public class BinaryTrees {
             System.out.print(n.value + ", ");
         }
     }
-    // ****** INORDER TRAVERSAL AND CONDITION CHECK ******
+    // ****** PREORDER TRAVERSAL AND CONDITION CHECK ******
     public static void exteriorOfLeftBT(List<Node2> exterior, Node2 nod, boolean boundary) {
         if (nod == null) {
             return;
