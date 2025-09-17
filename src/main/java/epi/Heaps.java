@@ -3,10 +3,8 @@ package epi;
 
 import epi.util.ListUtil;
 
-import java.util.Comparator;
+import java.util.*;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
 
 /* Heaps related problems.
  */
@@ -57,11 +55,31 @@ public class Heaps {
         return merged;
     }
 
+    //11.7 - Stack using heap.
+    public static void testStackUsingHeap(int k) {
+        Random r = new Random();
+        StackOnHeap stack  = new StackOnHeap();
+        while (k-- > 0) {
+            Integer i = r.nextInt(100);
+            System.out.print(i + ", ");
+            stack.push(i);
+        }
+        System.out.println("StackOnHeap");
+        while (stack.peek() != null) {
+            System.out.print(stack.pop() + ", ");
+        }
+    }
+
     public static void main(String[] args) {
-        //11.1 - Merge sorted files.
-        testMergeSortedFiles(3);
+        //11.7 - Stack using heap.
+        testStackUsingHeap(10);
+
         if (true) {
             return;
         }
+
+        //11.1 - Merge sorted files.
+        testMergeSortedFiles(3);
+
     }
 }
