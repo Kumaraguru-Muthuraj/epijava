@@ -290,6 +290,41 @@ public class BinarySearchTrees {
         bst.print();
     }
 
+    /* 15.11 - Check if nodes are ordered.
+     */
+    public static void testNodesOrdered(){
+        BinarySearchTree bst = BinaryTrees.getPerfectBST();
+        Node2 l = bst.getNodeFor(78);
+        Node2 m = bst.getNodeFor(90);
+        Node2 r = bst.getNodeFor(80);
+        System.out.println("\nNodes ordered - " + pairIncludesAncAndDescOfM(l, r, m));
+    }
+    public static boolean pairIncludesAncAndDescOfM(Node2 pAOrD0, Node2 pAOrD1, Node2 m) {
+        Node2 s0 = pAOrD0;
+        Node2 s1 = pAOrD1;
+        while (s0 != pAOrD1 && s0 != m
+            && s1 != pAOrD0 && s1 != m
+            && (s0 != null || s1 != null)) {
+            if (s0 != null) {
+                s0 = s0.value > m.value ? s0.left : s0.right;
+            }
+            if (s1 != null) {
+                s1 = s1.value > m.value ? s1.left : s1.right;
+            }
+        }
+        if (s0 == pAOrD1 || s1 == pAOrD0 || (s0 != m && s1 != m)) {
+            return false;
+        }
+        return s0 == m ? searchTarget(m, pAOrD1) : searchTarget(m, pAOrD0);
+
+    }
+    public static boolean searchTarget(Node2 from, Node2 target) {
+        while (from != null && from != target) {
+            from = from.value > target.value ? from.left : from.right;
+        }
+        return from == target;
+    }
+
     /* 15.12 - Get nodes in a range.
      */
     public static void testNodesInRange() {
@@ -331,6 +366,9 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
+        //15.11 - testNodesOrdered
+        testNodesOrdered();
+
         //15.12 - testNodesInRange
         testNodesInRange();
 

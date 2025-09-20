@@ -8,6 +8,19 @@ public class BinarySearchTree {
     public BinarySearchTree() {
         root = null;
     }
+    public Node2 getNodeFor(Integer i) {
+        if (root == null) {
+            return root;
+        }
+        Node2 cur = root;
+        while (cur != null) {
+            if (cur.value.equals(i))
+                return cur;
+            cur = cur.value < i ? cur.right : cur.left;
+        }
+        return cur;
+    }
+
     public Node2 add(Integer i) {
         if (root == null) {
             root = new Node2(i);
