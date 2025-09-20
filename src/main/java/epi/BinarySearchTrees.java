@@ -1,5 +1,8 @@
 package epi;
 
+import com.sun.source.tree.BinaryTree;
+import epi.util.ListUtil;
+
 import java.util.*;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -287,6 +290,27 @@ public class BinarySearchTrees {
         bst.print();
     }
 
+    /* 15.12 - Get nodes in a range.
+     */
+    public static void testNodesInRange() {
+        BinarySearchTree bst = BinaryTrees.getCustomBST();
+        List<Integer> nodes = new LinkedList<>();
+        getNodesInRange(nodes, bst.root, 25, 60);
+        ListUtil.print(nodes);
+    }
+    public static void getNodesInRange(List<Integer> nodes, Node2 root, int s, int b) {
+        if (root != null) {
+            if (root.value < s) {
+                getNodesInRange(nodes, root.right, s, b);
+            } else if (b < root.value) {
+                getNodesInRange(nodes, root.left, s, b);
+            } else if (s <= root.value && root.value <= b) {
+                getNodesInRange(nodes, root.left, s, b);
+                nodes.add(root.value);
+                getNodesInRange(nodes, root.right, s, b);
+            }
+        }
+    }
 
     public static List<ArrayInteger> getSortedList(int k, int index) {
         List<Integer> l = new LinkedList<>();
@@ -307,8 +331,9 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        //15.10
-        testAddAndDelete();
+        //15.12 - testNodesInRange
+        testNodesInRange();
+
         if (true) {
             return;
         }
@@ -335,6 +360,9 @@ public class BinarySearchTrees {
 
         //15.9 - minimumHeightBST
         minimumHeightBST(11);
+
+        //15.10
+        testAddAndDelete();
     }
 
 }
