@@ -26,7 +26,7 @@ public class ListUtil {
         }
         System.out.println();
     }
-    public static List<Integer> getKSortedList() {
+    public static List<Integer> getKIncreasingDecreasingList() {
         List<Integer> l = new LinkedList<>();
         l.add(40);l.add(41);l.add(42);l.add(43);l.add(45);
         l.add(39);l.add(38);l.add(37);
@@ -34,10 +34,29 @@ public class ListUtil {
         l.add(49);l.add(48);l.add(47);
         return l;
     }
-
+    public static List<Integer> getKSortedList() {
+        List<Integer> l = new LinkedList<>();
+        l.add(0);l.add(2);l.add(-1);l.add(1);l.add(4);
+        l.add(3);l.add(6);l.add(5);
+        l.add(8);l.add(7);l.add(10);
+        return l;
+    }
+    public static List<Integer> getKSortedList(int k) {
+        List<Integer> l = getSortedList(10);
+        print(l);
+        Random r = new Random();
+        int idx = 0;
+        int len = l.size();
+        for (int i = 0; i < len; i++) {
+            idx = i % (r.nextInt(k) + 1);
+            Collections.swap(l, i, idx);
+        }
+        return l;
+    }
 
     public static void main(String[] args) {
-        print(getList(10));
-        print(getSortedList(10));
+        //print(getList(10));
+       // print(getSortedList(10));
+        print(getKSortedList(3));
     }
 }

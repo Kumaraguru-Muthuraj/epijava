@@ -6,7 +6,7 @@ import epi.util.ListUtil;
 import java.util.*;
 import java.util.LinkedList;
 
-import static epi.util.ListUtil.getKSortedList;
+import static epi.util.ListUtil.getKIncreasingDecreasingList;
 
 /* Heaps related problems.
  */
@@ -101,7 +101,7 @@ public class Heaps {
 
     //11.2 - Sort an increasing-decreasing array.
     public static void testSortIncDecArray() {
-        List<Integer> l3 = getKSortedList();
+        List<Integer> l3 = getKIncreasingDecreasingList();
         ListUtil.print(l3);
         List<Integer> merged = sortIncDecArray(l3);
         ListUtil.print(merged);
@@ -134,6 +134,35 @@ public class Heaps {
         return mergeSortedFiles1(lists);
     }
 
+    //11.3 - Sort K-Sorted list
+    public static void testSortKSortedList() {
+       List<Integer> l = ListUtil.getKSortedList();
+       ListUtil.print(l);
+       l = sortKSortedList(l, 2);
+       ListUtil.print(l);
+    }
+    public static List<Integer> sortKSortedList(List<Integer> l, int k) {
+        k++;
+        Comparator<Integer> c = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        };
+        List<Integer> retList = new LinkedList<>();
+        PriorityQueue<Integer> heap = new PriorityQueue<>(16, c);
+        for (int i = 0; i < k; i++) {
+            heap.add(l.remove(0));
+        }
+        while (heap.peek() != null) {
+            retList.add(heap.poll());
+            if (!l.isEmpty()) {
+                heap.add(l.remove(0));
+            }
+        }
+        return retList;
+    }
+
     //11.7 - Stack using heap.
     public static void testStackUsingHeap(int k) {
         Random r = new Random();
@@ -150,6 +179,9 @@ public class Heaps {
     }
 
     public static void main(String[] args) {
+        //11.3 - Sort K-Sorted list
+        testSortKSortedList();
+
         if (true) {
             return;
         }
