@@ -163,6 +163,45 @@ public class Heaps {
         return retList;
     }
 
+    //11.6 - Get the k-largest elements from an array-based max heap
+    public static void testKLargestFromMaxHeap() {
+        List<Integer> heapInArr = ListUtil.getHeapInArray(10);
+        ListUtil.print(heapInArr);
+        List<Integer> kLargest = kLargestFromMaxHeap(heapInArr, 5);
+        System.out.print("K-Largest - ");
+        ListUtil.print(kLargest);
+    }
+    public static List<Integer> kLargestFromMaxHeap(List<Integer> maxHeapInArr, int k) {
+        List<Integer> ret = new LinkedList<>();
+        Comparator<IntegerWithID> c = new Comparator<IntegerWithID>() {
+            @Override
+            public int compare(IntegerWithID o1, IntegerWithID o2) {
+                return o2.value.compareTo(o1.value);
+            }
+        };
+
+        PriorityQueue<IntegerWithID> heap = new PriorityQueue<>(16, c);
+        IntegerWithID ele = new IntegerWithID(maxHeapInArr.get(0), 0);
+        heap.add(ele);
+
+        while (heap.peek() != null && (k-- > 0)) {
+            ele = heap.poll();
+            ret.add(ele.value);
+
+            int lChild = 2 * ele.id + 1;
+            if (lChild < maxHeapInArr.size()) {
+                heap.add(new IntegerWithID(maxHeapInArr.get(lChild), lChild));
+            }
+
+            int rChild = 2 * ele.id + 2;
+            if (rChild < maxHeapInArr.size()) {
+                heap.add(new IntegerWithID(maxHeapInArr.get(rChild), rChild));
+            }
+        }
+
+        return ret;
+    }
+
     //11.7 - Stack using heap.
     public static void testStackUsingHeap(int k) {
         Random r = new Random();
@@ -179,8 +218,7 @@ public class Heaps {
     }
 
     public static void main(String[] args) {
-        //11.3 - Sort K-Sorted list
-        testSortKSortedList();
+
 
         if (true) {
             return;
@@ -191,10 +229,14 @@ public class Heaps {
         //11.2 - testSortIncDecArray
         testSortIncDecArray();
 
+        //11.3 - Sort K-Sorted list
+        testSortKSortedList();
+
+        //11.6 - Get the k-largest elements from an array-based max heap
+        testKLargestFromMaxHeap();
+
         //11.7 - Stack using heap.
         testStackUsingHeap(10);
-
-
 
     }
 }

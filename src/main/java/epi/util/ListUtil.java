@@ -1,9 +1,6 @@
 package epi.util;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ListUtil {
     public static List<Integer> getList(int size) {
@@ -53,10 +50,29 @@ public class ListUtil {
         }
         return l;
     }
+    public static List<Integer> getHeapInArray(int k) {
+        List<Integer> ret = new LinkedList<>();
+        Comparator<Integer> c = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        };
+        Random r = new Random();
+        PriorityQueue<Integer> heap = new PriorityQueue<>(16, c);
+        while (k-- >= 0) {
+            heap.add(r.nextInt(100));
+        }
+        while (heap.peek() != null) {
+            ret.add(heap.poll());
+        }
+        return ret;
+    }
 
     public static void main(String[] args) {
         //print(getList(10));
        // print(getSortedList(10));
-        print(getKSortedList(3));
+        //print(getKSortedList(3));
+        getHeapInArray(10);
     }
 }
