@@ -163,6 +163,56 @@ public class Heaps {
         return retList;
     }
 
+    //11.5 - Compute Median on online data
+    public static void testMedianOfOnlineData() {
+        List<Integer> l = ListUtil.getList(10);
+        ListUtil.print(l);
+        ListUtil.printDouble(getRunningMedian(l));
+    }
+    public static List<Double> getRunningMedian(List<Integer> l) {
+        Comparator<Integer> min = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        };
+        Comparator<Integer> max = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        };
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(16, min);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(16, max);
+
+        List<Double> medians = new LinkedList<>();
+        double median;
+        for (Integer x : l) {
+            if (minHeap.isEmpty()) {
+                minHeap.add(x);
+            } else {
+                if (!minHeap.isEmpty() && minHeap.peek() <= x) {
+                    minHeap.add(x);
+                } else {
+                    maxHeap.add(x);
+                }
+            }
+
+            int minMinusMax = minHeap.size() - maxHeap.size();
+            /* As a policy we retain 1 more in minHeap than maxHeap
+            This is why we check > 1, not > 0
+             */
+            if (minMinusMax > 1) {
+                maxHeap.add(minHeap.poll());
+            } else if (minMinusMax < 0) {
+                minHeap.add(maxHeap.poll());
+            }
+            median = minHeap.size() == maxHeap.size() ? 0.5 * (minHeap.peek() + maxHeap.peek()) : minHeap.peek();
+            medians.add(median);
+        }
+        return medians;
+    }
+
     //11.6 - Get the k-largest elements from an array-based max heap
     public static void testKLargestFromMaxHeap() {
         List<Integer> heapInArr = ListUtil.getHeapInArray(10);
@@ -218,7 +268,8 @@ public class Heaps {
     }
 
     public static void main(String[] args) {
-
+        //11.5 - Compute Median on online data
+        testMedianOfOnlineData();
 
         if (true) {
             return;

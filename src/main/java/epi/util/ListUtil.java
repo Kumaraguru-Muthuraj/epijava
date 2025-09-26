@@ -23,6 +23,14 @@ public class ListUtil {
         }
         System.out.println();
     }
+    public static void printDouble(List<Double> l) {
+        System.out.print("\nPrinting list - ");
+        for (Double i : l) {
+            System.out.print(i + ", ");
+        }
+        System.out.println();
+    }
+
     public static List<Integer> getKIncreasingDecreasingList() {
         List<Integer> l = new LinkedList<>();
         l.add(40);l.add(41);l.add(42);l.add(43);l.add(45);
