@@ -360,6 +360,8 @@ public class Arrays {
     Since traversing is predominant, its O(n).
     S.C -> O(1)
      */
+
+    //Looks like the implementation is wrong. There is no sorting done??? 10/29
     public static void nextPermutation(List<Integer> ints) {
         //print(ints);
 
