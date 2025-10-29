@@ -361,7 +361,6 @@ public class Arrays {
     S.C -> O(1)
      */
 
-    //Looks like the implementation is wrong. There is no sorting done??? 10/29
     public static void nextPermutation(List<Integer> ints) {
         //print(ints);
 
@@ -379,6 +378,7 @@ public class Arrays {
         for (; j > i && ints.get(i) > ints.get(j); j--) {
         }
         Collections.swap(ints, i, j);
+        //Reverse the last part.
         for (int s = i+1, e = ints.size() - 1; s < e; s++, e--) {
             Collections.swap(ints, s, e);
         }
