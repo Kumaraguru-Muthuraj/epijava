@@ -292,14 +292,31 @@ public class BinarySearchTrees {
 
     public static void testGenerateKEntriesOfaplusbsqrt2_V2(int k) {
         List<ABSqrt2> result = new ArrayList<>();
+        ABSqrt2 e = new ABSqrt2(0, 0);
+        result.add(e);
 
+        int i = 0;
+        int j = 0;
 
         while (k-- > 0) {
+            ABSqrt2 iPlus1 = new ABSqrt2(result.get(i).a + 1, result.get(i).b);
+            ABSqrt2 jPlusSqrt2 = new ABSqrt2(result.get(j).a, result.get(j).b + 1);
 
+            if (iPlus1.compareTo(jPlusSqrt2) < 0) {
+                result.add(iPlus1);
+                ++i;
+            } else if (iPlus1.compareTo(jPlusSqrt2) > 0) {
+                result.add(jPlusSqrt2);
+                ++j;
+            } else {
+                result.add(iPlus1);
+                ++i;
+                ++j;
+            }
         }
 
-        for (ABSqrt2 e : result) {
-            System.out.println(e.toString());
+        for (ABSqrt2 el : result) {
+            System.out.println(el);
         }
 
     }
@@ -415,7 +432,7 @@ public class BinarySearchTrees {
 
     public static void main(String[] args) {
         //15.7
-        testGenerateKEntriesOfaplusbsqrt2_V1(10);
+        testGenerateKEntriesOfaplusbsqrt2_V2(10);
 
         if (true) {
             return;
