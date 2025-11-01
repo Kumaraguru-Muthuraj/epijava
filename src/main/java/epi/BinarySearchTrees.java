@@ -1,6 +1,7 @@
 package epi;
 
 import com.sun.source.tree.BinaryTree;
+import epi.util.ABSqrt2;
 import epi.util.ListUtil;
 
 import java.util.*;
@@ -256,6 +257,53 @@ public class BinarySearchTrees {
         return a;
     }
 
+    /* 15.7 - Generate k entries of the form a + b * sqrt(2)
+    log k insertions x 2
+    log k remove
+    This is done for k elements.
+    T.C - O(k.log(k)), S.C - O(k)
+     */
+    public static void testGenerateKEntriesOfaplusbsqrt2_V1(int k) {
+        List<ABSqrt2> result = new LinkedList<>();
+        TreeSet<ABSqrt2> treeSet = new TreeSet<>();
+
+        ABSqrt2 a = new ABSqrt2(0, 0);
+        treeSet.add(a);
+
+        while (k-- > 0) {
+            ABSqrt2 first = treeSet.first();
+            result.add(first);
+
+            treeSet.add(new ABSqrt2(first.a + 1, first.b));
+            treeSet.add(new ABSqrt2(first.a, first.b + 1));
+
+            treeSet.remove(first);
+            System.out.println(treeSet.size());
+        }
+        for (ABSqrt2 e : result) {
+            System.out.println(e.toString());
+        }
+        System.out.println("Tree");
+        for (ABSqrt2 e: treeSet) {
+            System.out.println(e);
+        }
+
+    }
+
+    public static void testGenerateKEntriesOfaplusbsqrt2_V2(int k) {
+        List<ABSqrt2> result = new ArrayList<>();
+
+
+        while (k-- > 0) {
+
+        }
+
+        for (ABSqrt2 e : result) {
+            System.out.println(e.toString());
+        }
+
+    }
+
     /* 15.9 - Minimum height BST from a sorted array.
      */
     public static BinarySearchTree minimumHeightBST(int n) {
@@ -366,11 +414,8 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        //15.11 - testNodesOrdered
-        testNodesOrdered();
-
-        //15.12 - testNodesInRange
-        testNodesInRange();
+        //15.7
+        testGenerateKEntriesOfaplusbsqrt2_V1(10);
 
         if (true) {
             return;
@@ -401,6 +446,13 @@ public class BinarySearchTrees {
 
         //15.10
         testAddAndDelete();
+
+        //15.11 - testNodesOrdered
+        testNodesOrdered();
+
+        //15.12 - testNodesInRange
+        testNodesInRange();
+
     }
 
 }
