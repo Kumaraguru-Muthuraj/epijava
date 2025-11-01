@@ -290,6 +290,10 @@ public class BinarySearchTrees {
 
     }
 
+    /* 15.7 - Generate k entries of the form a + b * sqrt(2)
+    Linear complexity
+    T.C - O(k)
+     */
     public static void testGenerateKEntriesOfaplusbsqrt2_V2(int k) {
         List<ABSqrt2> result = new ArrayList<>();
         ABSqrt2 e = new ABSqrt2(0, 0);
