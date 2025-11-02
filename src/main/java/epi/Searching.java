@@ -6,6 +6,10 @@ import java.util.Collections;
 public class Searching {
     /**
      * 12.1 - Search a sorted array for the first occurrence of k.
+     * T.C - Book says log(n).
+     * Consider the elements are k,k,...k. We will get k's index on first iteration. But for each k before we will do binary search in
+     * disguise, which is a linear search. This means worst case dependent on the data is O(n/2) -> O(n).
+     * S.C - O(1)
      */
     public static void testFirstK() {
         int[] array = Arrays.getArray(15);
