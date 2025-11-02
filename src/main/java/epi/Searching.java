@@ -37,7 +37,39 @@ public class Searching {
         return result;
     }
 
+    /**
+     * 12.2 - Find k whose index is k.
+     * This algorithm doesn't work for index 0 with 0 value.
+     * T.C - O(log(n)). S.C - O(1)
+     */
+    public static void testKatIndxK() {
+        int[] array = {-2, -1, 0, 1, 3, 4, 6};//Arrays.getArray(7);
+        java.util.Arrays.sort(array);
+
+        Arrays.print(array);
+        System.out.println(kAtIndxK(array,0, array.length - 1));
+    }
+
+    public static int kAtIndxK(int[] array, int lo, int hi) {
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            int diff = array[mid] - mid;
+            if (diff == 0) {
+                return mid;
+            } else if (diff > 0) {
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
+        testKatIndxK();
+        if (true)
+            return;
+
         //12.1 - First k in sorted array.
         testFirstK();
 
