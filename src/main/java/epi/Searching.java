@@ -67,7 +67,7 @@ public class Searching {
 
     /**
      * 12.3 - Find the miniumum value Index in a cyclic sorted array.
-     *
+     * T.C - O(log(n)), S.C - O(1)
      */
     public static void testMinValueIdx() {
         int[] array = {17, 20, 25, 28, 5, 7, 9, 10, 15}; //Arrays.getArray(7);
@@ -90,8 +90,7 @@ public class Searching {
     }
 
     public static void main(String[] args) {
-        //12.3 -
-        testMinValueIdx();
+
         if (true)
             return;
 
@@ -99,5 +98,7 @@ public class Searching {
         testFirstK();
         //12.2 - k at Index k
         testKatIndxK();
+        //12.3 - Find the miniumum value Index in a cyclic sorted array.
+        testMinValueIdx();
     }
 }
