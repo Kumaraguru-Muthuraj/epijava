@@ -65,13 +65,39 @@ public class Searching {
         return -1;
     }
 
+    /**
+     * 12.3 - Find the miniumum value Index in a cyclic sorted array.
+     *
+     */
+    public static void testMinValueIdx() {
+        int[] array = {17, 20, 25, 28, 5, 7, 9, 10, 15}; //Arrays.getArray(7);
+        Arrays.print(array);
+
+        System.out.println("\n" + minValueIdx(array));
+    }
+    public static int minValueIdx(int[] array) {
+        int lo = 0;
+        int hi = array.length - 1;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (array[mid] > array[hi]) {
+                lo = mid + 1;
+            } else if (array[mid] < array[hi]) {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+
     public static void main(String[] args) {
-        testKatIndxK();
+        //12.3 -
+        testMinValueIdx();
         if (true)
             return;
 
         //12.1 - First k in sorted array.
         testFirstK();
-
+        //12.2 - k at Index k
+        testKatIndxK();
     }
 }
