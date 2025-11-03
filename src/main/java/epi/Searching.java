@@ -88,8 +88,34 @@ public class Searching {
         }
         return lo;
     }
+    /** 12.4 - Compute integer sqrt
+     *
+     */
+    public static void testSqrt() {
+        System.out.println(getSqrt(10));
+        System.out.println(getSqrt(50));
+        System.out.println(getSqrt(100));
+        System.out.println(getSqrt(120));
+        System.out.println(getSqrt(150));
+    }
+    public static int getSqrt(int k) {
+        int lo = 0; int hi = k;
+        int mid = 0;
+        while (lo <= hi) {
+            mid = lo + (hi - lo)/2;
+            long sqr = mid * mid;
+            if (sqr <= k) {
+                lo = mid + 1;
+            } else if (sqr > k) {
+                hi = mid - 1;
+            }
+        }
+        return lo - 1;
+    }
 
     public static void main(String[] args) {
+        //12.4 - sqrt
+        testSqrt();
 
         if (true)
             return;
