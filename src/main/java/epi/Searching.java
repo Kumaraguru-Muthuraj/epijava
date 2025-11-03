@@ -89,7 +89,7 @@ public class Searching {
         return lo;
     }
     /** 12.4 - Compute integer sqrt
-     *
+     * T.C - O(log(k))
      */
     public static void testSqrt() {
         System.out.println(getSqrt(10));
