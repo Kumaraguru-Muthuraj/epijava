@@ -113,9 +113,52 @@ public class Searching {
         return lo - 1;
     }
 
+    /** 12.7 - Min and Max simultaneously.
+     * T.C - O(n)
+     */
+    public static void testMinMax() {
+        ArrayList<Integer> array = Arrays.getArrayList(11);
+        ArrayList<Integer> minMax = minMax(array);
+        System.out.println("Min - " + minMax.get(0) + " Max - " + minMax.get(1));
+    }
+    public static ArrayList<Integer> minMax(ArrayList<Integer> array) {
+        Arrays.print(array);
+        int minSoFar = Math.min(array.get(0), array.get(1));
+        int maxSoFar = Math.max(array.get(0), array.get(1));
+        ArrayList<Integer> minMaxSoFar = new ArrayList<>();
+        minMaxSoFar.add(minSoFar);
+        minMaxSoFar.add(maxSoFar);
+
+        for (int i = 2; i < array.size() - 1; i += 2) {
+            int cMin = Integer.MAX_VALUE;
+            int cMax = Integer.MIN_VALUE;
+            if (array.get(i+1) != null) {
+                if (array.get(i) <= array.get(i+1)){
+                    cMin = array.get(i);
+                    cMax = array.get(i + 1);
+                } else {
+                    cMax = array.get(i);
+                    cMin = array.get(i + 1);
+                }
+                minMaxSoFar.set(0, Math.min(minMaxSoFar.get(0), cMin));
+                minMaxSoFar.set(1, Math.max(minMaxSoFar.get(1), cMax));
+            } else {
+                if (minMaxSoFar.get(0) <= array.get(i)) {
+                    if (minMaxSoFar.get(1) < array.get(i)) {
+                        minMaxSoFar.set(1, array.get(i));
+                    }
+                } else {
+                    minMaxSoFar.set(1, array.get(i));
+                }
+            }
+        }
+
+        return minMaxSoFar;
+    }
+
     public static void main(String[] args) {
-        //12.4 - sqrt
-        testSqrt();
+        //12.7 - Min and Max simultaneously.
+        testMinMax();
 
         if (true)
             return;
@@ -126,5 +169,7 @@ public class Searching {
         testKatIndxK();
         //12.3 - Find the miniumum value Index in a cyclic sorted array.
         testMinValueIdx();
+        //12.4 - sqrt
+        testSqrt();
     }
 }
