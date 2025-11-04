@@ -189,6 +189,8 @@ public class Searching {
      * int kIdx = arr.length - k;
      *
      * T.C - O(log(n))
+     *
+     * We don't need recursion. We can just adjust the s and e and loop through.
      */
     public static int kThLargestVal;
     public static void testKthLargest() {
