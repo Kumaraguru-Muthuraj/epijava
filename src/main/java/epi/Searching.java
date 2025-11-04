@@ -113,6 +113,32 @@ public class Searching {
         return lo - 1;
     }
 
+    /** 12.6 - Search in a sorted 2D array.
+     * T.C -
+     */
+    public static void testSearch2DArray() {
+        int[][] sM = Arrays.generateSortedMatrix();
+        Arrays.printMatrix(sM);
+        System.out.println(search(sM, 11));
+    }
+    public static boolean search(int[][] sM, int k) {
+        int rowCount = sM.length;
+        int colCount = sM[0].length;
+        int row = 0;
+        int col = colCount - 1;
+        while (row < rowCount && col >= 0) {
+            if (sM[row][col] < k) {
+                ++row;
+            } else if (sM[row][col] > k) {
+                --col;
+            } else if (sM[row][col] == k) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /** 12.7 - Min and Max simultaneously.
      * T.C - O(n)
      */
@@ -157,8 +183,8 @@ public class Searching {
     }
 
     public static void main(String[] args) {
-        //12.7 - Min and Max simultaneously.
-        testMinMax();
+        //12.6 - Search in a sorted 2D array.
+        testSearch2DArray();
 
         if (true)
             return;
@@ -171,5 +197,8 @@ public class Searching {
         testMinValueIdx();
         //12.4 - sqrt
         testSqrt();
+        //12.7 - Min and Max simultaneously.
+        testMinMax();
+
     }
 }

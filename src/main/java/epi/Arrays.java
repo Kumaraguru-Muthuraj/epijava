@@ -611,6 +611,18 @@ public class Arrays {
         }
         return matrix;
     }
+    // Function to generate a n x n sorted matrix.
+    public static int[][] generateSortedMatrix() {
+        return new int[][]{
+                {2, 4, 6, 8, 10},
+                {3, 7, 9, 12, 15},
+                {5, 10, 17, 16, 18},
+                {8, 20, 23, 25, 29},
+                {13, 31, 35, 37, 40},
+                {41, 42, 45, 50, 55}
+
+        };
+    }
 
     // Utility function to print the matrix
     public static void printMatrix(int[][] matrix) {
