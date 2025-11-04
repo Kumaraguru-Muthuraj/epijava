@@ -2,6 +2,7 @@ package epi;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Searching {
     /**
@@ -182,10 +183,61 @@ public class Searching {
         return minMaxSoFar;
     }
 
-    public static void main(String[] args) {
-        //12.6 - Search in a sorted 2D array.
-        testSearch2DArray();
+    /** 12.8 - Find the kth largest element in an unsorted array.
+     * Why delayed? I should have passed the kthlargest transformed as the array index.
+     * Instead of k, I should have passed kIdx
+     * int kIdx = arr.length - k;
+     *
+     * T.C - O(log(n))
+     */
+    public static int kThLargestVal;
+    public static void testKthLargest() {
+        int[] arr = Arrays.getArray(10);
+        Arrays.print(arr);
+        int k = 3;
+        int kIdx = arr.length - k;
+        System.out.println(kthLargest(arr, kIdx, 0, arr.length - 1));
+        Arrays.print(arr);
+        System.out.println("Value - " + kThLargestVal);
+    }
 
+    public static boolean kthLargest(int[] arr, int k, int s, int e) {
+        Random r = new Random();
+        int pivotIdx = r.nextInt(e - s + 1) + s;
+        int pivot = arr[pivotIdx];
+        Arrays.swap(arr, s, pivotIdx);
+
+        //Hoare's partitioning
+        int sI = s + 1;
+        int eI = e;
+        while (sI <= eI) {
+            if (arr[sI] <= pivot) {
+                sI++;
+            } else if (arr[eI] > pivot) {
+                eI--;
+            } else {
+                Arrays.swap(arr, sI++, eI--);
+            }
+        }
+        Arrays.swap(arr, s, eI);
+        pivotIdx = sI - 1;
+
+        if (k == pivotIdx) {
+            kThLargestVal = pivot;
+            return true;
+        }
+        boolean found = false;
+        if (k < pivotIdx) {
+            found = kthLargest(arr, k, s, pivotIdx - 1);
+        } else {
+            found = kthLargest(arr, k, pivotIdx + 1, e);
+        }
+        return found;
+    }
+
+    public static void main(String[] args) {
+        //12.8 - Find the kth largest element in an unsorted array.
+        testKthLargest();
         if (true)
             return;
 
@@ -197,6 +249,8 @@ public class Searching {
         testMinValueIdx();
         //12.4 - sqrt
         testSqrt();
+        //12.6 - Search in a sorted 2D array.
+        testSearch2DArray();
         //12.7 - Min and Max simultaneously.
         testMinMax();
 

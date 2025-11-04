@@ -64,6 +64,7 @@ public class Arrays {
         for (int i : array) {
             System.out.print(i + ", ");
         }
+        System.out.println();
     }
 
     public static void print(List<Integer> l, int k) {
