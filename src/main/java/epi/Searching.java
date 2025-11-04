@@ -114,7 +114,7 @@ public class Searching {
     }
 
     /** 12.6 - Search in a sorted 2D array.
-     * T.C -
+     * T.C - O(m + n)
      */
     public static void testSearch2DArray() {
         int[][] sM = Arrays.generateSortedMatrix();
