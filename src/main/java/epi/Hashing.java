@@ -85,11 +85,60 @@ public class Hashing {
         return closestDist;
     }
 
+    /** 13.10 - Find the longest interval in an array.
+     * T.C - O(n)
+     * S.C - O(n)
+     */
+    public static void testLongestInterval() {
+        System.out.println(longestInterval(List.of( 0, 6, 8, 5, 4, -1, -3, 20, 7, 30)));
+        System.out.println(longestInterval(List.of( 1, 2, 3, 4, 5)));
+        System.out.println(longestInterval(List.of( 10, 5, 6, 7, 8)));
+        System.out.println(longestInterval(List.of( 100, 4, 200, 1, 3, 2)));
+        System.out.println(longestInterval(List.of( 1, 9, 3, 10, 2, 20)));
+        System.out.println(longestInterval(List.of( 5)));
+        System.out.println(longestInterval(List.of( 1, 2, 2, 3)));
+        System.out.println(longestInterval(List.of( 0, -1, -2, -3, 5, 6)));
+        System.out.println(longestInterval(List.of( 10, 30, 20)));
+    }
+    public static int longestInterval(List<Integer> arr) {
+        HashSet<Integer> lookUp = new HashSet<>(arr);
+        Integer diff = Integer.MIN_VALUE;
+
+        while (lookUp.size() > 0) {
+            Iterator<Integer> iter = lookUp.iterator();
+            Integer cur = Integer.MIN_VALUE;
+            Integer lo = Integer.MAX_VALUE;
+            Integer hi = Integer.MIN_VALUE;
+            if (iter.hasNext()) {
+                cur = iter.next();
+                lookUp.remove(cur);
+
+                lo = cur;
+                hi = lo + 1;
+                while (lookUp.contains(hi)) {
+                    diff = Math.max(diff, hi - lo);
+                    lookUp.remove(hi);
+                    hi++;
+                }
+                hi--;
+
+                lo = lo - 1;
+                while (lookUp.contains(lo)) {
+                    diff = Math.max(diff, hi - lo);
+                    lookUp.remove(lo);
+                    lo--;
+                }
+            }
+        }
+         return diff;
+    }
+
     public static void main(String[] args) {
-        //13.6 - Nearest repeated entry.
-        testNearestRepeatedEntries();
+        //13.10 - Find the longest interval in an array.
+        testLongestInterval();
 
         if (true) {
+
             return;
         }
         //13.1 - Test for palindromic permutations
@@ -97,5 +146,8 @@ public class Hashing {
 
         //13.4 - LCA in BT
         testLCAOptimized();
+
+        //13.6 - Nearest repeated entry.
+        testNearestRepeatedEntries();
     }
 }
