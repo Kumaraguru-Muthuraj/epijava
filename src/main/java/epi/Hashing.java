@@ -64,14 +64,38 @@ public class Hashing {
         }
     }
 
+    /** 13.6 - Find the nearest repeated entries in an array.
+     T.C - O(n).
+     S.C - O(n) / O(d) -> d is the number of distinct entries.
+     */
+    public static void testNearestRepeatedEntries() {
+        int[] ar = {5, 6, 7, 3, 7, 16, 3, 8, 9, 3, 10, 11, 3, 3};
+        System.out.println(nearestRepeatedEntryDistance(ar));
+    }
+    public static int nearestRepeatedEntryDistance(int[] ar) {
+        int closestDist = Integer.MAX_VALUE;
+        HashMap<Integer, Integer> lastIdxOfElement = new HashMap<>();
+        for (int i = 0; i < ar.length ; i++) {
+            Integer lastIdx = lastIdxOfElement.get(ar[i]);
+            if (lastIdx != null) {
+                closestDist = Math.min(closestDist, i - lastIdx);
+            }
+            lastIdxOfElement.put(ar[i], i);
+        }
+        return closestDist;
+    }
+
     public static void main(String[] args) {
-        //13.4 - LCA in BT
-        testLCAOptimized();
+        //13.6 - Nearest repeated entry.
+        testNearestRepeatedEntries();
+
         if (true) {
             return;
         }
         //13.1 - Test for palindromic permutations
         testCheckPalindrome();
 
+        //13.4 - LCA in BT
+        testLCAOptimized();
     }
 }
