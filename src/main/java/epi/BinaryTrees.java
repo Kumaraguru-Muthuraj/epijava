@@ -139,6 +139,23 @@ public class BinaryTrees {
             get2RandomNodes(r, nodes, cur.right, root);
         }
     }
+    public static void get2Nodes(List<Node2> nodes, Node2 root, int val1, int val2) {
+        nodes.add(getNode(root, val1));
+        nodes.add(getNode(root, val2));
+    }
+    public static Node2 getNode(Node2 root, int val) {
+        if (root != null) {
+            if (root.value == val) {
+                return root;
+            }
+            Node2 vNode = getNode(root.left, val);
+            if (vNode == null) {
+                vNode = getNode (root.right, val);
+            }
+            return vNode;
+        }
+        return null;
+    }
 
     /* 10.5 - Sum of all <root to leaf> that is binary.
     **** SUPER TRICKY ****
@@ -496,6 +513,8 @@ public class BinaryTrees {
         bst.add(110);
         bst.add(60);
         bst.add(80);
+        bst.add(95);
+        bst.add(105);
         bst.print();
         bst.printPreorder();
         return bst;
