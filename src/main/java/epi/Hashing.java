@@ -3,7 +3,10 @@ package epi;
 import java.util.HashMap;
 
 public class Hashing {
-    // 13.1 - Palindromic permutation check.
+    /** 13.1 - Palindromic permutation check.
+    T.C - O(n)
+     S.C - O(c), where c is the number of distinct characters.
+    */
     public static boolean checkPalindromic(String chars) {
         HashMap<Character, Character> charCnt = new HashMap<>();
         for (int i = 0; i < chars.length(); i++) {
