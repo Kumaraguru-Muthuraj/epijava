@@ -27,8 +27,8 @@ public class Hashing {
     }
 
     /** 13.4 - LCA in BT, optimizing for T.C. Traverse only till the CA, not till the root.
-     T.C -
-     S.C -
+     T.C - O(k1 + k1), ki is the distance of the ni from the LCA.
+     S.C - O(h) - h is the height of the tree.
      */
     public static Node2 LCAOptimized(Node2 n0, Node2 n1) {
         Set<Node2> touched = new HashSet<>();
