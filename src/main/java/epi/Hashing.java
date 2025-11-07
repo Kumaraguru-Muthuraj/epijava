@@ -20,6 +20,6 @@ public class Hashing {
         //13.1 - Test for palindromic permutations
         System.out.println(checkPalindromic("kumara"));
         System.out.println(checkPalindromic("madam"));
-        System.out.println(checkPalindromic("mabbam"));
+        System.out.println(checkPalindromic("mabbamccddeef"));
     }
 }
