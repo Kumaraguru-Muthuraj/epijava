@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
+//NOTES - VIEW ALL RECTANGLE PROBLEMS AS DIAGONALs. Build diagonals first. Abstract the points x,y, diagonals, equals and hash.
+
 /** Your goal is to find the largest rectangle (having maximum area) that can be formed using any four points as the corners. The rectangle should meet the following conditions:
  It has its borders parallel to the axes.
  It should not contain any other points inside or along its border.
