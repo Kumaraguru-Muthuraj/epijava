@@ -1,8 +1,7 @@
 package epi;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Arrays;
-import java.util.List;
 
 public class Sorting {
     /**
@@ -66,14 +65,78 @@ public class Sorting {
         List<Integer> merged =  merge2SortedArray(l1, l2);
         epi.Arrays.print(merged);
     }
+    /**
+     * 14.3 - Remove first name duplicates.
+     */
+    public static void removeFNameDups(List<Name> names) {
+        Collections.sort(names);
+        for (Name name : names) {
+            System.out.println(name);
+        }
+        int writeIdx = 0;
+        int readIdx = 1;
+        for (; readIdx < names.size(); readIdx++) {
+            if (!names.get(writeIdx).fName.equals(names.get(readIdx).fName)) {
+                names.set(++writeIdx, names.get(readIdx));
+            }
+        }
+        System.out.println("\nDup fNames removed");
+        if (names.size() > writeIdx + 1) {
+            names.subList(writeIdx + 1, names.size()).clear();
+        }
+        for (Name name : names) {
+            System.out.println(name);
+        }
+    }
+    static class Name implements Comparable<Name> {
+        public Name(String fName, String lName) {
+            this.fName = fName;
+            this.lName = lName;
+        }
+        @Override
+        public int compareTo(Name o) {
+            if (this.fName.compareTo(o.fName) != 0) {
+                return this.fName.compareTo(o.fName);
+            }
+            return this.lName.compareTo(o.lName);
+        }
+
+        @Override
+        public String toString() {
+            return this.fName + ", " + this.lName;
+        }
+        public String fName;
+        public String lName;
+    }
+    public static void testRemoveFNameDups() {
+        List<Name> names = new ArrayList<>();
+
+        names.add(new Name("Bob", "Smith"));
+        names.add(new Name("Alice", "Johnson"));
+        names.add(new Name("David", "Clark"));
+        names.add(new Name("Alice", "Brown"));
+        names.add(new Name("Charlie", "Adams"));
+        names.add(new Name("Eva", "Miller"));
+        names.add(new Name("Bob", "Taylor"));
+        names.add(new Name("Charlie", "Wells"));
+        names.add(new Name("David", "Reed"));
+        names.add(new Name("Eva", "Turner"));
+
+        removeFNameDups(names);
+
+    }
+
 
     public static void main(String[] args) {
-        // 14.2 - Intersect
-        testMerge();
-
+        //14.3 - Remove Duplicate fNames
+        testRemoveFNameDups();
         if (true) {
             return;
         }
+
+        // 14.2 - Intersect
+        testMerge();
+
         // 14.1 - Intersect
         testIntersect();
 
