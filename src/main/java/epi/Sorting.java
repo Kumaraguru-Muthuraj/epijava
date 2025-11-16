@@ -146,6 +146,10 @@ public class Sorting {
         //Step 2
         Interval outIvl = null;
         while (i < list.size() && newIvl.r >= ivl.l) {
+            /**
+             * Remember this logic. Overlapping intervals
+             * [a, b] [c, d] = [min(a,c), max(b,d)]
+             */
             outIvl = new Interval(Math.min(newIvl.l, ivl.l),
                                 Math.max(newIvl.r, ivl.r));
             newIvl = outIvl;
