@@ -2,7 +2,7 @@ package educative30;
 
 import java.util.HashMap;
 
-/*
+/**
 LeetCode 2554
 Description
 You are given an integer array banned and two integers n and maxSum.
