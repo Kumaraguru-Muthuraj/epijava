@@ -126,13 +126,82 @@ public class Sorting {
 
     }
 
+    /**
+     * 14.5 - Merge intervals.
+     * Given sorted range and a new interval, merge the new interval into the sorted range.
+     *
+     */
+    public static void merge(List<Interval> list, Interval newIvl) {
+        List<Interval> result = new ArrayList<>();
+
+        //Step 1
+        int i = 0;
+        Interval ivl = list.get(i);
+        while (i < list.size() && ivl.r < newIvl.l) {
+            result.add(ivl);
+            i++;
+            ivl = list.get(i);
+        }
+
+        //Step 2
+        Interval outIvl = null;
+        while (i < list.size() && newIvl.r >= ivl.l) {
+            outIvl = new Interval(Math.min(newIvl.l, ivl.l),
+                                Math.max(newIvl.r, ivl.r));
+            newIvl = outIvl;
+            ivl = list.get(++i);
+        }
+        result.add(newIvl);
+
+        //Step 3 - Copy over the rest
+        result.addAll(list.subList(i, list.size()));
+
+        System.out.println("Merged");
+        for (Interval it : result) {
+            System.out.println(it);
+        }
+
+
+    }
+    public static class Interval {
+        public Interval(int l, int r) {
+            this.l = l;
+            this.r = r;
+        }
+        public int l;
+        public int r;
+        public String toString() {
+            return "[" + l + ", " + r + "]";
+        }
+    }
+    public static void testMergeInterval() {
+        List<Interval> list = new ArrayList<>();
+
+        list.add(new Interval(0, 3));
+        list.add(new Interval(6, 9));
+        list.add(new Interval(12, 15));
+        list.add(new Interval(18, 21));
+        list.add(new Interval(24, 26));
+        list.add(new Interval(30, 35));
+
+        System.out.println("List");
+        for (Interval i : list) {
+            System.out.println(i);
+        }
+
+        merge(list, new Interval(13, 23));
+    }
 
     public static void main(String[] args) {
-        //14.3 - Remove Duplicate fNames
-        testRemoveFNameDups();
+
         if (true) {
             return;
         }
+        //14.5
+        testMergeInterval();
+
+        //14.3 - Remove Duplicate fNames
+        testRemoveFNameDups();
 
         // 14.2 - Intersect
         testMerge();
