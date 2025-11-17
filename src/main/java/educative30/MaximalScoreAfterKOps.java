@@ -12,6 +12,13 @@ import java.util.PriorityQueue;
  * Repeat this process exactly k times and return the highest score you can achieve.
  * The ceiling function ceil(value) is the least integer greater than or equal to value.
  */
+/**
+ * T.C - Prep = O(n.log(n))
+ *      K ops -> O(k.log(n))
+ * S.C - O(n)
+ *
+ * If we use binary search to get the k largest elements? There is no data prep, the run time is O(k.log(n))
+ */
 public class MaximalScoreAfterKOps {
     public static int maxScore (int[] nums, int k) {
         PriorityQueue<Integer> he = new PriorityQueue<>(cmp);
