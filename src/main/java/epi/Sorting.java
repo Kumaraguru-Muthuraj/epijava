@@ -196,6 +196,12 @@ public class Sorting {
         merge(list, new Interval(13, 23));
     }
 
+    /**
+     * 14.6 - Union of intervals.
+     * Given a list of intervals, closed/open on eother sides, find the union of the intervals.
+     *
+     */
+
     public static void main(String[] args) {
 
         if (true) {
