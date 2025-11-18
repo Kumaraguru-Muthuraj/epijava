@@ -268,7 +268,35 @@ public class Sorting {
         for (IntervalV2 ivl : intervals) {
             System.out.print(ivl + ", ");
         }
+        List<IntervalV2> union = unionOfIntervals(intervals);
+        System.out.println();
+        for (IntervalV2 ivl : union) {
+            System.out.print(ivl + ", ");
+        }
+    }
+    public static List<IntervalV2> unionOfIntervals(List<IntervalV2> list) {
+        List<IntervalV2> union = new ArrayList<>();
+        IntervalV2 wind = list.get(0);
+        int i = 1;
+        while (i < list.size()) {
+            IntervalV2 cur = list.get(i);
+            if (wind.r.val < cur.l.val) {
+                union.add(wind);
+                wind = cur;
+            } else if (wind.r.val == cur.l.val) {
+                wind.r = cur.r;
+            } else { //(wind.r.val > cur.l.val)
+                if (wind.r.val == cur.r.val) {
+                    wind.r.closed = wind.r.closed || cur.r.closed;
+                } else {
+                    wind.r = wind.r.val < cur.r.val ? cur.r : wind.r;
+                }
+            }
+            i++;
+        }
+        union.add(wind);
 
+        return union;
     }
     public static class IntervalV2 implements Comparable<IntervalV2> {
         public IntervalV2(Boundary l, Boundary r) {
