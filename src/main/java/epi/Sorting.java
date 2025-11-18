@@ -198,11 +198,137 @@ public class Sorting {
 
     /**
      * 14.6 - Union of intervals.
-     * Given a list of intervals, closed/open on eother sides, find the union of the intervals.
+     * Given a list of intervals, closed/open on either sides, find the union of the intervals.
      *
      */
+    public static void testUnionIntervals() {
+        List<IntervalV2> intervals = new ArrayList<>();
+        Boundary l = new Boundary(2, true);
+        Boundary r = new Boundary(4, true);
+        IntervalV2 i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(1, true);
+        r = new Boundary(1, true);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(3, true);
+        r = new Boundary(4, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(0, false);
+        r = new Boundary(3, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(8, true);
+        r = new Boundary(11, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(7, true);
+        r = new Boundary(8, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(5, true);
+        r = new Boundary(7, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(9, false);
+        r = new Boundary(11, true);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(13, false);
+        r = new Boundary(15, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(12, false);
+        r = new Boundary(16, true);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(12, true);
+        r = new Boundary(14, true);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        l = new Boundary(16, false);
+        r = new Boundary(17, false);
+        i = new IntervalV2(l, r);
+        intervals.add(i);
+
+        Collections.sort(intervals);
+        System.out.println();
+        for (IntervalV2 ivl : intervals) {
+            System.out.print(ivl + ", ");
+        }
+
+    }
+    public static class IntervalV2 implements Comparable<IntervalV2> {
+        public IntervalV2(Boundary l, Boundary r) {
+            this.l = l;
+            this.r = r;
+        }
+        public Boundary l;
+        public Boundary r;
+        public String toString() {
+            String lB = l.closed ? "[" : "(";
+            String rB = r.closed ? "]" : ")";
+            return lB + l.val + ", " + r.val + rB;
+        }
+
+        public boolean equals(Object obj) {
+            if (obj == null || !(obj instanceof IntervalV2)) {
+                return false;
+            }
+            if (this == obj) {
+                return true;
+            }
+            IntervalV2 that = (IntervalV2) obj;
+            return (this.l.val == that.l.val && this.r.val == that.r.val &&
+                    this.l.closed == that.l.closed && this.r.closed == that.r.closed);
+        }
+
+        /** Use only the left interval to decide the order.
+         * Closed left comes first if there is a tie.
+         */
+        @Override
+        public int compareTo(IntervalV2 o) {
+            Boundary l1 = this.l;
+            Boundary l2 = o.l;
+            if (l1.val < l2.val) {
+                return -1;
+            } else if (l1.val > l2.val) {
+                return 1;
+            }
+            //If equal
+            if (l1.closed && !l2.closed) {
+                return -1;
+            } else if (l2.closed && !l1.closed) {
+                return 1;
+            }
+            return 0;
+        }
+
+    }
+    public static class Boundary {
+        public Boundary(int val, boolean closed) {
+            this.val = val;
+            this.closed = closed;
+        }
+        public int val;
+        public boolean closed;
+    }
 
     public static void main(String[] args) {
+        //14.6
+        testUnionIntervals();
 
         if (true) {
             return;
