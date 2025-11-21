@@ -357,6 +357,47 @@ public class Sorting {
     }
 
     /**
+     * 14.7 - Group elements with same value, with high frequency.
+     * Sorting is an overkill.
+     */
+    public static void testSortArrayWithHighFreqElem() {
+        int[] arr = epi.Arrays.getArrayWithHighFreq(20);
+        epi.Arrays.print(arr);
+        sortArrayWithHighFreqElem(arr);
+        epi.Arrays.print(arr);
+    }
+
+    public static void sortArrayWithHighFreqElem(int[] arr) {
+        HashMap<Integer, Integer> elemToCount = new HashMap<>();
+        for (int e : arr) {
+            if (elemToCount.get(e) != null) {
+                elemToCount.put(e, elemToCount.get(e) + 1);
+            } else {
+                elemToCount.put(e, 1);
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry : elemToCount.entrySet()) {
+            System.out.print("<" + entry.getKey() + ", " + entry.getValue() + ">, ");
+        }
+
+        int offSet = 0;
+        HashMap<Integer, Integer> elemToOffset = new HashMap<>();
+        for (Map.Entry<Integer, Integer> entry : elemToCount.entrySet()) {
+            Integer elem = entry.getKey();
+            elemToOffset.put(elem, offSet);
+
+            offSet += entry.getValue();
+        }
+        System.out.println();
+        for (Map.Entry<Integer, Integer> entry : elemToOffset.entrySet()) {
+            System.out.print("<" + entry.getKey() + ", " + entry.getValue() + ">, ");
+        }
+
+
+    }
+
+    /**
      * 14.8 - Merge sort - Stable sorting algorithm, that is fast.
      * Use Floyd's 2 ptr approach, split the list to 2 and
      * merge with LinkedLists.merge().
@@ -402,11 +443,15 @@ public class Sorting {
     }
 
     public static void main(String[] args) {
-        testStableSort();
+        //14.7 - Sort elem with high freq
+        testSortArrayWithHighFreqElem();
 
         if (true) {
             return;
         }
+
+        //14.8 - Merge sort
+        testStableSort();
 
         //14.6
         testUnionIntervals();

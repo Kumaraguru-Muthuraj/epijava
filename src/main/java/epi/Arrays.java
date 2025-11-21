@@ -98,6 +98,15 @@ public class Arrays {
         array[k] = temp;
     }
 
+    public static int[] getArrayWithHighFreq(int size) {
+        int[] array = new int[size];
+        Random r = new Random();
+        for (int i = 0; i < size; i++) {
+            array[i] = r.nextInt(4) + 1;
+        }
+        return array;
+    }
+
     public static int[] getArray(int size) {
         int[] array = new int[size];
         Random r = new Random();
