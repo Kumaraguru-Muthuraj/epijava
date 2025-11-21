@@ -42,6 +42,28 @@ public class LinkedLists {
         System.out.println();
         return m;
     }
+    public static Node<Integer> merge(Node<Integer> c1, Node<Integer> c2) {
+        Node<Integer> m = new Node<>(Integer.MAX_VALUE);
+        Node<Integer> mh = m;
+        while (c1 != null && c2 != null) {
+            if (c1.value < c2.value) {
+                m.next = c1;
+                c1 = c1.next;
+            } else {
+                m.next = c2;
+                c2 = c2.next;
+            }
+            m = m.next;
+        }
+        m.next = c1 == null ? c2 : c1;
+
+        System.out.println("Merged - ");
+        for (Node<Integer> cur = m; cur != null; cur = cur.next) {
+            System.out.print(cur.value + ", ");
+        }
+        System.out.println();
+        return mh.next;
+    }
 
     public static LinkedList<Integer> getLinkedListWithCycle(int cycleIdx, int n) {
         int cnt = cycleIdx;

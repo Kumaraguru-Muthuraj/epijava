@@ -1,5 +1,7 @@
 package epi;
 
+import epi.util.ListUtil;
+
 import java.util.*;
 import java.util.Arrays;
 
@@ -354,13 +356,61 @@ public class Sorting {
         public boolean closed;
     }
 
+    /**
+     * 14.8 - Merge sort - Stable sorting algorithm, that is fast.
+     * Use Floyd's 2 ptr approach, split the list to 2 and
+     * merge with LinkedLists.merge().
+     */
+    public static Node<Integer> stableMergeSort(Node<Integer> node) {
+        print("List to be split", node);
+        Node<Integer> slow = node;
+        Node<Integer> fast = slow;
+        Node<Integer> preSlow = null;
+        while (fast != null && fast.next != null) {
+            preSlow = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node<Integer> l1 = slow;
+        if (preSlow != null) {
+            preSlow.next = null;
+        }
+        Node<Integer> l2 = node;
+        // Just 1 node left.
+        if (l1 == l2) {
+            return l1;
+        }
+        Node<Integer> sortedL1 = stableMergeSort(l1);
+        Node<Integer> sortedL2 = stableMergeSort(l2);
+        Node<Integer> mergedSorted = LinkedLists.merge(sortedL1, sortedL2);
+        return mergedSorted;
+    }
+
+    public static void print(String message, Node<Integer> head) {
+        System.out.print("\n" + message + " - ");
+        for (Node<Integer> cur = head; cur != null; cur = cur.next) {
+            System.out.print(cur.value + ", ");
+        }
+    }
+
+    public static void testStableSort() {
+        LinkedList<Integer> l = LinkedLists.getNewLinkedList(9);
+        l.print();
+        Node<Integer> n = stableMergeSort(l.getHead());
+        print("Merged", n);
+    }
+
     public static void main(String[] args) {
-        //14.6
-        testUnionIntervals();
+        testStableSort();
 
         if (true) {
             return;
         }
+
+        //14.6
+        testUnionIntervals();
+
         //14.5
         testMergeInterval();
 
