@@ -9,6 +9,9 @@ import java.util.HashMap;
  * Repeat the process until:
  * The number equals 1, which will depict that the given number n is a happy number. The number enters a cycle,
  * which will depict that the given number n is not a happy number. Return TRUE if n is a happy number, and FALSE if not.
+ *
+ * T.C - O(log(n))
+ * S.C - O(1)
  */
 public class HappyNumberV2 {
     public static boolean isHappyNumber(int n) {

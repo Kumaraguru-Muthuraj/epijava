@@ -10,6 +10,12 @@ import java.util.HashMap;
  * The number equals 1, which will depict that the given number n is a happy number. The number enters a cycle,
  * which will depict that the given number n is not a happy number. Return TRUE if n is a happy number, and FALSE if not.
  */
+
+/**
+ * T.C - O((log n)²) - Because of reverse
+ * S.C - O(1) Because convergence happens quickly and the hashmap contains ~20 elements anytime.
+ *
+ */
 public class HappyNumber {
     public static HashMap<Long, Long> map = new HashMap<>();
     public static boolean isHappyNumber(int n) {
