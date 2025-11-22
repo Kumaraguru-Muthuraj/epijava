@@ -519,6 +519,35 @@ public class BinaryTrees {
         bst.printPreorder();
         return bst;
     }
+
+    public static BinarySearchTree getCustomBSTForDiameterTest() {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.add(78);
+        bst.add(50);
+        bst.add(25);
+        bst.add(500);
+        bst.add(250);
+        bst.add(510);
+        bst.add(200);
+        bst.add(400);
+        bst.add(505);
+        bst.add(525);
+        bst.add(150);
+        bst.add(225);
+        bst.add(502);
+        bst.add(508);
+        bst.add(520);
+        bst.add(535);
+        bst.add(100);
+        bst.add(175);
+        bst.add(530);
+        bst.add(545);
+
+        bst.print();
+        bst.printPreorder();
+        return bst;
+    }
+
     public static BinarySearchTree getInvalidBST() {
         BinarySearchTree bst = new BinarySearchTree();
         bst.add(78);
