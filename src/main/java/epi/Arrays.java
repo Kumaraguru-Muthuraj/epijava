@@ -60,7 +60,7 @@ public class Arrays {
     }
 
     public static void print(int[] array) {
-        System.out.println();
+        System.out.println("Printing " + array.length + " elements");
         for (int i : array) {
             System.out.print(i + ", ");
         }
@@ -94,6 +94,7 @@ public class Arrays {
 
     public static void swap(int[] array, int i, int k) {
         int temp = array[i];
+        array[i] = array[k];
         array[i] = array[k];
         array[k] = temp;
     }

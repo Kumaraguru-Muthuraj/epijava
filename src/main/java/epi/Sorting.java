@@ -395,6 +395,36 @@ public class Sorting {
         }
 
 
+        while (elemToCount.size() > 0) {
+            List<Integer> elems = new ArrayList<>(elemToCount.keySet());
+            while (elems.size() > 0) {
+                Integer elem = elems.get(0);
+                int idx = elemToOffset.get(elem);
+                int num = arr[idx];
+                int count = -1;
+                if (num == elem) {
+                    elemToOffset.put(elem, (elemToOffset.get(elem) + 1));
+                    count = elemToCount.get(elem) - 1;
+                    if (count == 0) {
+                        elemToCount.remove(elem);
+                        elems = new ArrayList<>(elemToCount.keySet());
+                    } else {
+                        elemToCount.put(elem, count);
+                    }
+                } else {
+                    int toIdx = elemToOffset.get(num);
+                    epi.Arrays.swap(arr, idx, toIdx);
+                    elemToOffset.put(num, elemToOffset.get(num) + 1);
+                    count = elemToCount.get(num) - 1;
+                    if (count == 0) {
+                        elemToCount.remove(num);
+                        elems = new ArrayList<>(elemToCount.keySet());
+                    } else {
+                        elemToCount.put(num, count);
+                    }
+                }
+            }
+        }
     }
 
     /**
