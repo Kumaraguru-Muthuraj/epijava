@@ -1,4 +1,6 @@
 package educative30;
+import epi.Node2;
+
 import java.util.*;
 
 class TreeNode<T> {
@@ -14,6 +16,33 @@ class TreeNode<T> {
 }
 
 public class BSTFromSorted {
+    public TreeNode<Integer> root = null;
+    public BSTFromSorted() {
+
+    }
+    public TreeNode<Integer> add(Integer i) {
+        if (root == null) {
+            root = new TreeNode<Integer>(i);
+            return root;
+        }
+        TreeNode<Integer> parent = root;
+        TreeNode<Integer> cur = root;
+        while (cur != null) {
+            parent = cur;
+            if (i < cur.data) {
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        TreeNode<Integer>  n = new TreeNode<Integer>(i);
+        if (i < parent.data) {
+            parent.left = n;
+        } else {
+            parent.right = n;
+        }
+        return n;
+    }
     public static TreeNode<Integer> bst(int[] nums, int s, int e) {
         if (s > e ) {
             return null;
