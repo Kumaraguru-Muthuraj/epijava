@@ -1,0 +1,32 @@
+Problem: Contains Duplicate II
+Time Limit: 15 minutes
+Statement:
+You are given an integer array nums and an integer k. Determine whether there exist two distinct indices i and j in the array such that:
+nums[i] == nums[j], and
+|i - j| ≤ k
+Return TRUE if such indices exist; otherwise, return FALSE.
+
+Constraints:
+1 ≤ nums.length ≤ 10³
+−10³ ≤ nums[i] ≤ 10³
+0 ≤ k ≤ 10⁴
+
+-------------------------------------
+# Problem: Lucky Numbers in a Matrix
+**Time limit:** 15 minutes
+## Statement
+Given an `m × n` matrix of **distinct** numbers, return the lucky number(s) in the matrix.
+A **lucky number** is an element that is the **smallest in its row** and **largest in its column**.
+Return all lucky numbers in any order.
+---
+## Definitions
+* `m = matrix.length`
+* `n = matrix[i].length`
+---
+## Constraints
+* `1 ≤ m, n ≤ 50`
+* `1 ≤ matrix[i][j] ≤ 10^5`
+* All elements in the matrix are distinct.
+## Follow-ups / Dive Deep (optional)
+* Can you find all lucky numbers in **O(m·n)** time and **O(m + n)** extra space?
+* How would your approach change if elements were **not distinct**?
