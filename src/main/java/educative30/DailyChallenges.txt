@@ -30,3 +30,38 @@ Return all lucky numbers in any order.
 ## Follow-ups / Dive Deep (optional)
 * Can you find all lucky numbers in **O(m·n)** time and **O(m + n)** extra space?
 * How would your approach change if elements were **not distinct**?
+
+-------------------------------------
+# Problem: Number of Islands
+
+**Time limit:** 30 minutes
+
+## Statement
+
+Given an `m × n` 2D grid of binary characters where `'0'` represents **water** and `'1'` represents **land**,
+an **island** is a group of `'1'` cells connected **horizontally or vertically** (not diagonally).
+Return the total number of islands in the grid.
+
+## Input definition
+
+* `grid.length = m`
+* `grid[i].length = n`
+* `grid[i][j]` is a character `'0'` or `'1'`.
+
+## Constraints
+
+* `1 ≤ m ≤ 50`
+* `1 ≤ n ≤ 50`
+* `grid[i][j] ∈ {'0', '1'}`
+
+## Notes / Dive Deep (optional)
+
+* Typical solutions use DFS, BFS, or Union-Find.
+* Aim for **O(m·n)** time and **O(m·n)** worst-case auxiliary space (stack/queue or UF).
+* Consider in-place marking of visited cells (e.g., flip visited `'1'` → `'0'`) to avoid extra memory.
+public static int numIslands(List<List<Character>> grid) {
+
+    // Replace this placeholder return statement with your code
+    return -1;
+}
+-------------------------------------
