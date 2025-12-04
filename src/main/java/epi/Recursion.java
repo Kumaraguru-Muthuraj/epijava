@@ -1,11 +1,51 @@
 package epi;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
 public class Recursion {
+    /** 16.7 - Palindromic decompositions
+     *
+     */
+    List<List<String>> results = new ArrayList<>();
+    static Set<String> palins = new HashSet<>();
+    public static void testPalindromicDecompose() {
+        palindromePartitioning("0204451881");
+        palins.clear();
+        palindromePartitioning("abbacabba");
+    }
+    public static List<List<String>> palindromePartitioning(String input) {
+        List<String> partialPart = new ArrayList<>();
+        directedPalindromePartitioning(input, 0, partialPart);
+        System.out.println(palins);
+        return null;
+    }
+    public static void directedPalindromePartitioning(String input, int offset,
+                                                      List<String> partialPartition) {
+        if (offset == input.length()) {
+            System.out.println(partialPartition);
+        }
+        for (int i = offset + 1; i <= input.length() ; i++) {
+            String prefix = input.substring(offset, i);
+            if (isPalindrome(prefix)) {
+                if (prefix.length() > 1) {
+                    palins.add(prefix);
+                }
+                partialPartition.add(prefix);
+                directedPalindromePartitioning(input, i, partialPartition);
+                partialPartition.remove(partialPartition.size() - 1);
+            }
+        }
+    }
+    public static boolean isPalindrome(String s) {
+        for (int i = 0, j = s.length() - 1 ; i < j; ++i, --j) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /** 16.8 - Distinct binary trees.
      * Time and Space - ??
      */
@@ -103,11 +143,15 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.8 - BInary Trees
-        testBinTrees();
+        //16.7 - Palindromic decomposition
+        testPalindromicDecompose();
+
         if (true) {
             return;
         }
+        //16.8 - BInary Trees
+        testBinTrees();
+
         //16.10 - Gary code
         testGaryCode();
 
