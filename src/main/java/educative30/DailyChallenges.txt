@@ -65,3 +65,23 @@ public static int numIslands(List<List<Character>> grid) {
     return -1;
 }
 -------------------------------------
+# **Problem: Longest Common Prefix**
+
+**Time limit:** 15 minutes
+
+## **Statement**
+
+Given an array of strings `strs`, write a function to find the **longest common prefix** among them.
+If no common prefix exists, return an empty string `""`.
+
+## **Constraints**
+
+* `1 ≤ strs.length ≤ 200`
+* `0 ≤ strs[i].length ≤ 200`
+* Each `strs[i]` consists only of **lowercase English letters**.
+public static String longestCommonPrefix(String[] strs) {
+
+    // Replace the following return statement with your code
+    return "";
+}
+-------------------------------------
