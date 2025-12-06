@@ -50,7 +50,7 @@ public class CourseOrder {
         System.out.println(canFinish(numCourses1, prerequisites1));
 
         int numCourses2 = 7;
-        int[][] prerequisites2 = {{2,1}, {1,0}, {3,0}, {4,0}, {6,5}, {5,6}};
+        int[][] prerequisites2 = {{2,1}, {1,0}, {3,0}, {4,0}/*, {6,5}, {5,6}*/};
         System.out.println(canFinish(numCourses2, prerequisites2));
     }
 }

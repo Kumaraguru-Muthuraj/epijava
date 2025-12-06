@@ -5,6 +5,8 @@ package educative30;
  * A subarray in nums is called a fixed-bound subarray if it satisfies the following conditions:
  * The smallest value in the subarray equals minK. The largest value in the subarray equals maxK.
  * Note: A subarray is a contiguous sequence of elements within an array.
+ *
+ * Check Book-2, Page 8 for a simple solution.
  */
 public class FixedBoundSubArray {
     public long countSubarrays(int[] nums, int minK, int maxK) {
