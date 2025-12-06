@@ -85,3 +85,47 @@ public static String longestCommonPrefix(String[] strs) {
     return "";
 }
 -------------------------------------
+# **Problem: Implement Trie (Prefix Tree)**
+
+**Time limit:** 30 minutes
+
+## **Statement**
+
+A **Trie** (or *prefix tree*) is a tree-like data structure used to store strings, enabling efficient prefix-based lookups.
+Your task is to **implement a Trie** supporting the following operations:
+
+* **insert(word):** Insert a word into the Trie.
+* **search(word):** Return **TRUE** if the exact word exists in the Trie; otherwise, return **FALSE**.
+* **startsWith(prefix):** Return **TRUE** if any word in the Trie starts with the given prefix; otherwise, return **FALSE**.
+
+## **Constraints**
+
+* `1 ≤ word.length, prefix.length ≤ 500`
+* All strings consist only of **lowercase English letters**.
+* At most `10³` function calls will be made in total.
+
+If you'd like, I can generate the full Trie implementation in Java, Python, or C++.
+class Trie {
+
+    public Trie() {
+        // Write your code here
+    }
+
+    // inserting string in trie
+    public void insert(String word) {
+        // Write your code here
+    }
+
+    // searching for a string
+    public boolean search(String word) {
+        // Replace this placeholder return statement with your code
+        return false;
+    }
+
+    // searching for a prefix
+    public boolean searchPrefix(String prefix) {
+        // Replace this placeholder return statement with your code
+        return false;
+    }
+}
+----------------------------------------
