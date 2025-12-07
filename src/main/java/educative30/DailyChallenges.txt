@@ -129,3 +129,42 @@ class Trie {
     }
 }
 ----------------------------------------
+# **Problem: Parsing a Boolean Expression**
+**Time limit:** 40 minutes
+## **Statement**
+
+You are given a string `expression` that represents a boolean expression. The expression may take any of the following forms:
+
+* **`'t'`** — represents boolean **TRUE**
+* **`'f'`** — represents boolean **FALSE**
+* **`!(expr)`** — logical **NOT** applied to subexpression `expr`
+* **`&(expr1, expr2, ..., exprN)`** — logical **AND** over one or more subexpressions; returns TRUE only if **all** subexpressions evaluate to TRUE
+* **`|(expr1, expr2, ..., exprN)`** — logical **OR** over one or more subexpressions; returns TRUE if **at least one** subexpression is TRUE
+
+Your task is to **parse the given expression** and return its **boolean evaluation result**.
+
+**Note:**
+The input is guaranteed to be valid and follow the described syntax exactly.
+
+## **Constraints**
+* `1 ≤ expression.length ≤ 20,000`
+* Each character of `expression` is one of:
+  `(`, `)`, `&`, `|`, `!`, `t`, `f`, `,`
+
+If you want, I can also provide:
+✅ DFS parsing approach
+✅ Stack-based solution
+✅ Complete Java/Python implementation
+Just ask!
+
+public boolean parseBoolExpr(String expression) {
+
+    // Replace this placeholder return statement with your code
+    return false;
+}
+
+Examples:
+!(!(t)) ---> true
+&(t, |(f,f), !(f)) -> false
+|(&(t,t),&(f,t)) -> true
+----------------------------------------
