@@ -76,6 +76,7 @@ public class PrimitiveTypes {
     }
 
     // 5.4 - Closest number with the same binary weight - O(n) algorithm.
+    //There is an O(1) space and time algorithm in the notebook.
     public static long nWithSameWeightV0(long x) throws Exception {
         print(x);
         int numBits = 62; // Leave the sign bit.
