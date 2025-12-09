@@ -168,3 +168,64 @@ Examples:
 &(t, |(f,f), !(f)) -> false
 |(&(t,t),&(f,t)) -> true
 ----------------------------------------
+
+# **Problem: Find the Lexicographically Largest String From Box II**
+**Time limit:** 40 minutes
+## **Statement**
+You are given:
+* A string `word`
+* An integer `numFriends`, representing the number of friends in a game organized by Alice.
+The game proceeds in **multiple rounds**, and in each round:
+
+1. The string `word` is split into **exactly `numFriends` non-empty substrings**.
+2. The split must be **unique** — no previous round has produced the same sequence of substrings.
+3. All substrings produced in the round are placed into a **box**.
+
+After **all possible unique splits** have been performed, your task is to determine the **lexicographically largest string** among **all substrings** placed into the box.
+
+## **Lexicographical Order Definition**
+A string **`a`** is lexicographically larger than string **`b`** if:
+* At the first position where they differ, `a` has a character that comes **later** in the alphabet than the corresponding character in `b`, **or**
+* If `a` is a **prefix** of `b`, then the **longer** string is considered larger.
+
+## **Constraints**
+* `1 ≤ word.length ≤ 10³`
+* `word` consists only of lowercase English letters.
+* `1 ≤ numFriends ≤ word.length`
+
+If you'd like, I can also generate a solution outline, optimal approach, or full code.
+public String answerString(String word, int numFriends)
+{
+    // Replace this placeholder return statement with your code
+    return "";
+}
+---------------------------------
+# **Problem: Remove Invalid Parentheses**
+
+**Time limit:** 40 minutes
+
+## **Statement**
+
+You are given a string `s` containing:
+
+* Lowercase English letters
+* Opening `'('` and closing `')'` parentheses
+
+A string is considered **valid** if:
+
+1. Every opening `'('` has a matching closing `')'`.
+2. Parentheses are correctly ordered and properly nested.
+3. Letters can appear anywhere and do **not** affect validity.
+
+Your task is to **return all possible valid strings** that can be formed by removing the **minimum number** of invalid parentheses.
+The output must be a **list of unique strings**, in any order.
+
+## **Constraints**
+* `1 ≤ s.length ≤ 25`
+* `s` consists of lowercase English letters and the characters `'('` and `')'`
+* The string contains **at most 20 parentheses**
+
+If you want, I can also provide the optimal BFS or DFS backtracking solution.
+---------------------------------
+
+---------------------------------

@@ -5,7 +5,7 @@ import java.util.*;
 // Chapter 6.
 public class Arrays {
     /*6.0 - Order even followed by odd numbers.
-    We might think that its O(log(n)), but its O(n) because if all numbers are even or odd,
+    Its O(n) because if all numbers are even or odd,
     we traverse once completely.
     O(1), stable, in-place
      */
