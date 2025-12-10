@@ -227,5 +227,25 @@ The output must be a **list of unique strings**, in any order.
 
 If you want, I can also provide the optimal BFS or DFS backtracking solution.
 ---------------------------------
+# **Problem: Inorder Successor in BST**
 
+**Time limit:** 30 minutes
+
+## **Statement**
+
+You are given the **root** of a Binary Search Tree (BST) and a specific **node `p`**.
+Your task is to return the **inorder successor** of node `p`.
+
+If no inorder successor exists, return **NULL**.
+
+**Definition:**
+The inorder successor of `p` is the node with the **smallest value greater than `p.data`** in the BST.
+
+## **Constraints**
+* The tree contains **1 to 500 nodes**.
+* `-10⁴ ≤ Node.data ≤ 10⁴`
+* All node values are **unique**.
+* The node `p` is guaranteed to exist in the tree.
+
+If you want, I can also provide the optimal O(h)-time solution using BST properties.
 ---------------------------------
