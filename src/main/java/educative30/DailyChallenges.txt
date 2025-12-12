@@ -1,3 +1,24 @@
+
+-------------------------------------
+# **Problem: Middle of the Linked List**
+**Time limit:** 15 minutes
+## **Statement**
+Given the **head** of a singly linked list, return the **middle node** of the list.
+* If the list has an **odd** number of nodes, return the single middle node.
+* If the list has an **even** number of nodes, there are two middle nodes — **return the second one**.
+
+Return the node itself (not just its value).
+
+## **Constraints**
+* Let `n` be the number of nodes in the list.
+* `1 ≤ n ≤ 100`
+* `1 ≤ Node.value ≤ 100`
+* `head ≠ NULL` (the list is non-empty)
+
+## **Hints / Dive Deep**
+* Use the **two-pointer (slow & fast)** technique to find the middle in **O(n)** time and **O(1)** space.
+* Consider why returning the second middle for even-length lists works naturally with the usual slow/fast setup (fast moves 2 steps, slow moves 1).
+-------------------------------------
 Problem: Contains Duplicate II
 Time Limit: 15 minutes
 Statement:
