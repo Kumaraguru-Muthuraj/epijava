@@ -1,4 +1,29 @@
 
+# **Problem: Maximum Value at a Given Index in a Bounded Array**
+
+**Time limit:** 30 minutes
+
+## **Statement**
+
+You are given three positive integers `n`, `index`, and `maxSum`.
+Construct an array `nums` of length `n` such that all of the following conditions are satisfied:
+
+1. The length of the array `nums` is exactly `n`.
+2. Each element `nums[i]` is a **positive integer**.
+3. The absolute difference between any two consecutive elements is **at most 1**:
+   `|nums[i] − nums[i + 1]| ≤ 1`
+4. The **sum of all elements** in `nums` does **not exceed `maxSum`**.
+5. The value at position `index`, `nums[index]`, is **maximized**.
+
+Your task is to **return the maximum possible value of `nums[index]`**.
+
+## **Constraints**
+* `1 ≤ n ≤ maxSum ≤ 10⁹`
+* `0 ≤ index < n`
+
+If you want, I can also provide the intuition and optimal binary-search solution for this problem.
+
+
 -------------------------------------
 # **Problem: Middle of the Linked List**
 **Time limit:** 15 minutes
