@@ -1,5 +1,5 @@
 
-# **Problem: Rectangle Area**
+# **Problem: Rectangle Area** - EPI Chapter 1 last problem.
 **Time limit:** 30 minutes
 ## **Statement**
 You are given the coordinates of **two axis-aligned rectangles** on a 2D plane.
