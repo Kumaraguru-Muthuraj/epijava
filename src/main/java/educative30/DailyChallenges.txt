@@ -1,4 +1,26 @@
 
+# **Problem: Rectangle Area**
+**Time limit:** 30 minutes
+## **Statement**
+You are given the coordinates of **two axis-aligned rectangles** on a 2D plane.
+Your task is to compute the **total area covered by both rectangles**.
+
+* The **first rectangle** is defined by:
+  * Bottom-left corner: `(ax1, ay1)`
+  * Top-right corner: `(ax2, ay2)`
+* The **second rectangle** is defined by:
+  * Bottom-left corner: `(bx1, by1)`
+  * Top-right corner: `(bx2, by2)`
+
+**Note:**
+The rectangles may **overlap**, and any overlapping area should be counted **only once**.
+
+## **Constraints**
+* `-10⁴ ≤ ax1 ≤ ax2 ≤ 10⁴`
+* `-10⁴ ≤ ay1 ≤ ay2 ≤ 10⁴`
+* `-10⁴ ≤ bx1 ≤ bx2 ≤ 10⁴`
+* `-10⁴ ≤ by1 ≤ by2 ≤ 10⁴`
+-------------------------------------
 # **Problem: Maximum Value at a Given Index in a Bounded Array**
 
 **Time limit:** 30 minutes
