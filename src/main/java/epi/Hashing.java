@@ -133,6 +133,51 @@ public class Hashing {
          return diff;
     }
 
+    // 3 Types of hash functions.
+    public static int orderedHash(char[] arr) {
+        int hash = 0;
+        int base = 31;
+
+        for (char c : arr) {
+            hash = hash * base + c;
+        }
+        return hash;
+    }
+
+    public static int unorderedHash(char[] arr) {
+        int[] freq = new int[26]; // lowercase letters assumed
+
+        for (char c : arr) {
+            freq[c - 'a']++;
+        }
+
+        int hash = 0;
+        int prime = 31;
+        for (int count : freq) {
+            hash = hash * prime + count;
+        }
+        return hash;
+    }
+
+    public static int unorderedHashFast(char[] arr) {
+        int xor = 0;
+        int sum = 0;
+
+        for (char c : arr) {
+            xor ^= c;
+            sum += c;
+        }
+        return xor * 31 + sum;
+    }
+
+    /*
+    | Hash Type          | Order Matters? | Collision Risk | Use Case           |
+    | ------------------ | -------------- | -------------- | ------------------ |
+    | Polynomial rolling | ✅ Yes          | Low            | Strings, sequences |
+    | Frequency-based    | ❌ No           | Very Low       | Anagrams           |
+    | XOR + sum          | ❌ No           | Higher         | Fast heuristics    |
+    */
+
     public static void main(String[] args) {
         //13.10 - Find the longest interval in an array.
         testLongestInterval();
