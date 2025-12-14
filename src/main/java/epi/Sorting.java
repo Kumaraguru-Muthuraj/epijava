@@ -368,6 +368,7 @@ public class Sorting {
     }
 
     public static void sortArrayWithHighFreqElem(int[] arr) {
+        //Count the frequency of unique elements
         HashMap<Integer, Integer> elemToCount = new HashMap<>();
         for (int e : arr) {
             if (elemToCount.get(e) != null) {
@@ -381,6 +382,7 @@ public class Sorting {
             System.out.print("<" + entry.getKey() + ", " + entry.getValue() + ">, ");
         }
 
+        //Calculate the offset, index for placing the elements.
         int offSet = 0;
         HashMap<Integer, Integer> elemToOffset = new HashMap<>();
         for (Map.Entry<Integer, Integer> entry : elemToCount.entrySet()) {
@@ -394,7 +396,7 @@ public class Sorting {
             System.out.print("<" + entry.getKey() + ", " + entry.getValue() + ">, ");
         }
 
-
+        //Iterate through the elements, use the offset and count to group them.
         while (elemToCount.size() > 0) {
             List<Integer> elems = new ArrayList<>(elemToCount.keySet());
             while (elems.size() > 0) {
@@ -428,7 +430,7 @@ public class Sorting {
     }
 
     /**
-     * 14.8 - Merge sort - Stable sorting algorithm, that is fast.
+     * 14.9 - Merge sort - Stable sorting algorithm, that is fast.
      * Use Floyd's 2 ptr approach, split the list to 2 and
      * merge with LinkedLists.merge().
      */
@@ -480,7 +482,7 @@ public class Sorting {
             return;
         }
 
-        //14.8 - Merge sort
+        //14.9 - Merge sort
         testStableSort();
 
         //14.6
