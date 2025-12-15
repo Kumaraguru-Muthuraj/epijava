@@ -1,4 +1,20 @@
 
+-------------------------------------
+# **Problem: Max Consecutive Ones**
+**Time limit:** 15 minutes
+## **Statement**
+You are given a binary array `nums` (containing only `0`s and `1`s).
+Your task is to find the **maximum number of consecutive `1`s** in the array and return that value.
+
+## **Constraints**
+* `1 ≤ nums.length ≤ 10³`
+* `nums[i] ∈ {0, 1}`
+
+## **Notes / Dive Deep**
+* This can be solved in a single pass using a running counter.
+* Aim for **O(n)** time and **O(1)** extra space.
+-------------------------------------
+
 # **Problem: Rectangle Area** - EPI Chapter 1 last problem.
 **Time limit:** 30 minutes
 ## **Statement**
