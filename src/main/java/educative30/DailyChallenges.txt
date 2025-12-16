@@ -1,5 +1,26 @@
 
 -------------------------------------
+
+# **Problem: Candy**
+**Time limit:** 40 minutes
+## **Statement**
+You are given an array `ratings`, where `ratings[i]` represents the rating of the *i-th* child standing in a line.
+Your task is to distribute candies to the children according to the following rules:
+1. Every child must receive **at least one candy**.
+2. A child with a **higher rating** than an immediate neighbor must receive **more candies** than that neighbor.
+
+Return the **minimum total number of candies** required to satisfy these conditions.
+
+## **Constraints**
+* `1 ≤ ratings.length ≤ 1000`
+* `0 ≤ ratings[i] ≤ 1000`
+
+“I start by giving everyone one candy.
+Then I do a left-to-right pass to satisfy left neighbors,
+followed by a right-to-left pass to satisfy right neighbors,
+taking the maximum to preserve both constraints.”
+
+-------------------------------------
 # **Problem: Max Consecutive Ones**
 **Time limit:** 15 minutes
 ## **Statement**
