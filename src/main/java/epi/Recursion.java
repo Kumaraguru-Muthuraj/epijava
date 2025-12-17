@@ -142,10 +142,59 @@ public class Recursion {
         System.out.println("\nHeight - " + hAndD[0] + ", Diam - " + hAndD[1]);
     }
 
-    public static void main(String[] args) {
-        //16.11 - Diameter
-        testDiameter();
+    //16.5 - N Choose K
+    public static List<String> subsets = new ArrayList<>();
+    public static void generateNChooseK(StringBuilder partialSet, int n, int k, int offset) {
+        partialSet.append(offset);
+        if (partialSet.length() == k) {
+            subsets.add(partialSet.toString());
+        } else {
+            for (int i = offset + 1; i <= n; i++) {
+                generateNChooseK(partialSet, n, k, i);
+            }
+        }
+        partialSet.deleteCharAt(partialSet.length() - 1);
+    }
 
+    public static void testNChooseK() {
+        StringBuilder partial = new StringBuilder();
+        int n = 5;
+        int k = 3;
+        for (int offset = 1; offset <= n - k + 1; offset++) {
+            generateNChooseK(partial, n, k, offset);
+        }
+    }
+
+
+    public static void generateNChooseKV2(StringBuilder partialSet, int n, int k, int offset) {
+        if (partialSet.length() == k) {
+            subsets.add(partialSet.toString());
+        } else {
+            // Limiting the offset to n minus k is not done here.
+            for (int i = offset; i <= n; i++) {
+                partialSet.append(i);
+                generateNChooseKV2(partialSet, n, k, i + 1);
+                partialSet.deleteCharAt(partialSet.length() - 1);
+            }
+        }
+    }
+
+    public static void testNChooseKV2() {
+        StringBuilder partial = new StringBuilder();
+        int n = 5;
+        int k = 3;
+        //for (int offset = 1; offset <= n - k + 1; offset++) {
+            generateNChooseKV2(partial, n, k, 1);
+        //}
+        System.out.println("Size - " + subsets.size());
+        for (String str : subsets) {
+            System.out.println(str);
+        }
+    }
+
+    public static void main(String[] args) {
+        //16.5 - N Choose K
+        testNChooseKV2();
         if (true) {
             return;
         }
@@ -157,5 +206,8 @@ public class Recursion {
 
         //16.10 - Gary code
         testGaryCode();
+
+        //16.11 - Diameter
+        testDiameter();
     }
 }
