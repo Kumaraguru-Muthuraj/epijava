@@ -143,19 +143,19 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.7 - Palindromic decomposition
-        testPalindromicDecompose();
+        //16.11 - Diameter
+        testDiameter();
 
         if (true) {
             return;
         }
+        //16.7 - Palindromic decomposition
+        testPalindromicDecompose();
+
         //16.8 - BInary Trees
         testBinTrees();
 
         //16.10 - Gary code
         testGaryCode();
-
-        //16.11 - Diameter
-        testDiameter();
     }
 }

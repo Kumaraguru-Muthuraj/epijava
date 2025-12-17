@@ -1,4 +1,24 @@
 
+
+-------------------------------------
+# **Problem: Word Break II**
+**Time limit:** 40 minutes
+
+## **Statement**
+You are given a string `s` and an array of strings `wordDict`, representing a dictionary of valid words.
+Your task is to insert spaces into `s` such that it is broken into a sequence of valid dictionary words.
+Return **all possible sentences** that can be formed using words from `wordDict`.
+* The order of the returned sentences does **not** matter.
+* A dictionary word may be **reused multiple times**.
+
+## **Constraints**
+* `1 ≤ s.length ≤ 20`
+* `1 ≤ wordDict.length ≤ 1000`
+* `1 ≤ wordDict[i].length ≤ 10`
+* `s` and all `wordDict[i]` consist only of **lowercase English letters**
+* All strings in `wordDict` are **unique**
+
+If you want, I can also provide the DFS + memoization solution or walk through an example step by step.
 -------------------------------------
 
 # **Problem: Candy**
