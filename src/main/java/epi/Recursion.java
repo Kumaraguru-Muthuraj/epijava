@@ -192,12 +192,44 @@ public class Recursion {
         }
     }
 
+    //16.3 - Permutations, TC pending.
+    public static void testPermutations() {
+        List<Character> sequence = new ArrayList<>();
+        sequence.add('a');
+        sequence.add('b');
+        sequence.add('c');
+        sequence.add('d');
+        sequence.add('e');
+        generatePermutation(sequence, 0);
+        System.out.println();
+        for (List<Character> seq : permResults) {
+            System.out.println(seq.toString());
+        }
+    }
+    public static void generatePermutation(List<Character> sequence, int i) {
+        if (i == sequence.size() - 1) {
+            permResults.add(new ArrayList<>(sequence));
+            return;
+        }
+        //i is fixed and j changes to swap.
+        for (int j = i; j < sequence.size(); j++) {
+            Collections.swap(sequence, i, j);
+            generatePermutation(sequence, i+1);
+            Collections.swap(sequence, i, j);
+        }
+    }
+    public static List<List<Character>> permResults = new ArrayList<>();
+
     public static void main(String[] args) {
-        //16.5 - N Choose K
-        testNChooseKV2();
+        //16.3 - Permutations, TC pending.
+        testPermutations();
         if (true) {
             return;
         }
+
+        //16.5 - N Choose K
+        testNChooseKV2();
+
         //16.7 - Palindromic decomposition
         testPalindromicDecompose();
 
