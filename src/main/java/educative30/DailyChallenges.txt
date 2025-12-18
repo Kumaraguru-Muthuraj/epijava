@@ -1,5 +1,20 @@
 
+-------------------------------------
+# **Problem: Minimum Moves to Spread Stones Over Grid**
+**Time limit:** 30 minutes
+## **Statement**
+You are given a `3 × 3` grid of integers, where each cell value represents the number of stones in that cell.
+Your task is to determine the **minimum number of moves** required to make **every cell contain exactly one stone**.
 
+## **Rules**
+* In one move, **only one stone** can be moved.
+* A stone may be moved **only to an adjacent cell** (cells sharing a side).
+* The **total number of stones** in the grid is exactly **9**.
+
+## **Constraints**
+* `grid.length = grid[i].length = 3`
+* `0 ≤ grid[i][j] ≤ 9`
+* Sum of all values in `grid` equals `9`
 -------------------------------------
 # **Problem: Word Break II**
 **Time limit:** 40 minutes
