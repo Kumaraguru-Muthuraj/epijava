@@ -1,5 +1,29 @@
 
 -------------------------------------
+# **Problem: Reorder List**
+**Time limit:** 30 minutes
+## **Statement**
+Given the **head** of a singly linked list, reorder the list as if it were **folded onto itself**.
+For a list represented as:
+```
+L0 → L1 → L2 → … → L(n−2) → L(n−1) → Ln
+```
+Reorder it to:
+```
+L0 → Ln → L1 → L(n−1) → L2 → L(n−2) → …
+```
+### Important Notes
+* You **must not modify the values** of the nodes.
+* Only the **node pointers (links)** may be changed.
+* The reordering must be done **in-place**.
+---
+
+## **Constraints**
+* Number of nodes in the list: `1 ≤ n ≤ 500`
+* `-5000 ≤ Node.value ≤ 5000`
+
+If you want, I can also explain the optimal **find-middle → reverse → merge** approach or provide the full implementation.
+-------------------------------------
 # **Problem: Minimum Moves to Spread Stones Over Grid**
 **Time limit:** 30 minutes
 ## **Statement**
