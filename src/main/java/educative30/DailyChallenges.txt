@@ -1,5 +1,23 @@
 
 -------------------------------------
+Here is the problem formatted cleanly and interview-ready:
+# **Problem: Triangle**
+**Time limit:** 30 minutes
+## **Statement**
+You are given a triangular array `triangle`.
+Your task is to return the **minimum path sum** from **top to bottom**.
+At each step, you may move to an **adjacent number** in the row below.
+More formally, if you are at index `i` in the current row, you may move to:
+* Index `i` **or**
+* Index `i + 1`
+in the next row.
+
+## **Constraints**
+* `1 ≤ triangle.length ≤ 200`
+* `triangle[0].length = 1`
+* `triangle[i].length = triangle[i - 1].length + 1`
+* `-10⁴ ≤ triangle[i][j] ≤ 10⁴`
+-------------------------------------
 # **Problem: Reorder List**
 **Time limit:** 30 minutes
 ## **Statement**
