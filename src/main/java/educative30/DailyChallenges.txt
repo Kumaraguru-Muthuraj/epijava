@@ -1,5 +1,25 @@
 
 -------------------------------------
+# **Problem: Nth Magical Number**
+**Time limit:** 40 minutes
+## **Statement**
+You are given three integers `n`, `a`, and `b`.
+Your task is to return the **nᵗʰ magical number**.
+A **magical number** is defined as a **positive integer** that is divisible by **either `a` or `b`**.
+Since the result can be very large, return the answer **modulo**:
+[10^9 + 7]
+
+## **Constraints**
+* `1 ≤ n ≤ 10^9`
+* `2 ≤ a, b ≤ 4 × 10^4`
+
+If you want next, I can explain:
+* The **binary search + LCM** solution
+* A **human-friendly intuition**
+* Full **Java / Python code**
+* Step-by-step examples
+
+-------------------------------------
 Here is the problem formatted cleanly and interview-ready:
 # **Problem: Triangle**
 **Time limit:** 30 minutes
