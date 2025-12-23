@@ -4,6 +4,113 @@ import java.util.*;
 import java.util.LinkedList;
 
 public class Recursion {
+    /** 16.3 - Permutations, TC pending.
+     * */
+    public static void testPermutations() {
+        List<Character> sequence = new ArrayList<>();
+        sequence.add('a');
+        sequence.add('b');
+        sequence.add('c');
+        sequence.add('d');
+        sequence.add('e');
+        generatePermutation(sequence, 0);
+        System.out.println();
+        for (List<Character> seq : permResults) {
+            System.out.println(seq.toString());
+        }
+    }
+    public static void generatePermutation(List<Character> sequence, int i) {
+        if (i == sequence.size() - 1) {
+            permResults.add(new ArrayList<>(sequence));
+            return;
+        }
+        //i is fixed and j changes to swap.
+        for (int j = i; j < sequence.size(); j++) {
+            Collections.swap(sequence, i, j);
+            generatePermutation(sequence, i+1);
+            Collections.swap(sequence, i, j);
+        }
+    }
+    public static List<List<Character>> permResults = new ArrayList<>();
+
+    /** 16.4 - Generate Powerset
+     * Check the PowerSetOptimized algorithm for a backtracking algorithm
+     */
+    public static List<String> result = new ArrayList<>();
+    public static List<String> genPowerSet(String elems, int eIdx) {
+        List<String> powerSet = new ArrayList<>();
+        if (eIdx == 0) {
+            powerSet.add(String.valueOf(elems.charAt(eIdx)));
+            return powerSet;
+        }
+        List<String> tempSet = genPowerSet(elems, eIdx-1);
+        powerSet.addAll(tempSet);
+        for (String s : tempSet) {
+            powerSet.add(s + elems.charAt(eIdx));
+        }
+
+        powerSet.add(String.valueOf(elems.charAt(eIdx)));
+
+        return powerSet;
+    }
+    public static void testPowerset() {
+        String elems = new String("123");
+        result = genPowerSet(elems, elems.length() - 1);
+        for (String s : result) {
+            System.out.println(s);
+        }
+    }
+
+    /** 16.5 - N Choose K
+     */
+    public static List<String> subsets = new ArrayList<>();
+    public static void generateNChooseK(StringBuilder partialSet, int n, int k, int offset) {
+        partialSet.append(offset);
+        if (partialSet.length() == k) {
+            subsets.add(partialSet.toString());
+        } else {
+            for (int i = offset + 1; i <= n; i++) {
+                generateNChooseK(partialSet, n, k, i);
+            }
+        }
+        partialSet.deleteCharAt(partialSet.length() - 1);
+    }
+
+    public static void testNChooseK() {
+        StringBuilder partial = new StringBuilder();
+        int n = 5;
+        int k = 3;
+        for (int offset = 1; offset <= n - k + 1; offset++) {
+            generateNChooseK(partial, n, k, offset);
+        }
+    }
+
+    public static void generateNChooseKV2(StringBuilder partialSet, int n, int k, int offset) {
+        if (partialSet.length() == k) {
+            subsets.add(partialSet.toString());
+        } else {
+            // Limiting the offset to n minus k is not done here.
+            for (int i = offset; i <= n; i++) {
+                partialSet.append(i);
+                generateNChooseKV2(partialSet, n, k, i + 1);
+                partialSet.deleteCharAt(partialSet.length() - 1);
+            }
+        }
+    }
+
+    public static void testNChooseKV2() {
+        StringBuilder partial = new StringBuilder();
+        int n = 5;
+        int k = 3;
+        //for (int offset = 1; offset <= n - k + 1; offset++) {
+        generateNChooseKV2(partial, n, k, 1);
+        //}
+        System.out.println("Size - " + subsets.size());
+        for (String str : subsets) {
+            System.out.println(str);
+        }
+    }
+
     /** 16.7 - Palindromic decompositions
      *
      */
@@ -142,90 +249,15 @@ public class Recursion {
         System.out.println("\nHeight - " + hAndD[0] + ", Diam - " + hAndD[1]);
     }
 
-    //16.5 - N Choose K
-    public static List<String> subsets = new ArrayList<>();
-    public static void generateNChooseK(StringBuilder partialSet, int n, int k, int offset) {
-        partialSet.append(offset);
-        if (partialSet.length() == k) {
-            subsets.add(partialSet.toString());
-        } else {
-            for (int i = offset + 1; i <= n; i++) {
-                generateNChooseK(partialSet, n, k, i);
-            }
-        }
-        partialSet.deleteCharAt(partialSet.length() - 1);
-    }
-
-    public static void testNChooseK() {
-        StringBuilder partial = new StringBuilder();
-        int n = 5;
-        int k = 3;
-        for (int offset = 1; offset <= n - k + 1; offset++) {
-            generateNChooseK(partial, n, k, offset);
-        }
-    }
-
-
-    public static void generateNChooseKV2(StringBuilder partialSet, int n, int k, int offset) {
-        if (partialSet.length() == k) {
-            subsets.add(partialSet.toString());
-        } else {
-            // Limiting the offset to n minus k is not done here.
-            for (int i = offset; i <= n; i++) {
-                partialSet.append(i);
-                generateNChooseKV2(partialSet, n, k, i + 1);
-                partialSet.deleteCharAt(partialSet.length() - 1);
-            }
-        }
-    }
-
-    public static void testNChooseKV2() {
-        StringBuilder partial = new StringBuilder();
-        int n = 5;
-        int k = 3;
-        //for (int offset = 1; offset <= n - k + 1; offset++) {
-            generateNChooseKV2(partial, n, k, 1);
-        //}
-        System.out.println("Size - " + subsets.size());
-        for (String str : subsets) {
-            System.out.println(str);
-        }
-    }
-
-    //16.3 - Permutations, TC pending.
-    public static void testPermutations() {
-        List<Character> sequence = new ArrayList<>();
-        sequence.add('a');
-        sequence.add('b');
-        sequence.add('c');
-        sequence.add('d');
-        sequence.add('e');
-        generatePermutation(sequence, 0);
-        System.out.println();
-        for (List<Character> seq : permResults) {
-            System.out.println(seq.toString());
-        }
-    }
-    public static void generatePermutation(List<Character> sequence, int i) {
-        if (i == sequence.size() - 1) {
-            permResults.add(new ArrayList<>(sequence));
-            return;
-        }
-        //i is fixed and j changes to swap.
-        for (int j = i; j < sequence.size(); j++) {
-            Collections.swap(sequence, i, j);
-            generatePermutation(sequence, i+1);
-            Collections.swap(sequence, i, j);
-        }
-    }
-    public static List<List<Character>> permResults = new ArrayList<>();
-
     public static void main(String[] args) {
-        //16.3 - Permutations, TC pending.
-        testPermutations();
+        //16.4 - Generate Powerset
+        testPowerset();
+
         if (true) {
             return;
         }
+        //16.3 - Permutations, TC pending.
+        testPermutations();
 
         //16.5 - N Choose K
         testNChooseKV2();
