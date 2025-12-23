@@ -1,4 +1,23 @@
 
+
+-------------------------------------
+# **Problem: Divide Chocolate**
+**Time limit:** 40 minutes
+## **Statement**
+You are given a chocolate bar made up of several chunks, where each chunk has a certain sweetness. The sweetness of each chunk is provided in an array called `sweetness`.
+You want to share the chocolate with **`k` friends**. To do this, you will make **`k` cuts**, dividing the chocolate bar into **`k + 1` contiguous parts**.
+Each part must consist of **consecutive chunks**.
+Since you are a kind person, you will take the piece with the **minimum total sweetness**, and give the remaining pieces to your friends.
+Your task is to determine the **maximum possible total sweetness** of the piece you will receive by making the cuts optimally.
+
+## **Constraints**
+* `0 ≤ k < sweetness.length ≤ 10³`
+* `1 ≤ sweetness[i] ≤ 10³`
+
+If you want, I can next explain:
+* The **human intuition**
+* The **binary search on answer** approach
+
 -------------------------------------
 # **Problem: Nth Magical Number**
 **Time limit:** 40 minutes
