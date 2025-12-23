@@ -1,5 +1,7 @@
 package epi;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.LinkedList;
 
@@ -54,11 +56,16 @@ public class Recursion {
         return powerSet;
     }
     public static void testPowerset() {
-        String elems = new String("123");
+        Instant start = Instant.now();
+        String elems = new String("123456789ABCDEFGHIJKLM");
         result = genPowerSet(elems, elems.length() - 1);
         for (String s : result) {
             System.out.println(s);
         }
+        Instant end = Instant.now();
+        long elapsedMs = Duration.between(start, end).toMillis();
+
+        System.out.println("Time: " + elapsedMs + " ms");
     }
 
     /** 16.5 - N Choose K

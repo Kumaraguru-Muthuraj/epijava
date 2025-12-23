@@ -1,5 +1,7 @@
 package epi;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +31,15 @@ public class PowerSetOptimized {
     }
 
     public static void main(String[] args) {
-        List<String> l = new PowerSetOptimized().genPowerSet("234");
+        Instant start = Instant.now();
+        List<String> l = new PowerSetOptimized().genPowerSet("12");
         for (String s : l) {
             System.out.println(s);
         }
+        Instant end = Instant.now();
+        long elapsedMs = Duration.between(start, end).toMillis();
+
+        System.out.println("Time: " + elapsedMs + " ms");
     }
 
 }
