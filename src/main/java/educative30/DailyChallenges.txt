@@ -1,5 +1,21 @@
 
+-------------------------------------
+# **Problem: Perfect Squares**
+**Time limit:** 30 minutes
+## **Statement**
+You are given an integer `n`.
+Your task is to return the **minimum number of perfect square numbers** whose sum equals `n`.
+A **perfect square** is an integer that is the square of another integer.
+For example:
+* Perfect squares: `1`, `4`, `9`, `16`, …
+* Not perfect squares: `3`, `5`, `11`, …
 
+## **Constraints**
+* `1 ≤ n ≤ 10³`
+
+If you’d like, I can also:
+* Walk through the **DP solution step by step**
+* Explain the **BFS / number-theory approach**
 -------------------------------------
 # **Problem: Divide Chocolate**
 **Time limit:** 40 minutes
