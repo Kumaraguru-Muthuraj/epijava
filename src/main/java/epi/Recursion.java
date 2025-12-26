@@ -57,7 +57,7 @@ public class Recursion {
     }
     public static void testPowerset() {
         Instant start = Instant.now();
-        String elems = new String("123456789ABCDEFGHIJKLM");
+        String elems = new String("abcd");
         result = genPowerSet(elems, elems.length() - 1);
         for (String s : result) {
             System.out.println(s);

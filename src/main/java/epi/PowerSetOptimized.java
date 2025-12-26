@@ -32,7 +32,7 @@ public class PowerSetOptimized {
 
     public static void main(String[] args) {
         Instant start = Instant.now();
-        List<String> l = new PowerSetOptimized().genPowerSet("12");
+        List<String> l = new PowerSetOptimized().genPowerSet("abcde");
         for (String s : l) {
             System.out.println(s);
         }

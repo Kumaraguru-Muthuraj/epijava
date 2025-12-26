@@ -1,4 +1,28 @@
 
+# **Problem: Word Search II**
+**Time limit:** 40 minutes
+## **Statement**
+You are given a 2D grid of uppercase English letters and a list of strings `words`.
+Your task is to find **all words from the list** that can be constructed in the grid.
+A word can be constructed from letters of **sequentially adjacent cells**, where:
+* Adjacent cells are neighbors **horizontally or vertically** (not diagonally).
+* Each cell may be used **only once per word**.
+Return a list containing all the words from the input list that are found in the grid.
+The order of the returned words does not matter.
+## **Constraints**
+* `1 ≤ rows, columns ≤ 12`
+* `1 ≤ words.length ≤ 3 × 10³`
+* `1 ≤ words[i].length ≤ 10`
+* `grid[i][j]` is an uppercase English letter
+* `words[i]` consists of uppercase English letters
+* All words are **unique**
+
+If you want next, I can:
+* Explain the **Trie + DFS optimization**
+* Walk through a **sample grid**
+* Show **time/space complexity analysis**
+* Provide **clean Java / Python code**
+
 -------------------------------------
 # **Problem: Perfect Squares**
 **Time limit:** 30 minutes
