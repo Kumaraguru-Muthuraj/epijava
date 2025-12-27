@@ -118,6 +118,38 @@ public class Recursion {
         }
     }
 
+    /**
+     * 16.6 - Mathing paranthesis
+     */
+    public static List<String> set = new ArrayList<>();
+    public static StringBuilder parans = new StringBuilder();
+    public static int count = 0;
+    public static void testMatchingParans(int c) {
+        count = c;
+        genParans(count, count);
+        System.out.println("Res - " + count + " - " + set.size());
+//        for (String paran : set) {
+//            System.out.println(paran);
+//        }
+    }
+
+    public static void genParans(int balL, int balR) {
+        if (balL == 0 && balR == 0) {
+            set.add(parans.toString());
+            return;
+        }
+        if (balL > 0) {
+            parans.append('(');
+            genParans(balL - 1, balR);
+            parans.deleteCharAt(parans.length() - 1);
+        }
+        if (balL < balR) {
+            parans.append(')');
+            genParans(balL, balR - 1);
+            parans.deleteCharAt(parans.length() - 1);
+        }
+    }
+
     /** 16.7 - Palindromic decompositions
      *
      */
@@ -257,14 +289,19 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.4 - Generate Powerset
-        testPowerset();
+        //16.6 - Matching paranthesis
+        for (int i = 1; i < 10; i++) {
+            testMatchingParans(i);
+        }
 
         if (true) {
             return;
         }
         //16.3 - Permutations, TC pending.
         testPermutations();
+
+        //16.4 - Generate Powerset
+        testPowerset();
 
         //16.5 - N Choose K
         testNChooseKV2();
