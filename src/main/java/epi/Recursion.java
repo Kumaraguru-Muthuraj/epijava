@@ -39,6 +39,7 @@ public class Recursion {
      * Check the PowerSetOptimized algorithm for a backtracking algorithm
      */
     public static List<String> result = new ArrayList<>();
+    public static List<StringBuilder> result2 = new ArrayList<>();
     public static List<String> genPowerSet(String elems, int eIdx) {
         List<String> powerSet = new ArrayList<>();
         if (eIdx == 0) {
@@ -57,7 +58,7 @@ public class Recursion {
     }
     public static void testPowerset() {
         Instant start = Instant.now();
-        String elems = new String("abcd");
+        String elems = new String("abcde");
         result = genPowerSet(elems, elems.length() - 1);
         for (String s : result) {
             System.out.println(s);
@@ -289,10 +290,8 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.6 - Matching paranthesis
-        for (int i = 1; i < 10; i++) {
-            testMatchingParans(i);
-        }
+        //16.4 - Generate Powerset
+        testPowerset();
 
         if (true) {
             return;
@@ -300,11 +299,13 @@ public class Recursion {
         //16.3 - Permutations, TC pending.
         testPermutations();
 
-        //16.4 - Generate Powerset
-        testPowerset();
-
         //16.5 - N Choose K
         testNChooseKV2();
+
+        //16.6 - Matching paranthesis
+        for (int i = 1; i < 10; i++) {
+            testMatchingParans(i);
+        }
 
         //16.7 - Palindromic decomposition
         testPalindromicDecompose();
