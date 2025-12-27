@@ -1,4 +1,26 @@
 
+-----------------------------
+# **Problem: Moving Average from Data Stream**
+**Time limit:** 15 minutes
+## **Statement**
+You are given a stream of integers and a window size. Your task is to calculate the **moving average** of all integers within the current sliding window.
+Implement a class called `MovingAverage` with the following methods:
+* **`MovingAverage(int size)`**
+  Initializes the object with the specified window size.
+* **`double next(int val)`**
+  Adds a new integer `val` to the stream and returns the moving average of the **last `size` values**.
+
+## **Constraints**
+* `1 ≤ size ≤ 100`
+* `−10³ ≤ val ≤ 10³`
+* At most `10²` calls will be made to `next`
+
+If you want, I can also:
+* Show a **queue-based implementation**
+* Explain the **running sum optimization**
+* Provide **Java / Python code**
+* Walk through a **sample input-output sequence**
+--------------------------------------
 # **Problem: Word Search II**
 **Time limit:** 40 minutes
 ## **Statement**
