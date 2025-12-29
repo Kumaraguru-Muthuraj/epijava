@@ -6,6 +6,62 @@ import java.util.*;
 import java.util.LinkedList;
 
 public class Recursion {
+    /** 16.1 - Hanoi
+     * TC = O(pow(2,n))
+     * SC = O(n) - We make only n calls recursively.
+     * Even though Hanoi makes exponentially many moves, it only remembers one chain of recursive decisions at a time — one per disk — so space is linear.”
+     */
+    public static int steps = 0;
+    public static int calls = 0;
+    public static void printPlates(List<Stack<Integer>> pegs) {
+        System.out.println();
+        for (int i = 0; i < pegs.size(); i++) {
+            System.out.print("Peg-" + i + " : ");
+            Stack<Integer> plates = pegs.get(i);
+            for (int j = 0; j < plates.size(); j++) {
+                System.out.print(plates.get(j) + ", ");
+            }
+            System.out.print(" : ");
+        }
+    }
+    public static void testHanoi() {
+        for (int i = 2; i < 10; i++) {
+            steps = 0;
+            calls = 0;
+            hanoi(3, i);
+            System.out.println("Plates : " + i + " - Steps : " + steps + " - Calls : " + calls);
+        }
+    }
+    public static void hanoi(int numPegs, int numPlates) {
+        Stack<Integer> plates = new Stack<>();
+        for (int pC = numPlates; pC >= 1; pC--) {
+            plates.push(pC);
+        }
+
+        List<Stack<Integer>> pegs = new ArrayList<>();
+        for (int i = 0; i < numPegs; i++ ) {
+            pegs.add(i, new Stack<>());
+        }
+        pegs.set(0, plates);
+        doHanoi(pegs, numPegs, numPlates, 0, 1, 2);
+        printPlates(pegs);
+    }
+
+    public static void doHanoi(List<Stack<Integer>> pegs, int numPegs, int numPlates, int from, int to, int use) {
+        //calls++;
+        //System.out.print(calls + ", ");
+        if (numPlates > 0) {
+            doHanoi(pegs, numPegs, numPlates - 1, from, use, to);
+            int plate = pegs.get(from).pop();
+            pegs.get(to).push(plate);
+            //printPlates(pegs);
+            steps++;
+            doHanoi(pegs, numPegs, numPlates - 1, use, to, from);
+        }
+        //calls--;
+    }
+
+
     /** 16.3 - Permutations, TC pending.
      * */
     public static void testPermutations() {
@@ -290,14 +346,17 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.4 - Generate Powerset
-        testPowerset();
+        //16.1 - Towers of Hanoi
+        testHanoi();
 
         if (true) {
             return;
         }
         //16.3 - Permutations, TC pending.
         testPermutations();
+
+        //16.4 - Generate Powerset
+        testPowerset();
 
         //16.5 - N Choose K
         testNChooseKV2();
