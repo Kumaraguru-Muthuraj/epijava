@@ -6,6 +6,11 @@ import java.util.*;
 import java.util.LinkedList;
 
 public class Recursion {
+
+    /** Check chat-gpt for peg = 4 or more. There is something called Frame-Stewart algorithm.
+     *
+     */
+
     /** 16.1 - Hanoi
      * TC = O(pow(2,n))
      * SC = O(n) - We make only n calls recursively.

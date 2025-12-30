@@ -1,4 +1,32 @@
 
+# **Problem: Continuous Subarray Sum**
+## **Statement**
+You are given an integer array `nums` and an integer `k`.
+
+Your task is to determine whether the array contains a **good subarray**.
+Return `true` if such a subarray exists; otherwise, return `false`.
+
+A subarray of `nums` is considered **good** if:
+1. Its length is **at least 2**.
+2. The **sum of its elements** is a **multiple of `k`**.
+
+## **Notes**
+* A **subarray** is a contiguous sequence of elements within an array.
+* An integer `x` is a **multiple of `k`** if there exists an integer `n` such that `x = n × k`.
+* **0 is always considered a multiple of `k`.**
+
+## **Constraints**
+* `1 ≤ nums.length ≤ 10⁴`
+* `0 ≤ nums[i] ≤ 10⁵`
+* `0 ≤ sum(nums[i]) ≤ 2³¹ − 1`
+* `1 ≤ k ≤ 2³¹ − 1`
+
+If you want next, I can:
+* Explain the **prefix sum + modulo** intuition
+* Walk through **examples**
+* Show the **O(n) hashmap solution**
+* Provide clean **Java / Python code**
+
 -----------------------------
 # **Problem: Moving Average from Data Stream**
 **Time limit:** 15 minutes
