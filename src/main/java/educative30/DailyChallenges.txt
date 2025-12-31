@@ -1,4 +1,44 @@
 
+------------------
+# **Problem: Optimize Water Distribution in a Village**
+**Time limit:** 40 minutes
+## **Statement**
+There are **`n` houses** in a village, and each house must have access to water. You can supply water using **one of two methods**:
+
+### 1️⃣ Build a Well
+You may build a well directly at a house.
+* The cost of building a well at house `i` is given by `wells[i - 1]`.
+* Houses are numbered from `1` to `n`, while the `wells` array is **0-indexed**.
+
+### 2️⃣ Lay Water Pipes
+You may connect two houses using a pipe so that water can flow between them.
+* Pipe connections are described in the array `pipes`.
+* Each entry is of the form `[house1, house2, cost]`, meaning it costs `cost` to build a **two-way** pipe between `house1` and `house2`.
+* Multiple pipe options may exist between the same pair of houses, possibly with different costs. You may choose the most cost-effective option.
+---
+## **Objective**
+Determine the **minimum total cost** required to ensure that **every house has access to water**, either by:
+* building a well directly at the house, or
+* connecting it (directly or indirectly) via pipes to another house that has water.
+---
+## **Constraints**
+* `2 ≤ n ≤ 10⁴`
+* `wells.length = n`
+* `0 ≤ wells[i] ≤ 10⁵`
+* `1 ≤ pipes.length ≤ 10⁴`
+* `pipes[j].length = 3`
+* `1 ≤ house1j, house2j ≤ n`
+* `house1j ≠ house2j`
+* `0 ≤ costj ≤ 10⁵`
+---
+If you want next, I can:
+
+* Explain the **graph + Minimum Spanning Tree (MST)** intuition
+* Show how to model wells as a **virtual node**
+* Walk through a **sample input step-by-step**
+* Provide clean **Java / Python code**
+
+-----------------------------
 # **Problem: Continuous Subarray Sum**
 ## **Statement**
 You are given an integer array `nums` and an integer `k`.
