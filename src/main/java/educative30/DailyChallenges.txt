@@ -1,4 +1,31 @@
+------------------
+------------------
+# **Problem: Reorder Routes to Make All Paths Lead to the City Zero**
 
+## **Statement**
+There are `n` cities labeled from `0` to `n − 1`, connected by `n − 1` roads. Since there is exactly **one path between any two cities**, the road network forms a **tree**.
+Last year, the Ministry of Transport converted all roads into **one-way** roads due to their narrow width. These roads are represented by an array `connections`, where:
+```
+connections[i] = [ai, bi]
+```
+means there is a directed road **from city `ai` to city `bi`**.
+This year, a major event will take place in the capital city (**city 0**), and people from **all other cities must be able to reach it**.
+---
+## **Objective**
+Determine the **minimum number of roads** that must be **reoriented** so that **every city has a valid path leading to city 0**.
+> A solution is guaranteed to exist, meaning that after reordering some roads, every city can reach city 0.
+---
+## **Constraints**
+* `2 ≤ n ≤ 5 × 10⁴`
+* `connections.length = n − 1`
+* `connections[i].length = 2`
+* `0 ≤ ai, bi ≤ n − 1`
+---
+If you want next, I can:
+* Explain the **DFS / BFS intuition**
+* Walk through a **sample graph**
+* Show how to count reversals efficiently
+* Provide clean **Java / Python code**
 ------------------
 # **Problem: Optimize Water Distribution in a Village**
 **Time limit:** 40 minutes
