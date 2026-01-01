@@ -66,6 +66,57 @@ public class Recursion {
         //calls--;
     }
 
+    /**
+     * 16.2 - Non-attacking queens.
+     * TC - After placing the first queen, the number of recursive calls for the second queen reduces to n-1.
+     * For the 3rd, its n-2 and so on. So the placements is O(n!). Diagonals pruning reduces it further.
+     * For every row validation its O(n). So in total - O(n.n!)
+     * Worst case: O(n! · n)
+     * Average case: much smaller due to diagonal pruning
+     * Lower bound: Ω(number of valid solutions)
+     * Number of solutions grows roughly as O(n!) / eⁿ
+     * SC - O(s(n).n), where S(n) is the number of solutions.
+     *
+     * This N-Queens backtracking solution runs in O(n!·n) time due to O(n) validation per placement, with O(n) auxiliary
+     * space and O(S(n)·n) output space.
+     */
+    public static List<List<Integer>> placements = new ArrayList<>();
+    public static void testQueens() {
+        List<Integer> r = new LinkedList<>();
+        placeQueens(r, 5);
+        for (List<Integer> placement : placements) {
+            for (int i = 0; i < placement.size(); i++) {
+                System.out.print("<Row - " + i + ", Column - " + placement.get(i) + ">, ");
+            }
+            System.out.println();
+        }
+    }
+    public static void placeQueens(List<Integer> rows, int boardSize) {
+        if (rows.size() == boardSize) {
+            List<Integer> dRows = new ArrayList<>(rows);
+            placements.add(dRows);
+        } else {
+            for (int col = 0; col < boardSize; col++) {
+                rows.add(col);
+                if (validPlacement(rows)) {
+                    placeQueens(rows, boardSize);
+                }
+                rows.remove(rows.size() - 1);
+            }
+        }
+    }
+    public static boolean validPlacement(List<Integer> rows) {
+        int curRow = rows.size() - 1;
+        int curColumn = rows.get(curRow);
+        for (int row = 0; row < curRow; row++) {
+            int column = rows.get(row);
+            int diff = Math.abs(curColumn - column);
+            if (diff == 0 || diff == curRow - row) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /** 16.3 - Permutations, TC pending.
      * */
@@ -351,12 +402,15 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.1 - Towers of Hanoi
-        testHanoi();
+        //16.2 - Place Queens
+        testQueens();
 
         if (true) {
             return;
         }
+        //16.1 - Towers of Hanoi
+        testHanoi();
+
         //16.3 - Permutations, TC pending.
         testPermutations();
 
