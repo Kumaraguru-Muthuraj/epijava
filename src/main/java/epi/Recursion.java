@@ -79,22 +79,33 @@ public class Recursion {
      *
      * This N-Queens backtracking solution runs in O(n!·n) time due to O(n) validation per placement, with O(n) auxiliary
      * space and O(S(n)·n) output space.
+     *
+     * N-Queens backtracking is not factorial in practice; it behaves like a constrained exponential search whose
+     * effective branching factor grows, peaks, and then collapses due to diagonal pruning.
      */
+    public static int solSize = 0;
     public static List<List<Integer>> placements = new ArrayList<>();
     public static void testQueens() {
-        List<Integer> r = new LinkedList<>();
-        placeQueens(r, 5);
-        for (List<Integer> placement : placements) {
-            for (int i = 0; i < placement.size(); i++) {
-                System.out.print("<Row - " + i + ", Column - " + placement.get(i) + ">, ");
-            }
-            System.out.println();
+        for (int boardSize = 4; boardSize < 50; boardSize++) {
+            solSize = 0;
+            placements = new ArrayList<>();
+            List<Integer> r = new LinkedList<>();
+            placeQueens(r, boardSize);
+            System.out.println(boardSize + " - " + solSize);
+            /*for (List<Integer> placement : placements) {
+                for (int i = 0; i < placement.size(); i++) {
+                    System.out.print("<Row - " + i + ", Column - " + placement.get(i) + ">, ");
+                }
+                System.out.println();
+            }*/
         }
     }
     public static void placeQueens(List<Integer> rows, int boardSize) {
         if (rows.size() == boardSize) {
+            solSize++;
+            /*
             List<Integer> dRows = new ArrayList<>(rows);
-            placements.add(dRows);
+            placements.add(dRows);*/
         } else {
             for (int col = 0; col < boardSize; col++) {
                 rows.add(col);
