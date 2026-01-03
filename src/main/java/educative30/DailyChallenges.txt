@@ -23,6 +23,15 @@ If you want next, I can:
 * Walk through an **example**
 * Show **DP table construction**
 * Provide clean **Java / Python code**
+
+This requires a DP solution, there is answer in ChatGPT already. Check.
+https://chatgpt.com/c/692c622b-8edc-8324-b51d-5b2906719a63
+-----
+This is not intuitive. I have a simpler solution.
+. Either of the String, search for the last character in the other. From that point, go reverse and match till either of
+them is exhausted. Remember the index where you started and the result length can be derived.
+. Do this search further and you remember the smaller one.
+. The smallest is the solution.
 ------------------
 # **Problem: Reorder Routes to Make All Paths Lead to the City Zero**
 
