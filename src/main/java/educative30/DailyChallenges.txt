@@ -1,4 +1,28 @@
+
 ------------------
+
+------------------
+# **Problem: Shortest Common Supersequence**
+**Time limit:** 30 minutes
+## **Statement**
+You are given two strings, `str1` and `str2`.
+Your task is to find the **Shortest Common Supersequence (SCS)** of these two strings.
+A **shortest common supersequence** is the **shortest possible string** that contains **both `str1` and `str2` as subsequences**.
+If multiple valid shortest common supersequences exist, you may return **any one** of them.
+---
+## **Note**
+A string `s` is considered a **subsequence** of another string `t` if `s` can be obtained by deleting **zero or
+more characters** from `t` **without changing the order** of the remaining characters.
+---
+## **Constraints**
+* `1 ≤ str1.length, str2.length ≤ 10³`
+* `str1` and `str2` consist of **lowercase English letters**
+---
+If you want next, I can:
+* Explain the **LCS-based intuition**
+* Walk through an **example**
+* Show **DP table construction**
+* Provide clean **Java / Python code**
 ------------------
 # **Problem: Reorder Routes to Make All Paths Lead to the City Zero**
 
