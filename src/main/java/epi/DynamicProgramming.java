@@ -41,7 +41,43 @@ public class DynamicProgramming {
         }
     }
 
+    /**
+     * 17.3 - Number of ways to reach an element in a 2D array.
+     */
+    public static void testMatrixNavigation() {
+        int[][] array = new int[5][5];
+        printMatrix(array);
+        navigateMatrix(array, array.length - 1, array[0].length - 1);
+        printMatrix(array);
+    }
+    public static int navigateMatrix(int[][] array, int i, int j) {
+        if (i == 0 || j == 0) {
+            array[i][j] = 1;
+        } else {
+            if (array[i][j] == 0) {
+                int way2AboveCell = navigateMatrix(array, i - 1, j);
+                int way2LeftCell = navigateMatrix(array, i, j - 1);
+                array[i][j] = way2AboveCell + way2LeftCell;
+            }
+        }
+        return array[i][j];
+    }
+
+    public static void printMatrix(int[][] array) {
+        for (int i = 0 ; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+                System.out.print(array[i][j] + ", ");
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
+        //17.3 - 2D array navigation
+        testMatrixNavigation();
+        if (true) {
+            return;
+        }
         testFB();
     }
 }
