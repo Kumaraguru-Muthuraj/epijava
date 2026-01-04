@@ -72,12 +72,44 @@ public class DynamicProgramming {
         }
     }
 
+    /**
+     * 17.4 - Compute binomial coefficients.
+     * n choose k.
+     */
+    public static void testNChooseK() {
+        int n = 5;
+        int k = 2;
+        int[][] dp = new int[n+1][k+1];
+        printMatrix(dp);
+        System.out.println(nChooseK(n, k, dp));
+        printMatrix(dp);
+    }
+    public static int nChooseK(int n, int k, int[][] dp) {
+        if (n == 0) {
+            dp[n][k] = 0;
+        } else if (n == k || k == 0) {
+            dp[n][k] = 1;
+        } else {
+            if (dp[n][k] == 0) {
+                int withOutY = nChooseK(n-1, k, dp); //Without the element
+                int withY = nChooseK(n-1, k-1, dp); //With the element
+                dp[n][k] = withOutY + withY;
+            }
+        }
+        return dp[n][k];
+    }
+
+
     public static void main(String[] args) {
-        //17.3 - 2D array navigation
-        testMatrixNavigation();
+        //17.4 - nChooseK
+        testNChooseK();
+
         if (true) {
             return;
         }
+        //17.3 - 2D array navigation
+        testMatrixNavigation();
+
         testFB();
     }
 }
