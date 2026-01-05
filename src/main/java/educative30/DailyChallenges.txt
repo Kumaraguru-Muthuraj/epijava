@@ -2,6 +2,44 @@
 ------------------
 
 ------------------
+## **Problem: Logger Rate Limiter**
+---
+### **Statement**
+You are given a stream of message requests, each associated with a timestamp. Your task is to implement a **logger rate
+limiter** that determines whether a message should be displayed.
+A message **should be displayed** if and only if **the same message has not been displayed in the last `S` seconds**.
+* If the message **has already been displayed within the previous `S` seconds**, return **`false`** (duplicate message).
+* Otherwise, return **`true`** (display the message).
+---
+### **Notes**
+* Multiple message requests may contain the **same message** but arrive at **different timestamps**.
+* Timestamps are provided in **ascending order**.
+---
+## **Constraints**
+* ( 1 \le \text{request.length} \le 10^2 )
+* ( 0 \le \text{timestamp} \le 10^3 )
+* Timestamps are strictly **non-decreasing**
+* Messages consist of **uppercase and/or lowercase English letters**
+---
+### **Expected Behavior**
+For each incoming `(timestamp, message)` pair, return a boolean indicating whether the message should be logged according to the rate-limiting rule.
+---
+If you want, I can also:
+* Add **example inputs and outputs**
+* Explain the **hash map + sliding window intuition**
+* Provide **Java / Python implementation**
+* Do **time & space complexity analysis**
+class RequestLogger {
+	public RequestLogger(int timeLimit) {
+		// Initialize your data structure here
+	}
+
+	public boolean messageRequestDecision(int timestamp, String request) {
+		// Replace this placeholder return statement with your code
+		return false;
+	}
+}
+------------------
 # **Problem: Shortest Common Supersequence**
 **Time limit:** 30 minutes
 ## **Statement**
