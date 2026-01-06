@@ -2,6 +2,39 @@
 ------------------
 
 ------------------
+
+## **Problem: Count Days Without Meetings**
+### **Statement**
+You are given a positive integer `days`, representing the total number of days an employee is available for work, starting from **day 1**.
+You are also given a 2D array `meetings`, where each entry:
+```
+meetings[i] = [start_i, end_i]
+```
+indicates that a meeting is scheduled from **day `start_i` to day `end_i`**, **inclusive**.
+Your task is to **count the number of days** during which the employee is available for work **but has no meetings scheduled**.
+---
+### **Notes**
+* Meetings **may overlap**.
+* Days are numbered starting from **1** through `days`.
+---
+### **Constraints**
+* ( 1 \le \text{days} \le 100{,}000 )
+* ( 1 \le \text{meetings.length} \le 1{,}000 )
+* ( \text{meetings[i].length} = 2 )
+* ( 1 \le \text{start}_i \le \text{end}_i \le \text{days} )
+
+---
+### **Expected Output**
+Return the number of days with **no meetings scheduled**.
+---
+If you want, I can also:
+* Add **example inputs and outputs**
+* Explain an **interval-merging solution**
+* Show a **sweep-line approach**
+* Provide **Java/Python code**
+* Do **time and space complexity analysis**
+
+------------------
 ## **Problem: Logger Rate Limiter**
 ---
 ### **Statement**

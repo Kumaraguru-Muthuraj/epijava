@@ -99,16 +99,28 @@ public class DynamicProgramming {
         return dp[n][k];
     }
 
+    /**
+     * 17.5 - Search for a sequence in a 2D array.
+     */
+    public static void testSearch2DArray() {
+
+    }
+    public static boolean patternFound() {
+
+    }
 
     public static void main(String[] args) {
-        //17.4 - nChooseK
-        testNChooseK();
+        //17.5 - testSearch2DArray
+        testSearch2DArray();
 
         if (true) {
             return;
         }
         //17.3 - 2D array navigation
         testMatrixNavigation();
+
+        //17.4 - nChooseK
+        testNChooseK();
 
         testFB();
     }
