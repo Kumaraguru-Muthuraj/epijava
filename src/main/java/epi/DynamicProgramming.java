@@ -1,7 +1,11 @@
 package epi;
 
 
+import epi.util.MatrixXYOffset;
+
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DynamicProgramming {
     public static int fb(int x) {
@@ -102,11 +106,42 @@ public class DynamicProgramming {
     /**
      * 17.5 - Search for a sequence in a 2D array.
      */
+    public static Set<MatrixXYOffset> dpCache = new HashSet<>();
     public static void testSearch2DArray() {
+        int[][] matrix = { {1, 2, 3},
+                            {3, 4, 5},
+                            {5, 6, 7}};
+        int[] pattern = {2, 3, 5, 7, 6};
+        System.out.println(patternFound(matrix, pattern));
 
     }
-    public static boolean patternFound() {
-
+    public static boolean patternFound(int[][] matrix, int[] pattern) {
+        for (int x = 0; x < matrix.length; x++) {
+            for (int y = 0; y < matrix[0].length; y++) {
+                if (patternFound(matrix, pattern, x, y, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean patternFound(int[][] matrix, int[] pattern, int x, int y, int offset) {
+        if (offset == pattern.length) {
+            return true;
+        }
+        if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length
+            || dpCache.contains(new MatrixXYOffset(x, y, offset))) {
+            return false;
+        }
+        if (matrix[x][y] == pattern[offset]) {
+            return
+                patternFound(matrix, pattern, x, y - 1, offset + 1) ||
+                patternFound(matrix, pattern, x, y + 1, offset + 1) ||
+                patternFound(matrix, pattern, x - 1, y, offset + 1) ||
+                patternFound(matrix, pattern, x + 1, y, offset + 1);
+        }
+        dpCache.add(new MatrixXYOffset(x, y, offset));
+        return false;
     }
 
     public static void main(String[] args) {
