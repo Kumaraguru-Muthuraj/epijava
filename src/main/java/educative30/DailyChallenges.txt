@@ -1,6 +1,55 @@
 
 ------------------
+------------------
+------------------
+---
+## **Problem: Reconstruct Itinerary**
+**Time Limit:** 40 min
+---
+### **Statement**
+You are given a list of airline tickets, where each ticket is represented as:
+```
+tickets[i] = [from_i, to_i]
+```
+This indicates a direct flight from airport `from_i` to airport `to_i`.
+Your task is to **reconstruct the complete travel itinerary** using **all tickets exactly once**, following these rules:
+* The journey **must begin at `"JFK"`**.
+* If **multiple valid itineraries** exist, return the one with the **smallest lexical (dictionary) order** when the entire itinerary is viewed as a single string.
+* You are guaranteed that **at least one valid itinerary exists**.
+---
+### **Lexical Order Clarification**
+An itinerary is compared lexicographically as a sequence of strings.
+For example:
+* `["JFK", "EDU"]` is lexicographically smaller than `["JFK", "EDX"]`.
+---
+### **Notes**
+* All tickets must be used **exactly once**.
+* Airport codes are always **3 uppercase English letters**.
+---
+### **Constraints**
+* ( 1 \le \text{tickets.length} \le 300 )
+* ( \text{tickets[i].length} = 2 )
+* ( \text{from}_i.\text{length} = 3 )
+* ( \text{to}_i.\text{length} = 3 )
+* ( \text{from}_i \ne \text{to}_i )
+* `from_i` and `to_i` consist of uppercase English letters
+---
+### **Expected Output**
+Return a list of airport codes representing the reconstructed itinerary.
+---
+If you want, I can also:
+* Walk through a **graph + DFS (Hierholzer’s Algorithm)** solution
+* Provide **Java / Python code**
+* Explain **why a priority queue is needed**
+* Do **time and space complexity analysis**
+* Add **example test cases**
+public class Solution {
+    public static List<String> findItinerary(List<List<String>> tickets) {
 
+        // Replace this placeholder return statement with your code
+        return new ArrayList<>();
+    }
+}
 ------------------
 
 ## **Problem: Count Days Without Meetings**
