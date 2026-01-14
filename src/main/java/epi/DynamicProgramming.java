@@ -145,8 +145,6 @@ public class DynamicProgramming {
     }
 
     public static void main(String[] args) {
-        //17.5 - testSearch2DArray
-        testSearch2DArray();
 
         if (true) {
             return;
@@ -156,6 +154,9 @@ public class DynamicProgramming {
 
         //17.4 - nChooseK
         testNChooseK();
+
+        //17.5 - testSearch2DArray
+        testSearch2DArray();
 
         testFB();
     }
