@@ -3,10 +3,8 @@ package epi;
 
 import epi.util.MatrixXYOffset;
 
+import java.util.*;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class DynamicProgramming {
     public static int fb(int x) {
@@ -210,7 +208,50 @@ public class DynamicProgramming {
         return dp[n];
     }
 
+    /** 17.8 - Minimum weight triangle.
+     * T.C - O(n^2) because there are 1 + 2 + 3 + ... + n elements. Uniform work done for each element.
+     * S.C - O(n) even though new memory is not allocated.
+     */
+
+    public static void testTriangleMinimumWeight() {
+        Random r = new Random();
+        triangle = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                row.add(r.nextInt(20) + 1);
+            }
+            triangle.add(row);
+        }
+        printTriangle();
+        triangleMiniumWeight();
+        printTriangle();
+    }
+    public static void triangleMiniumWeight() {
+        int rowIdx = triangle.size() - 2;
+        for (int i = rowIdx; i >= 0; i--) {
+            ArrayList<Integer> row = triangle.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                ArrayList<Integer> nextRow = triangle.get(i + 1);
+                int weight = row.get(j) + Math.min(nextRow.get(j), nextRow.get(j+1));
+                row.set(j, weight);
+            }
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> triangle;
+    public static void printTriangle() {
+        for (int i = 0; i < triangle.size();i++) {
+            ArrayList<Integer> row = triangle.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                System.out.print(row.get(j) + ", ");
+            }
+            System.out.println();
+        }
+    }
+
+
     public static void main(String[] args) {
+
 
         if (true) {
             return;
@@ -223,6 +264,9 @@ public class DynamicProgramming {
 
         //17.5 - testSearch2DArray
         testSearch2DArray();
+
+        //17.8 - Minimum weight triangle.
+        testTriangleMinimumWeight();
 
         //17.10
         testClimbNStairs();
