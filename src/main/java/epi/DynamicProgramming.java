@@ -3,6 +3,7 @@ package epi;
 
 import epi.util.MatrixXYOffset;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -144,7 +145,74 @@ public class DynamicProgramming {
         return false;
     }
 
+    /**
+     * 17.10 - Climb n stairs with 1 - k hops.
+     * For n=4 and k=3 the values are
+     * 1234
+     * 124
+     * 134
+     * 14
+     * 234
+     * 24
+     * 34
+     * TC = O(n.k), S.C = O(n)
+     */
+    public static void testClimbNStairs() {
+        int n = 5;
+        int k = 3;
+        dp = new int[n+1];
+        Arrays.fill(dp, 0);
+        int steps1 = climbNStairsKMax(n, k);
+        Arrays.fill(dp, 0);
+        int steps2 = climbNStairsKMaxFromBook(n, k);
+        Arrays.fill(dp, 0);
+        int steps3 = climbNStairsKMaxBottomUp(n, k);
+        System.out.println("Steps - " + steps1 + ", " + steps2 + ", " + steps3);
+
+    }
+    public static int climbNStairsKMax(int n, int k) {
+        if (n <= 1) {
+            dp[n] = 1;
+            return dp[n];
+        }
+        int steps = 0;
+        if (dp[n] == 0) {
+            for (int i = 1 ; i <= Math.min(n, k); i++) {
+                dp[n] += climbNStairsKMax(n - i, k);
+            }
+        }
+        steps = dp[n];
+        return steps;
+    }
+    public static int[] dp;
+
+    public static int climbNStairsKMaxFromBook(int n, int k) {
+        if (n <= 1) {
+            return 1;
+        }
+        if (dp[n] == 0) {
+            for (int i = 1 ; i <= k && n - i >= 0; i++) {
+                dp[n] += climbNStairsKMax(n - i, k);
+            }
+        }
+        return dp[n];
+    }
+
+    public static int climbNStairsKMaxBottomUp(int n, int k) {
+        dp[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int jump = 1 ; jump <= k; jump++) {
+                if (i - jump >= 0) {
+                    dp[i] += dp[i - jump];
+                }
+            }
+        }
+        return dp[n];
+    }
+
     public static void main(String[] args) {
+        //17.10
+        testClimbNStairs();
 
         if (true) {
             return;
