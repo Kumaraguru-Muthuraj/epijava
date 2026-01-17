@@ -211,8 +211,6 @@ public class DynamicProgramming {
     }
 
     public static void main(String[] args) {
-        //17.10
-        testClimbNStairs();
 
         if (true) {
             return;
@@ -225,6 +223,9 @@ public class DynamicProgramming {
 
         //17.5 - testSearch2DArray
         testSearch2DArray();
+
+        //17.10
+        testClimbNStairs();
 
         testFB();
     }
