@@ -44,6 +44,32 @@ public class DynamicProgramming {
         }
     }
 
+    /** 17.1 - Number of score combinations
+     * a(i,j) = a(i-1,j) + a(i,j-k), where k is the different denominations. k is for the current denomination.
+     * T.C = O(s.n), s - size of denominations
+     * S.C = O(s.n)
+     */
+    public static void testNumberOfScoreCombinations() {
+        List<Integer> d = List.of(2, 3, 7);
+        int sum = 12;
+        int ways = numberOfScoreCombinations(sum, d);
+        System.out.println(ways);
+    }
+    public static int numberOfScoreCombinations(int sum, List<Integer> denominations) {
+        int[][] dp = new int[denominations.size()][sum+1];
+
+        for (int i = 0; i < denominations.size(); i++) {
+            dp[i][0] = 1;
+            for (int j = 1; j <= sum; j++) {
+                int withoutCurrent = (i - 1 >= 0) ? dp[i - 1][j] : 0;
+                int withCurrent = (j - denominations.get(i) >= 0) ? dp[i][j - denominations.get(i)] : 0;
+                dp[i][j] = withoutCurrent + withCurrent;
+            }
+        }
+
+        return dp[denominations.size() - 1][sum];
+    }
+
     /**
      * 17.3 - Number of ways to reach an element in a 2D array.
      */
@@ -251,7 +277,8 @@ public class DynamicProgramming {
 
 
     public static void main(String[] args) {
-
+        //17.1 - Number of score combinations
+        testNumberOfScoreCombinations();
 
         if (true) {
             return;
