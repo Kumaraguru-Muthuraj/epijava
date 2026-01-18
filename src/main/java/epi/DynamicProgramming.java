@@ -71,6 +71,48 @@ public class DynamicProgramming {
     }
 
     /**
+     * 17.2 - Levenshtein distance.
+     * Count of minimum number of inserts, deletes and replacements to make strings same.
+     */
+    public static void testLevenshteinDistance() {
+        String s1 = "kitten"; //"Saturdays";
+        String s2 = "sitting"; //"Sundays";
+        levenshteinDistance(s1, s2);
+    }
+
+    /** A is word1 and B is word2, We are converting
+     * A to B.
+     */
+    public static int levenshteinDistance(String A, String B) {
+        int[][] dp = new int[A.length() + 1][B.length() + 1];
+        for (int i = 0; i < A.length() + 1; i++) {
+            Arrays.fill(dp[i], 0);
+        }
+        // Base case for row 0 - Convert empty String to w2 -> Insert all chars of w2
+        for (int j = 0; j < B.length() + 1; j++) {
+            dp[0][j] = j;
+        }
+        // Base case for column 0 - Convert w1 to empty string -> Delete all chars
+        for (int i = 0; i < A.length() + 1; i++) {
+            dp[i][0] = i;
+        }
+        //Decision case - Look at the notebook for EPI 17.2
+        for (int i = 1; i < A.length() + 1; i++) {
+            for (int j = 1; j < B.length() + 1; j++) {
+                if (A.charAt(i - 1) == B.charAt(j - 1)) {
+                    dp[i][j] = dp[i-1][j-1];
+                } else {
+                    dp[i][j] = 1 + Math.min(
+                                        Math.min(dp[i-1][j], dp[i][j-1]),
+                                        dp[i-1][j-1]);
+                }
+            }
+        }
+
+        return dp[A.length()][B.length()];
+    }
+
+    /**
      * 17.3 - Number of ways to reach an element in a 2D array.
      */
     public static void testMatrixNavigation() {
@@ -277,12 +319,16 @@ public class DynamicProgramming {
 
 
     public static void main(String[] args) {
-        //17.1 - Number of score combinations
-        testNumberOfScoreCombinations();
+        // 17.2 - Levenshtein distance.
+        testLevenshteinDistance();
 
         if (true) {
             return;
         }
+
+        //17.1 - Number of score combinations
+        testNumberOfScoreCombinations();
+
         //17.3 - 2D array navigation
         testMatrixNavigation();
 
