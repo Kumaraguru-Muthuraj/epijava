@@ -135,6 +135,7 @@ public class DynamicProgramming {
     }
 
     public static void printMatrix(int[][] array) {
+        System.out.println();
         for (int i = 0 ; i < array.length; i++) {
             for (int j = 0; j < array[0].length; j++) {
                 System.out.print(array[i][j] + ", ");
@@ -210,6 +211,55 @@ public class DynamicProgramming {
         dpCache.add(new MatrixXYOffset(x, y, offset));
         return false;
     }
+
+    /** 17.6 - Knapsack problem
+     * Check the notebook for a story-kind of explanation.
+     */
+    public static void testKnapsack() {
+        values = new int[]{1, 4, 5, 7}; //new int[]{60, 50, 70, 30};
+        weights = new int[]{1, 3, 4, 5}; //new int[]{5, 3, 4, 2};
+        W = 7;
+        System.out.println("For max capacity of - " + W + " - Value is - " + knapSack());
+    }
+    //Returns the value of the items
+    public static int knapSack() {
+        int itemCount = values.length;
+        int[][] dp = new int[itemCount + 1][W + 1];
+        for (int i = 0; i <= itemCount; i++) {
+            Arrays.fill(dp[i], 0);
+        }
+        printMatrix(dp);
+
+        for (int itmIdx = 1; itmIdx <= itemCount; itmIdx++) {
+            int curItemWeight = weights[itmIdx - 1];
+            int curItemValue = values[itmIdx - 1];
+            for (int weight = 0; weight <= W; weight++) {
+                if (curItemWeight > weight) {
+                    /** You cannot use current item, just limited to
+                     * the previous item constrained by the max capacity.
+                     */
+                    dp[itmIdx][weight] = dp[itmIdx - 1][weight];
+                } else {
+                    /** We have 2 options, consider / drop current item.
+                     * withoutItm - Value obtained by previous item constrained by max capacity.
+                     * withItm - Value obtained by previous item constrained by max capacity - current item weight
+                     *              +
+                     *            currentItemValue.
+                     * Take max of them.
+                     */
+                    int withoutItm = dp[itmIdx - 1][weight];
+                    int withItm = dp[itmIdx - 1][weight - curItemWeight] + curItemValue;
+
+                    dp[itmIdx][weight] = Math.max(withoutItm, withItm);
+                }
+            }
+        }
+        printMatrix(dp);
+        return dp[itemCount][W];
+    }
+    static int W;
+    static int[] values;
+    static int[] weights;
 
     /**
      * 17.10 - Climb n stairs with 1 - k hops.
@@ -319,8 +369,8 @@ public class DynamicProgramming {
 
 
     public static void main(String[] args) {
-        // 17.2 - Levenshtein distance.
-        testLevenshteinDistance();
+        //17.6 - Knapsack problem
+        testKnapsack();
 
         if (true) {
             return;
@@ -328,6 +378,9 @@ public class DynamicProgramming {
 
         //17.1 - Number of score combinations
         testNumberOfScoreCombinations();
+
+        // 17.2 - Levenshtein distance.
+        testLevenshteinDistance();
 
         //17.3 - 2D array navigation
         testMatrixNavigation();
