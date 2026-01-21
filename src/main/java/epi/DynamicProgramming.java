@@ -214,8 +214,10 @@ public class DynamicProgramming {
 
     /** 17.6 - Knapsack problem
      * Check the notebook for a story-kind of explanation.
+     * T.C - O(value count x W)
+     * S.C - Same.
      */
-    public static void testKnapsack() {
+    public static void testKnapsackBottomUp() {
         values = new int[]{1, 4, 5, 7}; //new int[]{60, 50, 70, 30};
         weights = new int[]{1, 3, 4, 5}; //new int[]{5, 3, 4, 2};
         W = 7;
@@ -260,6 +262,58 @@ public class DynamicProgramming {
     static int W;
     static int[] values;
     static int[] weights;
+
+    /** 17.8 - Minimum weight triangle.
+     * T.C - O(n^2) because there are 1 + 2 + 3 + ... + n elements. Uniform work done for each element.
+     * S.C - O(n) even though new memory is not allocated.
+     */
+
+    public static void testTriangleMinimumWeight() {
+        Random r = new Random();
+        triangle = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                row.add(r.nextInt(20) + 1);
+            }
+            triangle.add(row);
+        }
+        printTriangle();
+        triangleMiniumWeight();
+        printTriangle();
+    }
+    public static void triangleMiniumWeight() {
+        int rowIdx = triangle.size() - 2;
+        for (int i = rowIdx; i >= 0; i--) {
+            ArrayList<Integer> row = triangle.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                ArrayList<Integer> nextRow = triangle.get(i + 1);
+                int weight = row.get(j) + Math.min(nextRow.get(j), nextRow.get(j+1));
+                row.set(j, weight);
+            }
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> triangle;
+    public static void printTriangle() {
+        for (int i = 0; i < triangle.size();i++) {
+            ArrayList<Integer> row = triangle.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                System.out.print(row.get(j) + ", ");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * 17.9 - Pick coins for maximum gain.
+     */
+    public static void testPickCoinsMaxGain() {
+
+    }
+    public static int pickCoinsMaxGain() {
+        int gain = 0;
+        return gain;
+    }
 
     /**
      * 17.10 - Climb n stairs with 1 - k hops.
@@ -326,51 +380,12 @@ public class DynamicProgramming {
         return dp[n];
     }
 
-    /** 17.8 - Minimum weight triangle.
-     * T.C - O(n^2) because there are 1 + 2 + 3 + ... + n elements. Uniform work done for each element.
-     * S.C - O(n) even though new memory is not allocated.
-     */
 
-    public static void testTriangleMinimumWeight() {
-        Random r = new Random();
-        triangle = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            ArrayList<Integer> row = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                row.add(r.nextInt(20) + 1);
-            }
-            triangle.add(row);
-        }
-        printTriangle();
-        triangleMiniumWeight();
-        printTriangle();
-    }
-    public static void triangleMiniumWeight() {
-        int rowIdx = triangle.size() - 2;
-        for (int i = rowIdx; i >= 0; i--) {
-            ArrayList<Integer> row = triangle.get(i);
-            for (int j = 0; j < row.size(); j++) {
-                ArrayList<Integer> nextRow = triangle.get(i + 1);
-                int weight = row.get(j) + Math.min(nextRow.get(j), nextRow.get(j+1));
-                row.set(j, weight);
-            }
-        }
-    }
-    public static ArrayList<ArrayList<Integer>> triangle;
-    public static void printTriangle() {
-        for (int i = 0; i < triangle.size();i++) {
-            ArrayList<Integer> row = triangle.get(i);
-            for (int j = 0; j < row.size(); j++) {
-                System.out.print(row.get(j) + ", ");
-            }
-            System.out.println();
-        }
-    }
 
 
     public static void main(String[] args) {
-        //17.6 - Knapsack problem
-        testKnapsack();
+        //17.9 - Pick coins for max gain.
+        testPickCoinsMaxGain();
 
         if (true) {
             return;
@@ -390,6 +405,9 @@ public class DynamicProgramming {
 
         //17.5 - testSearch2DArray
         testSearch2DArray();
+
+        //17.6 - Knapsack problem
+        testKnapsackBottomUp();
 
         //17.8 - Minimum weight triangle.
         testTriangleMinimumWeight();
