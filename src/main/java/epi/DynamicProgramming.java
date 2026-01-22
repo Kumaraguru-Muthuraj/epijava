@@ -305,28 +305,93 @@ public class DynamicProgramming {
     }
 
     /**
-     * 17.9 - Pick coins for maximum gain.
+     * 17.9 (a) - Pick coins for maximum gain.
      */
-    public static void testPickCoinsMaxGain() {
-
+    public static void testPickCoinsMaxGainBottomUp() {
+        coins = new int[]{10, 25, 5, 1, 10, 5};
+        System.out.println("Max gain - " + pickCoinsMaxGainBottomUp());
     }
-    public static int pickCoinsMaxGain() {
+    public static int pickCoinsMaxGainBottomUp() {
         int gain = 0;
+        int coinLen = coins.length;
+        int[][] dp = new int[coinLen][coinLen];
+
+        for (int i = 0; i < coinLen; i++) {
+            dp[i][i] = coins[i];
+        }
+        System.out.println("Coin Length - " + coinLen);
+        /** For lengths from 2 to total number of coins, we will the DP table.
+         * We go for 2 length, 3 length till all coins are considered.
+         */
+        for (int len = 2; len <= coinLen; len++) {
+            System.out.println("\nLen - " + len);
+            /** If begin index is 2 and length is 3, we can only go till num_coins - 1.
+             * i = start, j = i + len, indicating the number of coins considered.
+             */
+            for (int i = 0; i + len - 1 < coinLen; i++) {
+                int j = i + len - 1;
+                System.out.println(i + ", " + j);
+                /** Comment from this. This block can be commented out to understand the i and j values.
+                 * This recursive equation is known already.
+                  */
+                int val1 = coins[i] + Math.min(
+                                i+2 <= j ? dp[i + 2][j] : 0,        /** x has to be <= y, to get a value from dp[x][y]. */
+                                i+1 <= j-1 ? dp[i + 1][j - 1] : 0);
+                int val2 = coins[j] + Math.min(
+                                    i+1 <= j-1 ? dp[i + 1][j - 1] : 0,
+                                    i <= j-2 ? dp[i][j - 2] : 0);
+                dp[i][j] = Math.max(val1, val2);
+                /** Comment till this.
+                 */
+            }
+        }
+        gain = dp[0][coinLen - 1];
         return gain;
     }
+    static int[] coins;
 
     /**
-     * 17.10 - Climb n stairs with 1 - k hops.
-     * For n=4 and k=3 the values are
-     * 1234
-     * 124
-     * 134
-     * 14
-     * 234
-     * 24
-     * 34
-     * TC = O(n.k), S.C = O(n)
+     * 17.9 (b) - Pick coins for maximum gain.
+     * The DP table will not be all filled. Only required ones are filled.
+     * ALL DP problems, fill the table with -1, not 0, because 0 could be a valid value.
      */
+    public static void testPickCoinsMaxGainMemoization() {
+        coins = new int[]{10, 25, 5, 1, 10, 5};
+        int coinLen = coins.length;
+        int[][] dp = new int[coinLen][coinLen];
+        for (int i = 0; i < coinLen; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        System.out.println("Max gain - " + pickCoinsMaxGainMemoization(0, coins.length - 1, dp));
+    }
+    public static int pickCoinsMaxGainMemoization(int i, int j, int[][] dp) {
+        if (i > j) {
+            return 0;
+        }
+        if (dp[i][j] == -1) {
+            int val1 = coins[i] + Math.min(
+                                        pickCoinsMaxGainMemoization(i + 2, j, dp),
+                                        pickCoinsMaxGainMemoization(i + 1, j - 1, dp));
+            int val2 = coins[j] + Math.min(
+                                        pickCoinsMaxGainMemoization(i + 1, j - 1, dp),
+                                        pickCoinsMaxGainMemoization(i, j - 2, dp));
+            dp[i][j] = Math.max(val1, val2);
+        }
+        return dp[i][j];
+    }
+
+        /**
+         * 17.10 - Climb n stairs with 1 - k hops.
+         * For n=4 and k=3 the values are
+         * 1234
+         * 124
+         * 134
+         * 14
+         * 234
+         * 24
+         * 34
+         * TC = O(n.k), S.C = O(n)
+         */
     public static void testClimbNStairs() {
         int n = 5;
         int k = 3;
@@ -385,7 +450,8 @@ public class DynamicProgramming {
 
     public static void main(String[] args) {
         //17.9 - Pick coins for max gain.
-        testPickCoinsMaxGain();
+        testPickCoinsMaxGainBottomUp();
+        testPickCoinsMaxGainMemoization();
 
         if (true) {
             return;
