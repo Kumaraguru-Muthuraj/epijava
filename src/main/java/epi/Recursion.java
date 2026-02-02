@@ -413,14 +413,17 @@ public class Recursion {
     }
 
     public static void main(String[] args) {
-        //16.2 - Place Queens
-        testQueens();
+        //16.4 - Generate Powerset
+        testPowerset();
 
         if (true) {
             return;
         }
         //16.1 - Towers of Hanoi
         testHanoi();
+
+        //16.2 - Place Queens
+        testQueens();
 
         //16.3 - Permutations, TC pending.
         testPermutations();
