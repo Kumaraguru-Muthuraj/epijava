@@ -20,7 +20,33 @@ import java.util.*;
 public class Tiles {
 
     public static int numTilePossibilities(String tiles) {
+        int[] alphaFreq = new int[26];
+        for (char c : tiles.toCharArray()) {
+            alphaFreq[c - 'A']++;
+        }
+        return recurse(alphaFreq);
+    }
 
-        return - 1;
+    private static int recurse(int[] alphaFreq) {
+        int count = 0;
+
+        for (int i = 0; i < 26; i++) {
+            if (alphaFreq[i] == 0) continue;
+
+            // choose this character
+            count++;
+            alphaFreq[i]--;
+
+            // extend the sequence further
+            count += recurse(alphaFreq);
+
+            // revert
+            alphaFreq[i]++;
+        }
+
+        return count;
+    }
+    public static void main(String[] args) {
+        System.out.println(numTilePossibilities("ABC"));
     }
 }
