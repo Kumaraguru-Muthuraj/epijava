@@ -15,6 +15,8 @@ import java.util.*;
  *
  *  I see this as NChooseK, but the chars are duplicated. We can use a Set to prevent duplicates,
  *  but ChatGPT gave an algorithm that uses counts.
+ *
+ *  Alternate - Create a regular nChooseK-permutation algorithm and add the values to a set.
  */
 //20260202
 public class Tiles {
@@ -47,6 +49,6 @@ public class Tiles {
         return count;
     }
     public static void main(String[] args) {
-        System.out.println(numTilePossibilities("ABC"));
+        System.out.println(numTilePossibilities("ABCDE"));
     }
 }

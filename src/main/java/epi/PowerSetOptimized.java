@@ -39,7 +39,7 @@ public class PowerSetOptimized {
         Instant end = Instant.now();
         long elapsedMs = Duration.between(start, end).toMillis();
 
-        System.out.println("Time: " + elapsedMs + " ms");
+        System.out.println("Size: " + l.size() + " Time: " + elapsedMs + " ms");
     }
 
 }
