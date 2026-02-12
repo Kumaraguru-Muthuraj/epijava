@@ -1,5 +1,4 @@
-package educative2;
-import java.util.*;
+package flagship;
 
 /**
  * You are given a string tiles consisting of uppercase English letters.

@@ -1,7 +1,6 @@
-package educative2;
+package flagship;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

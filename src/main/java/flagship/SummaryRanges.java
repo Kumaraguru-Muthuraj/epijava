@@ -1,4 +1,4 @@
-package educative2;
+package flagship;
 
 
 import java.util.*;
