@@ -18,6 +18,7 @@ import epi.Node;
  * * `-10^3 ≤ Node.value ≤ 10^3`
  * * `1 ≤ n ≤ k`
  */
+//FLAGSHIP02
 public class RemoveNthFromEnd {
     //Use SENTINEL.
     public static Node<Integer> removeNthLastNode(Node<Integer> head, int n) {
