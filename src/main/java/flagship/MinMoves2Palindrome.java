@@ -15,7 +15,7 @@ import java.util.Collections;
  * `s` is guaranteed to be converted into a palindrome in a finite number of moves.
  */
 public class MinMoves2Palindrome {
-    private static void swap(char[] arr, int i, int j) {
+    public static void swap(char[] arr, int i, int j) {
         char temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
