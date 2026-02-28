@@ -421,6 +421,7 @@ public class LinkedLists {
         Node<Integer> cur = l.getHead();
         Node<Integer> nextNode = cur.next;
         while (cur != null) {
+            nextNode = cur.next;
             while (nextNode != null && cur.value.equals(nextNode.value)) {
                 nextNode = nextNode.next;
             }
