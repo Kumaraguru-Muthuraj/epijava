@@ -7,6 +7,41 @@ import java.util.Random;
 
 // Chapter 7.
 public class Strings {
+
+    //Rolling Hash - Start
+    public static int BASE = 26;
+    public static long hashStr(String sub) {
+        long hash = 0;
+        for (int i = 0; i < sub.length(); i++) {
+            Character c = sub.charAt(i);
+            hash *= BASE;
+            hash += c.hashCode();
+        }
+        return hash;
+    }
+
+
+    public static int findSubString(String text, String sub) {
+        long targetHash = hashStr(sub);
+
+        long workingHash = hashStr(text.substring(0, sub.length()));
+        if (targetHash == workingHash) {
+            return 0;
+        }
+        long toSubtract = (long) Math.pow(BASE, sub.length() - 1);
+        for (int i = 0; i < text.length() - sub.length(); i++) {
+            //Calculate the rolling hash
+            workingHash -= toSubtract * text.charAt(i);
+            workingHash = workingHash * BASE + text.charAt(i + sub.length());
+
+            if (workingHash == targetHash) {
+                return i+1;
+            }
+        }
+        return -1;
+    }
+    //Rolling Hash - End
+
     /* 7.0 - Plaindrome
      */
     public static boolean palindrome(String str) {
@@ -463,6 +498,15 @@ public class Strings {
     }
 
     public static void main(String[] args) {
+
+        System.out.println(findSubString("kumaraguru muthuraj", "hur"));
+
+        System.out.println(convertToBase10("53AB", 16));
+        System.out.println(convertToBase10("10101100", 2));
+        System.out.println(convertBase10ToB(532541, 16));
+        System.out.println(convertBase10ToB(53, 8));
+        System.out.println(convertBase10ToB(53, 2));
+
         ArrayList<String> alphabets = new ArrayList<>();
 
         alphabets.clear();

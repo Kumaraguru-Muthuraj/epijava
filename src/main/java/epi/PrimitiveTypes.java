@@ -260,6 +260,7 @@ public class PrimitiveTypes {
     }
 
     public static void main(String[] args) throws Exception {
+        System.out.println(nWithSameWeight(8));
         for (int i = 0; i < 7; i++) {
             System.out.println(power(2, i));
         }
