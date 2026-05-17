@@ -482,23 +482,23 @@ public class Sorting {
             return;
         }
 
+        //14.5
+        testMergeInterval();
+
+        // 14.1 - Intersect
+        testIntersect();
+
         //14.9 - Merge sort
         testStableSort();
 
         //14.6
         testUnionIntervals();
 
-        //14.5
-        testMergeInterval();
-
         //14.3 - Remove Duplicate fNames
         testRemoveFNameDups();
 
         // 14.2 - Intersect
         testMerge();
-
-        // 14.1 - Intersect
-        testIntersect();
 
     }
 

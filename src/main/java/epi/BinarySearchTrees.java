@@ -435,12 +435,15 @@ public class BinarySearchTrees {
 
 
     public static void main(String[] args) {
-        //15.7
-        testGenerateKEntriesOfaplusbsqrt2_V2(10);
+        //15.2 - first after value k
+        testGreaterThanK(80);
 
         if (true) {
             return;
         }
+
+        //15.7
+        testGenerateKEntriesOfaplusbsqrt2_V2(10);
 
         //15.1 - testBSTProperty
         testBST3Property();
@@ -449,9 +452,6 @@ public class BinarySearchTrees {
 
         //15.3 - K largest elements in BST.
         testKLargestElements(7);
-
-        //15.2 - first after value k
-        testGreaterThanK(111);
 
         //15.4 - LCA
         testLCA(60, 60);
